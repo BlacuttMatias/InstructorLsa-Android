@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">InstructorLsa</string>
+    <string name="slogan_app">Aprendé, Jugá, Incluí</string>
+
+    <string name="home_login_welcome_message">Bienvenidos</string>
+    <string name="home_login_register_google">Iniciar sesión con Google</string>
+    <string name="home_login_login_google">Registrarse con Google</string>
 </resources>
