@@ -28,9 +28,10 @@ fun HomeScreen() {
     val practiceSectionButtonText = stringResource(id = R.string.home_practice_section)
     val comprehensiveGamesButtonText = stringResource(id = R.string.home_comprehensive_games)
     val icon = painterResource(id = R.drawable.ic_launcher_foreground)
-    
+    val titleTopTabBarText = stringResource(id = R.string.app_name)
+
     Scaffold(
-        topBar = { TopTabBarLsa() }
+        topBar = { TopTabBarLsa(titleText = titleTopTabBarText) }
     ) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
             Spacer(modifier = Modifier.height(20.dp))
@@ -56,7 +57,7 @@ fun HomeScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun HomeScreenPreview() {
     InstructorLsaTheme {
         HomeScreen()
     }

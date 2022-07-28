@@ -41,7 +41,7 @@ fun LoginHomeScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun HomeLoginScreenPreview() {
     InstructorLsaTheme {
         LoginHomeScreen()
     }
