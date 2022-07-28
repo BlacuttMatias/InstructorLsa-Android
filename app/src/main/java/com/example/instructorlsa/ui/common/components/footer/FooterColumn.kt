@@ -10,12 +10,10 @@ import androidx.compose.ui.unit.dp
 import com.example.instructorlsa.R
 
 @Composable
-fun FooterText(text: String) {
+fun FooterColumn(content: @Composable() (ColumnScope.() -> Unit)) {
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Bottom
-    ) {
-        Text(text = text)
-        Spacer(modifier = Modifier.height(80.dp))
-    }
+        verticalArrangement = Arrangement.Bottom,
+        content = content
+    )
 }

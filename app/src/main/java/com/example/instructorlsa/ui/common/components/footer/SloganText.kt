@@ -5,7 +5,7 @@ import androidx.compose.ui.res.stringResource
 import com.example.instructorlsa.R
 
 @Composable
-fun SloganFooterText() {
+fun SloganText() {
     val sloganText = stringResource(id = R.string.slogan_app)
     FooterText(text = sloganText)
 }
