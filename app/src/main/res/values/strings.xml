@@ -10,4 +10,7 @@
     <string name="home_learning_section">Sección Aprendizaje</string>
     <string name="home_practice_section">Sección práctica</string>
     <string name="home_comprehensive_games">Juegos Integrales</string>
+
+    <string name="categories">Categorías</string>
+
 </resources>
