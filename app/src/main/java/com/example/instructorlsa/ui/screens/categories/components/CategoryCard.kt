@@ -3,6 +3,7 @@ package com.example.instructorlsa.ui.screens.categories.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -24,7 +25,9 @@ fun CategoryCard(category: CategoryViewModel){
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
                 painter = painterResource(id = category.iconId),
-                contentDescription = null)
+                contentDescription = null,
+                modifier = Modifier.size(100.dp)
+            )
             Text(text = category.name)
         }
     }

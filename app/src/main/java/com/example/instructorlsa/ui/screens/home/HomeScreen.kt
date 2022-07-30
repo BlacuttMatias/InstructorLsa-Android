@@ -27,7 +27,7 @@ fun HomeScreen() {
     val learningSectionButtonText = stringResource(id = R.string.home_learning_section)
     val practiceSectionButtonText = stringResource(id = R.string.home_practice_section)
     val comprehensiveGamesButtonText = stringResource(id = R.string.home_comprehensive_games)
-    val icon = painterResource(id = R.drawable.ic_launcher_foreground)
+    val icon = painterResource(id = R.drawable.ic_icon_app)
     val titleTopTabBarText = stringResource(id = R.string.app_name)
 
     Scaffold(
