@@ -11,6 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.instructorlsa.R
 import com.example.instructorlsa.ui.common.components.SloganFooterText
 import com.example.instructorlsa.ui.common.components.TitleText
@@ -26,12 +28,12 @@ import com.example.instructorlsa.viewmodels.signs.SignScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignViewModel
 
 @Composable
-fun SignLearningScreen(screenViewModel: SignScreenViewModel) {
+fun SignLearningScreen(screenViewModel: SignScreenViewModel, navController: NavController) {
     val titleText = screenViewModel.sign.name
     val titleTopTabBarText = screenViewModel.category.name
 
     Scaffold(
-        topBar = { TopTabBarLsa(titleText = titleTopTabBarText) }
+        topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
             Spacer(modifier = Modifier.height(50.dp))
@@ -57,6 +59,6 @@ fun SignLearningScreenPreview() {
     InstructorLsaTheme {
         val category = CategoriesScreenViewModel().getAllCategories().first()
         val sign = SignViewModel(name = "Una seña", urlVideo = "https://cdn.videvo.net/videvo_files/video/free/2020-05/large_watermarked/3d_ocean_1590675653_preview.mp4")
-        SignLearningScreen(SignScreenViewModel(category, sign))
+        SignLearningScreen(SignScreenViewModel(category, sign), rememberNavController())
     }
 }

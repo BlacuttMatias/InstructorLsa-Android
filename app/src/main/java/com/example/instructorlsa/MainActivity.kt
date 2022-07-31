@@ -10,8 +10,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.instructorlsa.ui.screens.home.HomeScreen
+import com.example.instructorlsa.ui.screens.learningSection.signLearning.SignLearningScreen
+import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.VideoPlayer
 import com.example.instructorlsa.ui.screens.loginHome.LoginHomeScreen
 import com.example.instructorlsa.ui.theme.InstructorLsaTheme
+import com.example.instructorlsa.viewmodels.categories.CategoriesScreenViewModel
+import com.example.instructorlsa.viewmodels.signs.SignScreenViewModel
+import com.example.instructorlsa.viewmodels.signs.SignViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    LoginHomeScreen()
+                    InstructorLsaApp()
                 }
             }
         }

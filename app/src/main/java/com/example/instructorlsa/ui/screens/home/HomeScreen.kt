@@ -13,6 +13,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.instructorlsa.R
 import com.example.instructorlsa.ui.common.components.FooterSloganAndIcon
 import com.example.instructorlsa.ui.common.components.MainButton
@@ -22,7 +24,7 @@ import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.example.instructorlsa.ui.theme.InstructorLsaTheme
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     val titleText = stringResource(id = R.string.home_main_menu)
     val learningSectionButtonText = stringResource(id = R.string.home_learning_section)
     val practiceSectionButtonText = stringResource(id = R.string.home_practice_section)
@@ -31,14 +33,14 @@ fun HomeScreen() {
     val titleTopTabBarText = stringResource(id = R.string.app_name)
 
     Scaffold(
-        topBar = { TopTabBarLsa(titleText = titleTopTabBarText) }
+        topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
             Spacer(modifier = Modifier.height(20.dp))
             TitleText(text = titleText)
             Spacer(modifier = Modifier.height(70.dp))
             MainButton(text = learningSectionButtonText) {
-
+                navController.navigate("Categories/learning")
             }
             Spacer(modifier = Modifier.height(10.dp))
             MainButton(text = practiceSectionButtonText) {
@@ -59,6 +61,6 @@ fun HomeScreen() {
 @Composable
 fun HomeScreenPreview() {
     InstructorLsaTheme {
-        HomeScreen()
+        HomeScreen(rememberNavController())
     }
 }

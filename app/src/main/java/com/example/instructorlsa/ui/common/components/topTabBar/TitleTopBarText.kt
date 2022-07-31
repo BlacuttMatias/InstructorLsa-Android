@@ -8,5 +8,5 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun TitleTopBarText(text: String){
-    Text(text = text, modifier = Modifier.padding(start = 30.dp))
+    Text(text = text)
 }

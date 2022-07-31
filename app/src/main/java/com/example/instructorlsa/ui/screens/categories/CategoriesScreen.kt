@@ -19,6 +19,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.instructorlsa.R
 import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
@@ -28,12 +30,12 @@ import com.example.instructorlsa.viewmodels.categories.CategoriesScreenViewModel
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 
 @Composable
-fun CategoriesScreen() {
+fun CategoriesScreen(navController: NavController) {
     val titleText = stringResource(id = R.string.categories)
     val titleTopTabBarText = stringResource(id = R.string.home_learning_section)
     val categories = CategoriesScreenViewModel().getAllCategories()
     Scaffold(
-        topBar = { TopTabBarLsa(titleText = titleTopTabBarText) }
+        topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
             Spacer(modifier = Modifier.height(20.dp))
@@ -58,6 +60,6 @@ fun CategoriesScreen() {
 @Composable
 fun CategoriesScreenPreview() {
     InstructorLsaTheme {
-        CategoriesScreen()
+        CategoriesScreen(rememberNavController())
     }
 }
