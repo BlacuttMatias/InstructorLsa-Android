@@ -8,7 +8,7 @@ class CategoriesScreenViewModel {
         return listOf(
             CategoryViewModel("Números", R.drawable.ic_numbers),
             CategoryViewModel("Modales", R.drawable.ic_people_manners),
-            CategoryViewModel("Familiares", R.drawable.ic_people),
+            CategoryViewModel("Personas", R.drawable.ic_people),
             CategoryViewModel("Abecedario", R.drawable.ic_alphabet),
             CategoryViewModel("Comidas", R.drawable.ic_foods),
             CategoryViewModel("Geografía", R.drawable.ic_argentina),
