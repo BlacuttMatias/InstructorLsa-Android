@@ -13,4 +13,6 @@
 
     <string name="categories">Categorías</string>
 
+    <string name="close_session">Cerrar sesión</string>
+
 </resources>
