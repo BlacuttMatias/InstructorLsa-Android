@@ -9,6 +9,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.instructorlsa.ui.screens.categories.CategoriesScreen
 import com.example.instructorlsa.ui.screens.home.HomeScreen
+import com.example.instructorlsa.ui.screens.learningSection.signs.SignsScreen
+import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
+import com.example.instructorlsa.viewmodels.signs.MockDataSigns
+import com.example.instructorlsa.viewmodels.signs.SignsScreenViewModel
 
 
 @Composable
@@ -21,11 +25,23 @@ fun Navigation() {
     val scrollState = rememberScrollState()
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "Home") {
-        composable("Home") {
+        composable(NavigationRoute.Home.route) {
             HomeScreen(navController = navController)
         }
-        composable("Categories/learning"){
+        composable(NavigationRoute.CategoriesLearning.route){
             CategoriesScreen(navController)
         }
+        composable(NavigationRoute.Signs.route){
+            SignsScreen(navController = navController, screenViewModel = SignsScreenViewModel(
+                category = CategoryViewModel("Colores", 0),
+                signs = MockDataSigns.signs
+            ))
+        }
     }
+}
+
+enum class NavigationRoute(val route: String){
+    Home("Home"),
+    CategoriesLearning("learning/categories"),
+    Signs("learning/signs")
 }

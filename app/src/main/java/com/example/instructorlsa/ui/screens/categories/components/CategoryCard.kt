@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,12 +18,16 @@ import com.example.instructorlsa.ui.screens.categories.CategoriesScreen
 import com.example.instructorlsa.ui.theme.InstructorLsaTheme
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CategoryCard(category: CategoryViewModel){
+fun CategoryCard(category: CategoryViewModel, onClick: () -> Unit){
     Card(
-        elevation = 10.dp
+        elevation = 10.dp,
+        onClick = onClick
     ) {
-        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Image(
                 painter = painterResource(id = category.iconId),
                 contentDescription = null,
@@ -37,6 +42,6 @@ fun CategoryCard(category: CategoryViewModel){
 @Composable
 fun CategoryCardPreview() {
     InstructorLsaTheme {
-        CategoryCard(category = CategoryViewModel(name = "Nombre categoria", iconId = R.drawable.ic_launcher_foreground))
+        CategoryCard(category = CategoryViewModel(name = "Nombre categoria", iconId = R.drawable.ic_launcher_foreground), onClick = {})
     }
 }

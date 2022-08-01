@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.instructorlsa.NavigationRoute
 import com.example.instructorlsa.R
 import com.example.instructorlsa.ui.common.components.FooterSloganAndIcon
 import com.example.instructorlsa.ui.common.components.MainButton
@@ -40,7 +41,7 @@ fun HomeScreen(navController: NavController) {
             TitleText(text = titleText)
             Spacer(modifier = Modifier.height(70.dp))
             MainButton(text = learningSectionButtonText) {
-                navController.navigate("Categories/learning")
+                navController.navigate(NavigationRoute.CategoriesLearning.route)
             }
             Spacer(modifier = Modifier.height(10.dp))
             MainButton(text = practiceSectionButtonText) {

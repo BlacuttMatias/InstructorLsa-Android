@@ -2,7 +2,7 @@ package com.example.instructorlsa.viewmodels.signs
 
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 
-class SignScreenViewModel(category: CategoryViewModel, sign: SignViewModel) {
+class SignLearningScreenViewModel(category: CategoryViewModel, sign: SignViewModel) {
     var category: CategoryViewModel
     var sign: SignViewModel
 
