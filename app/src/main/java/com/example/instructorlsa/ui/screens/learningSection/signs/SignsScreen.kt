@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.instructorlsa.NavigationRoute
 import com.example.instructorlsa.R
 import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
@@ -46,7 +47,7 @@ fun SignsScreen(navController: NavController, screenViewModel: SignsScreenViewMo
             ) {
                 items(signs){ sign ->
                     SignToLearnView(sign = sign) {
-
+                        navController.navigate(NavigationRoute.SignLearning.route)
                     }
                 }
             }
