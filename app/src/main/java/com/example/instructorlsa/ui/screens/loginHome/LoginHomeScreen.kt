@@ -12,6 +12,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.instructorlsa.Navigation
 import com.example.instructorlsa.R
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.SloganFooterText
@@ -20,10 +23,10 @@ import com.example.instructorlsa.ui.theme.InstructorLsaTheme
 
 
 @Composable
-fun LoginHomeScreen() {
+fun LoginHomeScreen(navController: NavController) {
+
     val welcomeText = stringResource(id = R.string.home_login_welcome_message)
     val icon = painterResource(id = R.drawable.ic_icon_app)
-    val registerText = stringResource(id = R.string.home_login_register_google)
     val loginText = stringResource(id = R.string.home_login_login_google)
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
         Spacer(modifier = Modifier.height(20.dp))
@@ -31,15 +34,13 @@ fun LoginHomeScreen() {
         Spacer(modifier = Modifier.height(40.dp))
         Icon(painter = icon,
             contentDescription = null,
-            Modifier.size(100.dp).clip(CircleShape),
+            Modifier
+                .size(100.dp)
+                .clip(CircleShape),
             tint = Color.Unspecified
         )
         Spacer(modifier = Modifier.height(30.dp))
         MainButton(text = loginText) {
-
-        }
-        Spacer(modifier = Modifier.height(10.dp))
-        MainButton(text = registerText) {
 
         }
         SloganFooterText()
@@ -50,6 +51,6 @@ fun LoginHomeScreen() {
 @Composable
 fun HomeLoginScreenPreview() {
     InstructorLsaTheme {
-        LoginHomeScreen()
+        LoginHomeScreen(rememberNavController())
     }
 }
