@@ -43,11 +43,11 @@ fun HomeScreen(navController: NavController) {
             MainButton(text = learningSectionButtonText) {
                 navController.navigate(NavigationRoute.CategoriesLearning.route)
             }
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(40.dp))
             MainButton(text = practiceSectionButtonText) {
 
             }
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(40.dp))
             MainButton(text = comprehensiveGamesButtonText) {
 
             }

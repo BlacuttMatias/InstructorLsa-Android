@@ -42,8 +42,8 @@ fun SignsScreen(navController: NavController, screenViewModel: SignsScreenViewMo
             Spacer(modifier = Modifier.height(20.dp))
             LazyVerticalGrid(
                 cells = GridCells.Fixed(2),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(30.dp),
+                horizontalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 items(signs){ sign ->
                     SignToLearnView(sign = sign) {
