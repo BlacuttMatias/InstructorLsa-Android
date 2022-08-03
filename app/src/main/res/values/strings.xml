@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Instructor LSA</string>
     <string name="slogan_app">Aprendé, Jugá, Incluí</string>
-    <string name="gcp_client_id">CLIENT_ID</string>
+    <string name="gcp_client_id">YOUR_WEB_CLIENT_ID</string>
 
     <string name="home_login_welcome_message">Bienvenidos</string>
     <string name="home_login_login_google">Iniciar sesión con Google</string>
