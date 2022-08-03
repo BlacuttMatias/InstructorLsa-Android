@@ -30,9 +30,9 @@ fun LoginView(
 ) {
     val state = mSignInViewModel.loading.observeAsState()
     val isLoading = state.value
-    val welcomeText = stringResource(id = R.string.home_login_welcome_message)
+    val welcomeText = stringResource(id = R.string.login_welcome_message)
     val icon = painterResource(id = R.drawable.ic_icon_app)
-    val loginText = stringResource(id = R.string.home_login_login_google)
+    val loginText = stringResource(id = R.string.login_sign_in_google)
     Scaffold {
         if (isLoading == true && !isError) {
             FullScreenLoader()

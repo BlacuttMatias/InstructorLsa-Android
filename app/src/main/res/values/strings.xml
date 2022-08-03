@@ -3,8 +3,8 @@
     <string name="slogan_app">Aprendé, Jugá, Incluí</string>
     <string name="gcp_client_id">YOUR_WEB_CLIENT_ID</string>
 
-    <string name="home_login_welcome_message">Bienvenidos</string>
-    <string name="home_login_login_google">Iniciar sesión con Google</string>
+    <string name="login_welcome_message">Bienvenidos</string>
+    <string name="login_sign_in_google">Iniciar sesión con Google</string>
 
     <string name="home_main_menu">Menú Principal</string>
     <string name="home_learning_section">Sección Aprendizaje</string>

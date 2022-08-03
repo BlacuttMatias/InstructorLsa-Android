@@ -2,16 +2,14 @@ package com.example.instructorlsa
 
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.example.instructorlsa.ui.screens.categories.CategoriesScreen
 import com.example.instructorlsa.ui.screens.home.HomeScreen
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.SignLearningScreen
 import com.example.instructorlsa.ui.screens.learningSection.signs.SignsScreen
-import com.example.instructorlsa.ui.screens.loginHome.LoginHomeScreen
+import com.example.instructorlsa.ui.screens.loginHome.LoginScreen
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.signs.MockDataSigns
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel
@@ -29,7 +27,7 @@ fun Navigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = NavigationRoute.Login.route) {
         composable(NavigationRoute.Login.route) {
-            LoginHomeScreen(navController = navController)
+            LoginScreen(navController = navController)
         }
         composable(NavigationRoute.Home.route) {
             HomeScreen(navController = navController)

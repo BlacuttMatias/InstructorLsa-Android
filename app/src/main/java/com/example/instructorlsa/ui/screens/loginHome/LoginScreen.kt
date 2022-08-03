@@ -20,7 +20,7 @@ import com.google.android.gms.common.api.ApiException
 
 
 @Composable
-fun LoginHomeScreen(navController: NavController) {
+fun LoginScreen(navController: NavController) {
 
     val signInRequestCode = 1
     val context = LocalContext.current
@@ -71,8 +71,8 @@ fun LoginHomeScreen(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun HomeLoginScreenPreview() {
+fun LoginScreenPreview() {
     InstructorLsaTheme {
-        LoginHomeScreen(rememberNavController())
+        LoginScreen(rememberNavController())
     }
 }
