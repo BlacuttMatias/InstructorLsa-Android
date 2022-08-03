@@ -11,6 +11,7 @@ import com.example.instructorlsa.ui.screens.categories.CategoriesScreen
 import com.example.instructorlsa.ui.screens.home.HomeScreen
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.SignLearningScreen
 import com.example.instructorlsa.ui.screens.learningSection.signs.SignsScreen
+import com.example.instructorlsa.ui.screens.loginHome.LoginHomeScreen
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.signs.MockDataSigns
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel
@@ -26,7 +27,10 @@ fun InstructorLsaApp() {
 fun Navigation() {
     val scrollState = rememberScrollState()
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "Home") {
+    NavHost(navController = navController, startDestination = NavigationRoute.Login.route) {
+        composable(NavigationRoute.Login.route) {
+            LoginHomeScreen(navController = navController)
+        }
         composable(NavigationRoute.Home.route) {
             HomeScreen(navController = navController)
         }
@@ -49,6 +53,7 @@ fun Navigation() {
 }
 
 enum class NavigationRoute(val route: String){
+    Login("Login"),
     Home("Home"),
     CategoriesLearning("learning/categories"),
     Signs("learning/signs"),
