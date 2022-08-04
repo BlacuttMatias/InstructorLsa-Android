@@ -1,4 +1,4 @@
-package com.example.instructorlsa.ui.screens.loginHome
+package com.example.instructorlsa.ui.screens.login
 
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -13,7 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.instructorlsa.NavigationRoute
 import com.example.instructorlsa.googleApi.GoogleApiContract
-import com.example.instructorlsa.ui.screens.loginHome.components.LoginView
+import com.example.instructorlsa.ui.screens.login.components.LoginView
 import com.example.instructorlsa.ui.theme.InstructorLsaTheme
 import com.example.instructorlsa.viewmodels.login.LoginScreenViewModel
 import com.google.android.gms.common.api.ApiException

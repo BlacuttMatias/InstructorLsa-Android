@@ -9,7 +9,7 @@ import com.example.instructorlsa.ui.screens.categories.CategoriesScreen
 import com.example.instructorlsa.ui.screens.home.HomeScreen
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.SignLearningScreen
 import com.example.instructorlsa.ui.screens.learningSection.signs.SignsScreen
-import com.example.instructorlsa.ui.screens.loginHome.LoginScreen
+import com.example.instructorlsa.ui.screens.login.LoginScreen
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.signs.MockDataSigns
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel

@@ -1,4 +1,4 @@
-package com.example.instructorlsa.ui.screens.loginHome.components
+package com.example.instructorlsa.ui.screens.login.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
