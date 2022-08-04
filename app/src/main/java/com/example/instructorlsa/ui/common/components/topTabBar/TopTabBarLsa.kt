@@ -14,15 +14,15 @@ import com.example.instructorlsa.R
 import com.example.instructorlsa.googleApi.GoogleSignInClient
 
 @Composable
-fun TopTabBarLsa(titleText: String, navController: NavController){
+fun TopTabBarLsa(titleText: String, navController: NavController?, showCloseSession: Boolean = true){
     var showMenu by remember { mutableStateOf(false) }
     val closeSessionText = stringResource(id = R.string.close_session)
     val context = LocalContext.current
     TopAppBar(
         title = { TitleTopBarText(text = titleText) },
-        navigationIcon = if (navController.previousBackStackEntry != null) {
+        navigationIcon = if (navController?.previousBackStackEntry != null) {
             {
-                IconButton(onClick = { navController.navigateUp() }) {
+                IconButton(onClick = { navController?.navigateUp() }) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
                         contentDescription = "Back"
@@ -33,23 +33,25 @@ fun TopTabBarLsa(titleText: String, navController: NavController){
             null
         },
         actions = {
-            IconButton(onClick = { showMenu = !showMenu }) {
-                Icon(
-                    imageVector = Icons.Filled.MoreVert,
-                    contentDescription = ""
-                )
-            }
-            DropdownMenu(
-                expanded = showMenu,
-                onDismissRequest = { showMenu = false }) {
-                DropdownMenuItem(onClick = {
-                    GoogleSignInClient.getClient(context).signOut().addOnCompleteListener {
-                        navController.navigate(NavigationRoute.Login.route){
-                            popUpTo(0)
+            if(showCloseSession){
+                IconButton(onClick = { showMenu = !showMenu }) {
+                    Icon(
+                        imageVector = Icons.Filled.MoreVert,
+                        contentDescription = ""
+                    )
+                }
+                DropdownMenu(
+                    expanded = showMenu,
+                    onDismissRequest = { showMenu = false }) {
+                    DropdownMenuItem(onClick = {
+                        GoogleSignInClient.getClient(context).signOut().addOnCompleteListener {
+                            navController?.navigate(NavigationRoute.Login.route){
+                                popUpTo(0)
+                            }
                         }
+                    }) {
+                        Text(text = closeSessionText)
                     }
-                }) {
-                    Text(text = closeSessionText)
                 }
             }
         }

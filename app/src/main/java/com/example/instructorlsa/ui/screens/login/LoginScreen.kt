@@ -51,7 +51,7 @@ fun LoginScreen(navController: NavController) {
             authResultLauncher.launch(signInRequestCode)
         },
         isError = isError.value,
-        mSignInViewModel
+        mSignInViewModel = mSignInViewModel
     )
 
     if (mSignInViewModel.googleUser.value != null) {
