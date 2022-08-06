@@ -27,6 +27,7 @@ import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.example.instructorlsa.ui.screens.categories.components.CategoryCard
 import com.example.instructorlsa.ui.theme.InstructorLsaTheme
+import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.categories.CategoriesScreenViewModel
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 
@@ -49,6 +50,7 @@ fun CategoriesScreen(navController: NavController) {
             ) {
                 items(categories){ category ->
                     CategoryCard(category = category){
+                        InstructorLsaConfig.setLearningCategory(category)
                         navController.navigate(NavigationRoute.Signs.route)
                     }
                 }

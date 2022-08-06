@@ -1,14 +1,32 @@
 package com.example.instructorlsa.viewmodels.signs
 
+import androidx.lifecycle.ViewModel
+import com.example.instructorlsa.models.Sign
+import com.example.instructorlsa.services.LearningSignsService
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewModelScope
+import com.example.instructorlsa.mappers.SignMapper
+import kotlinx.coroutines.launch
 
-class SignsScreenViewModel(category: CategoryViewModel, signs: List<SignViewModel>) {
+class SignsScreenViewModel(category: CategoryViewModel): ViewModel() {
     var category: CategoryViewModel
-    var signs: List<SignViewModel>
+    var signs by mutableStateOf(listOf<SignViewModel>())
+    val service = LearningSignsService()
+    val signMapper = SignMapper()
 
     init {
         this.category = category
-        this.signs = signs
+        viewModelScope.launch {
+            loadInitData()
+        }
+    }
+
+    suspend fun loadInitData(){
+        val signsDto = service.getLearningSigns(categoryName = category.name)
+        signs =  signsDto.categoryWithSignsDto.signs.map { sign -> signMapper.map(sign) }
     }
 }
 

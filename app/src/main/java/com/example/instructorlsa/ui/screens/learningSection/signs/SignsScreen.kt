@@ -32,7 +32,6 @@ import com.example.instructorlsa.viewmodels.signs.SignsScreenViewModel
 fun SignsScreen(navController: NavController, screenViewModel: SignsScreenViewModel) {
     val titleText = screenViewModel.category.name
     val titleTopTabBarText = stringResource(id = R.string.home_learning_section)
-    var signs by remember { mutableStateOf(screenViewModel.signs)}
     Scaffold(
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
@@ -45,7 +44,7 @@ fun SignsScreen(navController: NavController, screenViewModel: SignsScreenViewMo
                 verticalArrangement = Arrangement.spacedBy(30.dp),
                 horizontalArrangement = Arrangement.spacedBy(5.dp)
             ) {
-                items(signs){ sign ->
+                items(screenViewModel.signs){ sign ->
                     SignToLearnView(sign = sign) {
                         navController.navigate(NavigationRoute.SignLearning.route)
                     }
@@ -63,6 +62,6 @@ fun SignsScreenPreview() {
     val mockSignsViewModel = MockDataSigns.signs
     val mockCategory = CategoryViewModel(name = "Colores", iconId = 0)
     InstructorLsaTheme {
-        SignsScreen(rememberNavController(), SignsScreenViewModel(category = mockCategory, signs = mockSignsViewModel))
+        SignsScreen(rememberNavController(), SignsScreenViewModel(category = mockCategory))
     }
 }
