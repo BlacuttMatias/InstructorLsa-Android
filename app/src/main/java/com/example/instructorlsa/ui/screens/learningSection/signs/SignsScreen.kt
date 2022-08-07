@@ -21,6 +21,7 @@ import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.example.instructorlsa.ui.screens.categories.components.CategoryCard
 import com.example.instructorlsa.ui.screens.learningSection.signs.components.SignToLearnView
 import com.example.instructorlsa.ui.theme.InstructorLsaTheme
+import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.categories.CategoriesScreenViewModel
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.signs.MockDataSigns
@@ -46,6 +47,10 @@ fun SignsScreen(navController: NavController, screenViewModel: SignsScreenViewMo
             ) {
                 items(screenViewModel.signs){ sign ->
                     SignToLearnView(sign = sign) {
+                        InstructorLsaConfig.indexSignToLearn = screenViewModel.signs.indexOfFirst {
+                            it == sign
+                        }
+                        InstructorLsaConfig.learningSigns = screenViewModel.signs
                         navController.navigate(NavigationRoute.SignLearning.route)
                     }
                 }

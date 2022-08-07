@@ -44,7 +44,8 @@ fun Navigation() {
         composable(NavigationRoute.SignLearning.route){
             SignLearningScreen(navController = navController, screenViewModel = SignLearningScreenViewModel(
                 category = CategoryViewModel("Colores", 0),
-                sign = MockDataSigns.signs.first()
+                signs = InstructorLsaConfig.learningSigns,
+                currentIndex = InstructorLsaConfig.indexSignToLearn
             ))
         }
     }
