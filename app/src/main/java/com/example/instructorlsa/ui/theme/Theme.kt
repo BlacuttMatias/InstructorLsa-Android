@@ -9,13 +9,15 @@ import androidx.compose.runtime.Composable
 private val DarkColorPalette = darkColors(
     primary = DarkBlue500,
     primaryVariant = Purple700,
-    secondary = Teal200
+    secondary = Teal200,
+    secondaryVariant = DarkGrey300
 )
 
 private val LightColorPalette = lightColors(
     primary = Blue500,
     primaryVariant = Purple700,
-    secondary = Teal200
+    secondary = Teal200,
+    secondaryVariant = Grey300
 
     /* Other default colors to override
     background = Color.White,
@@ -37,7 +39,6 @@ fun InstructorLsaTheme(
     } else {
         LightColorPalette
     }
-
     MaterialTheme(
         colors = colors,
         typography = Typography,
