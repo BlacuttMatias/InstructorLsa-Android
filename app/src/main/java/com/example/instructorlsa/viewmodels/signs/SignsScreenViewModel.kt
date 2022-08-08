@@ -14,13 +14,16 @@ import kotlinx.coroutines.launch
 class SignsScreenViewModel(category: CategoryViewModel): ViewModel() {
     var category: CategoryViewModel
     var signs by mutableStateOf(listOf<SignViewModel>())
+    var loading by mutableStateOf(false)
     val service = LearningSignsService()
     val signMapper = SignMapper()
 
     init {
         this.category = category
         viewModelScope.launch {
+            loading = true
             loadInitData()
+            loading = false
         }
     }
 
