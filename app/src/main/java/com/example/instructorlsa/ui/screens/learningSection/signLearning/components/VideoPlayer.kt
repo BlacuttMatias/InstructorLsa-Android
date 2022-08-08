@@ -1,8 +1,8 @@
 package com.example.instructorlsa.ui.screens.learningSection.signLearning.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -20,8 +20,8 @@ fun VideoPlayer(urlVideo: String){
     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
 
         val context = LocalContext.current
-        val player = ExoPlayer.Builder(context).build()
-        val playerView = StyledPlayerView(context)
+        val player by remember {mutableStateOf(ExoPlayer.Builder(context).build())}
+        val playerView by remember {mutableStateOf(StyledPlayerView(context))}
         val mediaItem = MediaItem.fromUri(urlVideo)
 
         player.setMediaItem(mediaItem)
