@@ -37,7 +37,7 @@ fun LoginScreen(navController: NavController) {
             try {
                 val gsa = task?.getResult(ApiException::class.java)
                 if (gsa != null) {
-                    mSignInViewModel.fetchSignInUser(gsa.email, gsa.displayName)
+                    mSignInViewModel.fetchSignInUser(gsa.email, gsa.displayName, gsa.idToken)
                 } else {
                     isError.value = true
                 }

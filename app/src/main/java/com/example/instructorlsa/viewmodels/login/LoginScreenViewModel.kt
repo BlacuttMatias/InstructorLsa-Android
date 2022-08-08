@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.instructorlsa.models.User
+import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import kotlinx.coroutines.launch
 
@@ -19,14 +20,17 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
         checkSignedInUser(application.applicationContext)
     }
 
-    fun fetchSignInUser(email: String?, name: String?) {
+    fun fetchSignInUser(email: String?, name: String?, token: String?) {
         _loadingState.value = true
 
         viewModelScope.launch {
-            _userState.value = User(
+            val user = User(
                 email = email,
                 name = name,
+                token = token
             )
+            InstructorLsaConfig.user = user
+            _userState.value = user
         }
 
 
@@ -38,10 +42,13 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
         val gsa = GoogleSignIn.getLastSignedInAccount(applicationContext)
 
         if (gsa != null) {
-            _userState.value = User(
+            val user = User(
                 email = gsa.email,
                 name = gsa.displayName,
+                token = gsa.idToken
             )
+            InstructorLsaConfig.user = user
+            _userState.value = user
         }
         else{
             hideLoading()
