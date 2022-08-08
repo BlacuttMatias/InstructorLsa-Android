@@ -56,8 +56,6 @@ fun LoginScreen(navController: NavController) {
 
     if (mSignInViewModel.googleUser.value != null) {
         LaunchedEffect(key1 = Unit) {
-            mSignInViewModel.hideLoading()
-
             navController.navigate(
                 NavigationRoute.Home.route
             ) {

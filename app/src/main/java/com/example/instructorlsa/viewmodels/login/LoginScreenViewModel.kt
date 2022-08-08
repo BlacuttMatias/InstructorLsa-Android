@@ -34,8 +34,7 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
     }
 
     private fun checkSignedInUser(applicationContext: Context) {
-        _loadingState.value = true
-
+        showLoading()
         val gsa = GoogleSignIn.getLastSignedInAccount(applicationContext)
 
         if (gsa != null) {
@@ -44,8 +43,9 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
                 name = gsa.displayName,
             )
         }
-
-        _loadingState.value = false
+        else{
+            hideLoading()
+        }
     }
 
     fun hideLoading() {
