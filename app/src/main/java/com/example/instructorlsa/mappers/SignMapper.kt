@@ -5,6 +5,6 @@ import com.example.instructorlsa.viewmodels.signs.SignViewModel
 
 class SignMapper {
     fun map(sign: Sign): SignViewModel{
-        return SignViewModel(name = sign.name, urlVideo = sign.urlVideo, isCompleted = sign.completed)
+        return SignViewModel(id = sign.id, name = sign.name, urlVideo = sign.urlVideo, isCompleted = sign.completed)
     }
 }

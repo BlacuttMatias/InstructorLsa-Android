@@ -39,6 +39,7 @@ fun SignsScreen(navController: NavController, screenViewModel: SignsScreenViewMo
     ) {
         if(screenViewModel.loading){
             FullScreenLoader()
+            screenViewModel.loadInitData()
         }
         else{
             Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){

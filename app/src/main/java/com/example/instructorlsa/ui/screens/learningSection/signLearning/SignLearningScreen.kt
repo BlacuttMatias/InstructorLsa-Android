@@ -46,7 +46,7 @@ fun SignLearningScreen(screenViewModel: SignLearningScreenViewModel, navControll
                 Spacer(modifier = Modifier.width(50.dp))
                 if(screenViewModel.currentIndex < screenViewModel.signs.size-1){
                     NextNavigateButton {
-                        screenViewModel.didNextButtonPClicked()
+                        screenViewModel.didNextButtonClicked()
                     }
                 }
                 else{
@@ -65,7 +65,9 @@ fun SignLearningScreen(screenViewModel: SignLearningScreenViewModel, navControll
 fun SignLearningScreenPreview() {
     InstructorLsaTheme {
         val category = CategoriesScreenViewModel().getAllCategories().first()
-        val sign = SignViewModel(name = "Una seña",
+        val sign = SignViewModel(
+            id = 1,
+            name = "Una seña",
             urlVideo = "https://cdn.videvo.net/videvo_files/video/free/2020-05/large_watermarked/3d_ocean_1590675653_preview.mp4",
             isCompleted = false
         )

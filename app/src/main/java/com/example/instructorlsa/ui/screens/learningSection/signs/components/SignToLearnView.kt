@@ -49,6 +49,6 @@ fun SignToLearnView(sign: SignViewModel, onClick: () -> Unit){
 @Composable
 fun SignToLearnViewPreview() {
     InstructorLsaTheme {
-        SignToLearnView(sign = SignViewModel(name = "Diez", urlVideo = "", isCompleted = false), onClick = {})
+        SignToLearnView(sign = SignViewModel(id = 1,name = "Diez", urlVideo = "", isCompleted = false), onClick = {})
     }
 }
