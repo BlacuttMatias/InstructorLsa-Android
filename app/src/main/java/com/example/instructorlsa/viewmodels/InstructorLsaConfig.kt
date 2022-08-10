@@ -18,4 +18,14 @@ object InstructorLsaConfig {
     fun getLearningCategory(): CategoryViewModel{
         return categoryLearningViewModel ?:  CategoryViewModel("Colores", R.drawable.ic_color_pencils)
     }
+
+    fun getUserToken(): String{
+        return user.token ?: ""
+    }
+
+    fun getUserEmail(): String{
+        return user.email ?: ""
+    }
+
+
 }
