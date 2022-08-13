@@ -3,49 +3,73 @@ package com.example.instructorlsa.viewmodels.login
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.*
+import com.example.instructorlsa.models.LoginPostBody
 import com.example.instructorlsa.models.User
+import com.example.instructorlsa.services.LoginService
+import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import kotlinx.coroutines.launch
 
 class LoginScreenViewModel(application: Context) : ViewModel() {
-    private var _userState = MutableLiveData<User>()
-    val googleUser: LiveData<User> = _userState
+    var googleUser by mutableStateOf(User(null,null,null))
 
     private var _loadingState = MutableLiveData(false)
     val loading: LiveData<Boolean> = _loadingState
+    val loginService = LoginService()
 
     init {
         checkSignedInUser(application.applicationContext)
     }
 
-    fun fetchSignInUser(email: String?, name: String?) {
-        _loadingState.value = true
-
+    fun fetchSignInUser(email: String?, name: String?, token: String?) {
+        showLoading()
         viewModelScope.launch {
-            _userState.value = User(
-                email = email,
-                name = name,
-            )
+            val body = LoginPostBody(username = name, email = email, token = token)
+            val response = loginService.login(body)
+            if (response.isSuccessful){
+                val user = User(
+                    email = email,
+                    name = name,
+                    token = token
+                )
+                InstructorLsaConfig.user = user
+                googleUser = user
+            }
+            else{
+                //TODO
+            }
         }
-
-
-        _loadingState.value = false
     }
 
     private fun checkSignedInUser(applicationContext: Context) {
-        _loadingState.value = true
-
+        showLoading()
         val gsa = GoogleSignIn.getLastSignedInAccount(applicationContext)
 
         if (gsa != null) {
-            _userState.value = User(
-                email = gsa.email,
-                name = gsa.displayName,
-            )
+            viewModelScope.launch{
+                val body = LoginPostBody(username = gsa.displayName, email = gsa.email, token = gsa.idToken)
+                val response = loginService.login(body)
+                if(response.isSuccessful){
+                    val user = User(
+                        email = gsa.email,
+                        name = gsa.displayName,
+                        token = gsa.idToken
+                    )
+                    InstructorLsaConfig.user = user
+                    googleUser = user
+                }
+                else{
+                    //TODO
+                }
+            }
         }
-
-        _loadingState.value = false
+        else{
+            hideLoading()
+        }
     }
 
     fun hideLoading() {

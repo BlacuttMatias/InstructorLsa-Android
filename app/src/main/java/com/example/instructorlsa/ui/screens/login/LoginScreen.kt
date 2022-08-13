@@ -2,10 +2,8 @@ package com.example.instructorlsa.ui.screens.login
 
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,10 +23,7 @@ fun LoginScreen(navController: NavController) {
     val signInRequestCode = 1
     val context = LocalContext.current
 
-    val mSignInViewModel: LoginScreenViewModel = LoginScreenViewModel(context)
-
-    val state = mSignInViewModel.googleUser.observeAsState()
-    val user = state.value
+    val mSignInViewModel by remember { mutableStateOf(LoginScreenViewModel(context))}
 
     val isError = rememberSaveable { mutableStateOf(false) }
 
@@ -37,7 +32,7 @@ fun LoginScreen(navController: NavController) {
             try {
                 val gsa = task?.getResult(ApiException::class.java)
                 if (gsa != null) {
-                    mSignInViewModel.fetchSignInUser(gsa.email, gsa.displayName)
+                    mSignInViewModel.fetchSignInUser(gsa.email, gsa.displayName, gsa.idToken)
                 } else {
                     isError.value = true
                 }
@@ -54,10 +49,8 @@ fun LoginScreen(navController: NavController) {
         mSignInViewModel = mSignInViewModel
     )
 
-    if (mSignInViewModel.googleUser.value != null) {
+    if (mSignInViewModel.googleUser.token != null) {
         LaunchedEffect(key1 = Unit) {
-            mSignInViewModel.hideLoading()
-
             navController.navigate(
                 NavigationRoute.Home.route
             ) {

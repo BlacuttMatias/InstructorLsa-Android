@@ -22,7 +22,7 @@ import com.example.instructorlsa.viewmodels.signs.SignViewModel
 
 @Composable
 fun SignLearningScreen(screenViewModel: SignLearningScreenViewModel, navController: NavController) {
-    val titleText = screenViewModel.sign.name
+    val titleText = screenViewModel.getCurrentSign().name
     val titleTopTabBarText = screenViewModel.category.name
 
     Scaffold(
@@ -32,12 +32,26 @@ fun SignLearningScreen(screenViewModel: SignLearningScreenViewModel, navControll
             Spacer(modifier = Modifier.height(50.dp))
             TitleText(text = titleText)
             Spacer(modifier = Modifier.height(60.dp))
-            VideoPlayer(urlVideo = screenViewModel.sign.urlVideo)
+            VideoPlayer(urlVideo = screenViewModel.getCurrentSign().urlVideo)
             Spacer(modifier = Modifier.height(60.dp))
             Row(horizontalArrangement = Arrangement.Center) {
-                BackNavigateButton {}
+                if(screenViewModel.currentIndex > 0){
+                    BackNavigateButton {
+                        screenViewModel.didBackButtonClicked()
+                    }
+                }
+                else{
+                    Spacer(modifier = Modifier.width(60.dp))
+                }
                 Spacer(modifier = Modifier.width(50.dp))
-                NextNavigateButton {}
+                if(screenViewModel.currentIndex < screenViewModel.signs.size-1){
+                    NextNavigateButton {
+                        screenViewModel.didNextButtonClicked()
+                    }
+                }
+                else{
+                    Spacer(modifier = Modifier.width(60.dp))
+                }
             }
             SloganFooterText()
         }
@@ -51,10 +65,12 @@ fun SignLearningScreen(screenViewModel: SignLearningScreenViewModel, navControll
 fun SignLearningScreenPreview() {
     InstructorLsaTheme {
         val category = CategoriesScreenViewModel().getAllCategories().first()
-        val sign = SignViewModel(name = "Una seña",
+        val sign = SignViewModel(
+            id = 1,
+            name = "Una seña",
             urlVideo = "https://cdn.videvo.net/videvo_files/video/free/2020-05/large_watermarked/3d_ocean_1590675653_preview.mp4",
             isCompleted = false
         )
-        SignLearningScreen(SignLearningScreenViewModel(category, sign), rememberNavController())
+        SignLearningScreen(SignLearningScreenViewModel(category, listOf(sign), 0), rememberNavController())
     }
 }

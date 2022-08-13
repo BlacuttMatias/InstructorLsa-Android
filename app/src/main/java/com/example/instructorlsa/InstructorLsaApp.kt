@@ -10,6 +10,7 @@ import com.example.instructorlsa.ui.screens.home.HomeScreen
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.SignLearningScreen
 import com.example.instructorlsa.ui.screens.learningSection.signs.SignsScreen
 import com.example.instructorlsa.ui.screens.login.LoginScreen
+import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.signs.MockDataSigns
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel
@@ -37,14 +38,14 @@ fun Navigation() {
         }
         composable(NavigationRoute.Signs.route){
             SignsScreen(navController = navController, screenViewModel = SignsScreenViewModel(
-                category = CategoryViewModel("Colores", 0),
-                signs = MockDataSigns.signs
+                category = InstructorLsaConfig.getLearningCategory()
             ))
         }
         composable(NavigationRoute.SignLearning.route){
             SignLearningScreen(navController = navController, screenViewModel = SignLearningScreenViewModel(
                 category = CategoryViewModel("Colores", 0),
-                sign = MockDataSigns.signs.first()
+                signs = InstructorLsaConfig.learningSigns,
+                currentIndex = InstructorLsaConfig.indexSignToLearn
             ))
         }
     }
