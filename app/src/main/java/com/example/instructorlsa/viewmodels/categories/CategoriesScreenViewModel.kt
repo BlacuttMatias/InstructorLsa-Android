@@ -1,8 +1,15 @@
 package com.example.instructorlsa.viewmodels.categories
 
+import androidx.navigation.NavController
 import com.example.instructorlsa.R
 
-class CategoriesScreenViewModel {
+class CategoriesScreenViewModel(navigationStrategy: CategoryNavigationStrategy) {
+
+    var navigationStrategy: CategoryNavigationStrategy
+
+    init{
+        this.navigationStrategy = navigationStrategy
+    }
 
     fun getAllCategories(): List<CategoryViewModel> {
         return listOf(
@@ -16,6 +23,10 @@ class CategoriesScreenViewModel {
             CategoryViewModel("Preguntas", R.drawable.ic_questions),
             CategoryViewModel("Verbos", R.drawable.ic_call_verb),
         )
+    }
+
+    fun navigateToNextScreen(navController: NavController, category: CategoryViewModel){
+        navigationStrategy.navigateToNextScreen(navController = navController, category = category)
     }
 }
 

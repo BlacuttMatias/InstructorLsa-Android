@@ -13,6 +13,8 @@
 
     <string name="categories">Categorías</string>
 
+    <string name="start_to_play">Empezar a Jugar</string>
+
     <string name="close_session">Cerrar sesión</string>
 
 </resources>
