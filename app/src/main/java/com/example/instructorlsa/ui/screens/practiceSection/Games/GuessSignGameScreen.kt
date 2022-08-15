@@ -32,8 +32,8 @@ fun GuessSignGameScreen(screenViewModel: GuessSignScreenViewModel, navController
         VideoPlayer(urlVideo = screenViewModel.game.sign.urlVideo)
         Spacer(modifier = Modifier.height(30.dp))
         screenViewModel.game.answerOptions.forEach { answerOption ->
-            OptionButton(text = answerOption.text) {
-
+            OptionButton(text = answerOption.text, showState = screenViewModel.showStateAnswer(answerOption),isCorrect = answerOption.isCorrect) {
+                screenViewModel.didTapAnswerOption(answerOption)
             }
             Spacer(modifier = Modifier.height(20.dp))
         }
