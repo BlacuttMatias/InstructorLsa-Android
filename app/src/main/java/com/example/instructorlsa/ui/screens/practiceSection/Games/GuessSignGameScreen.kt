@@ -18,7 +18,7 @@ import com.example.instructorlsa.viewmodels.games.GuessSignScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel
 
 @Composable
-fun SignLearningScreen(screenViewModel: GuessSignScreenViewModel, navController: NavController) {
+fun GuessSignGameScreen(screenViewModel: GuessSignScreenViewModel, navController: NavController) {
     val titleText = screenViewModel.game.name
     val titleTopTabBarText = screenViewModel.category.name
 
