@@ -57,8 +57,6 @@ fun SignLearningScreen(screenViewModel: SignLearningScreenViewModel, navControll
             SloganFooterText()
         }
     }
-
-
 }
 
 @Preview(showBackground = true)
