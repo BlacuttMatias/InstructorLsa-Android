@@ -18,19 +18,18 @@ import com.example.instructorlsa.ui.common.components.FooterSloganAndIcon
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
+import com.example.instructorlsa.ui.screens.practiceSection.Games.GuessSignGameScreen
+import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
 
 @Composable
-fun GameScreen(navController: NavController) {
-    val titleText = "Una seña"
-    val titleTopTabBarText = "Una categoria"
+fun GameScreen(navController: NavController, screenViewModel: GameScreenViewModel) {
+    val titleTopTabBarText = screenViewModel.category.name
 
     Scaffold(
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
-            Spacer(modifier = Modifier.height(20.dp))
-            TitleText(text = titleText)
-            Spacer(modifier = Modifier.height(70.dp))
+            GuessSignGameScreen(screenViewModel = screenViewModel.getGuessSignScreenViewModel(), navController = navController)
         }
     }
 }
