@@ -29,10 +29,10 @@ fun OptionButton(text: String, showState: Boolean = false, isCorrect: Boolean = 
     if(showState){
         LaunchedEffect(Unit) {
             if(isCorrect){
-                backgroundColorToShow.animateTo(correctBackgroundColor, animationSpec = tween(1000))
+                backgroundColorToShow.animateTo(correctBackgroundColor, animationSpec = tween(500))
             }
             else{
-                backgroundColorToShow.animateTo(incorrectBackgroundColor, animationSpec = tween(1000))
+                backgroundColorToShow.animateTo(incorrectBackgroundColor, animationSpec = tween(500))
             }
         }
     }
