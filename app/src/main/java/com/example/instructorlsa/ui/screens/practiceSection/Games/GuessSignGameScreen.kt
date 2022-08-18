@@ -30,6 +30,7 @@ import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.BackNavigateButton
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.NextNavigateButton
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.VideoPlayer
+import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AnimatedStateResultIcon
 import com.example.instructorlsa.viewmodels.games.GuessSignScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel
@@ -62,34 +63,12 @@ fun GuessSignGameScreen(screenViewModel: GuessSignScreenViewModel, navController
             }
             Spacer(modifier = Modifier.height(20.dp))
         }
-        if(screenViewModel.showContinueView){
-            AlertDialog(
-                onDismissRequest = {
-                    screenViewModel.didTapContinueButton()
-                },
-                modifier = Modifier.padding(bottom = 170.dp),
-                title = {
-                    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(screenViewModel.correctStateText(), fontSize = 20.sp)
-                    }
-                    Spacer(modifier = Modifier.height(60.dp))
-                },
-                buttons = {
-                    Row(
-                        modifier = Modifier.padding(all = 8.dp),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Button(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(50.dp),
-                            onClick = {  }
-                        ) {
-                            Text("Continuar", fontSize = 16.sp)
-                        }
-                    }
-                }
-            )
-        }
+        AlertDialogResultGame(
+            isVisble = screenViewModel.showContinueView,
+            title = screenViewModel.correctStateText(),
+            onClickContinueButton = {
+                screenViewModel.didTapContinueButton()
+            }
+        )
     }
 }
