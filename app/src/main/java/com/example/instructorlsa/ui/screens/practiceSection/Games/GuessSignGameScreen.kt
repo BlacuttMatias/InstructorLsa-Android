@@ -6,9 +6,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Close
@@ -19,7 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.instructorlsa.R
 import com.example.instructorlsa.ui.common.components.MainButton
@@ -61,6 +61,35 @@ fun GuessSignGameScreen(screenViewModel: GuessSignScreenViewModel, navController
                 screenViewModel.didTapAnswerOption(answerOption)
             }
             Spacer(modifier = Modifier.height(20.dp))
+        }
+        if(screenViewModel.showContinueView){
+            AlertDialog(
+                onDismissRequest = {
+                    screenViewModel.didTapContinueButton()
+                },
+                modifier = Modifier.padding(bottom = 170.dp),
+                title = {
+                    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(screenViewModel.correctStateText(), fontSize = 20.sp)
+                    }
+                    Spacer(modifier = Modifier.height(60.dp))
+                },
+                buttons = {
+                    Row(
+                        modifier = Modifier.padding(all = 8.dp),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Button(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(50.dp),
+                            onClick = {  }
+                        ) {
+                            Text("Continuar", fontSize = 16.sp)
+                        }
+                    }
+                }
+            )
         }
     }
 }

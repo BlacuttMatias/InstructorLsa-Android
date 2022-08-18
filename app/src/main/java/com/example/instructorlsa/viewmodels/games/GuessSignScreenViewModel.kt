@@ -3,12 +3,17 @@ package com.example.instructorlsa.viewmodels.games
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel) {
+class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel): ViewModel() {
     val game: GameViewModel
     val category: CategoryViewModel
     var answerWasSelected by mutableStateOf(false)
+    var showContinueView by mutableStateOf(false)
     var answerSelected: AnswerOption? = null
 
     init{
@@ -19,10 +24,23 @@ class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel)
     fun didTapAnswerOption(answerOption: AnswerOption){
         answerWasSelected = true
         answerSelected = answerOption
+        viewModelScope.launch{
+            delay(700)
+            showContinueView = true
+        }
     }
 
     fun isTheAnswerSelected(answerOption: AnswerOption): Boolean{
         return answerOption == answerSelected
+    }
+
+    fun correctStateText(): String{
+        if(answerSelected?.isCorrect == true){
+            return "Correcto"
+        }
+        else{
+            return "Incorrecto"
+        }
     }
 
     fun answerWasSelectedAndIsTheCorrect(answerOption: AnswerOption): Boolean{
@@ -35,5 +53,9 @@ class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel)
 
     fun showStateAnswer(answerOption: AnswerOption): Boolean{
         return answerWasSelectedAndIsTheCorrect(answerOption) || answerWasSelectedAndIsNotCorrect(answerOption)
+    }
+
+    fun didTapContinueButton(){
+
     }
 }
