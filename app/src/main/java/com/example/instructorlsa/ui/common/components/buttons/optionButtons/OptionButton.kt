@@ -36,6 +36,11 @@ fun OptionButton(text: String, showState: Boolean = false, isCorrect: Boolean = 
             }
         }
     }
+    else{
+        LaunchedEffect(Unit) {
+            backgroundColorToShow.animateTo(normalBackgroundColor, animationSpec = tween(0))
+        }
+    }
 
 
     Button(modifier = Modifier.fillMaxWidth()
