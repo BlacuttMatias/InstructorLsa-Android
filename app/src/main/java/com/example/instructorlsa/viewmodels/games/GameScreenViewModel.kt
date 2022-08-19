@@ -38,6 +38,10 @@ class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
         }
         indexCurrentGame++
     }
+
+    fun getResultGames(): Double{
+        return gamesAnsweredCorrect.toDouble()
+    }
 }
 
 val mockSign1 = SignViewModel(

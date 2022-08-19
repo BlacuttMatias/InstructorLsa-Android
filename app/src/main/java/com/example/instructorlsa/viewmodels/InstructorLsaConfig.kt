@@ -9,6 +9,7 @@ object InstructorLsaConfig {
     var categoryLearningViewModel: CategoryViewModel? = null
     var categoryPracticeViewModel: CategoryViewModel? = null
     var learningSigns: List<SignViewModel> = listOf()
+    var resultGames: Double = 0.0
     var indexSignToLearn: Int = 0
     var user: User = User(null, null, null)
 
@@ -35,6 +36,4 @@ object InstructorLsaConfig {
     fun getUserEmail(): String{
         return user.email ?: ""
     }
-
-
 }

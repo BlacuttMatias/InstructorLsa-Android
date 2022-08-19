@@ -19,6 +19,7 @@ import com.example.instructorlsa.viewmodels.categories.CategoryLearningNavigatio
 import com.example.instructorlsa.viewmodels.categories.CategoryPracticeNavigation
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
+import com.example.instructorlsa.viewmodels.games.resultGames.ResultGamesScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.MockDataSigns
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignsScreenViewModel
@@ -70,7 +71,11 @@ fun Navigation() {
             GameScreen(navController = navController, screenViewModel = screenViewModel)
         }
         composable(NavigationRoute.ResultGames.route){
-            ResultGamesScreen(navController = navController)
+            val screenViewModel = ResultGamesScreenViewModel(
+                category = InstructorLsaConfig.getPracticeCategory(),
+                result = InstructorLsaConfig.resultGames
+            )
+            ResultGamesScreen(navController = navController, screenViewModel = screenViewModel)
         }
     }
 }

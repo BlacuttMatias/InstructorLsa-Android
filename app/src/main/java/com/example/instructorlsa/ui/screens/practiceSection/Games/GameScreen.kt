@@ -19,6 +19,7 @@ import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.example.instructorlsa.ui.screens.practiceSection.Games.GuessSignGameScreen
+import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
 
 @Composable
@@ -29,6 +30,7 @@ fun GameScreen(navController: NavController, screenViewModel: GameScreenViewMode
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
         if(screenViewModel.allGamesAreCompleted()){
+            InstructorLsaConfig.resultGames = screenViewModel.getResultGames()
             navController.navigate(NavigationRoute.ResultGames.route){
                 popUpTo(NavigationRoute.GamePractice.route) {
                     inclusive = true

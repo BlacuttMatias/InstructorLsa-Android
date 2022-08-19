@@ -8,12 +8,19 @@
 
     <string name="home_main_menu">Menú Principal</string>
     <string name="home_learning_section">Sección Aprendizaje</string>
-    <string name="home_practice_section">Sección práctica</string>
+    <string name="home_practice_section">Sección Práctica</string>
     <string name="home_comprehensive_games">Juegos Integrales</string>
 
     <string name="categories">Categorías</string>
 
     <string name="start_to_play">Empezar a Jugar</string>
+
+    <string name="result_games_correct_answers">Respuestas Correctas</string>
+    <string name="result_games_congratulations">¡Felicidades!</string>
+    <string name="result_games_main_menu">Ir a Menú Principal</string>
+    <string name="result_games_play_again">Volver a Jugar</string>
+    <string name="result_games_go_to_learning_section">Ir a Sección Aprendizaje</string>
+    <string name="result_games_go_to_category_selection">Seleccionar otra categoría</string>
 
     <string name="close_session">Cerrar sesión</string>
 
