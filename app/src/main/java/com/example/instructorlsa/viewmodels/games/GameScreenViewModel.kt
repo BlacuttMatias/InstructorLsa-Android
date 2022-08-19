@@ -11,6 +11,7 @@ class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
     var games: List<GameViewModel> = listOf()
     val category: CategoryViewModel
     var indexCurrentGame by mutableStateOf(0)
+    var gamesAnsweredCorrect = 0
 
     init{
         this.category = category
@@ -18,11 +19,24 @@ class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
     }
 
     fun getCurrentGame(): GameViewModel{
-        return games[indexCurrentGame]
+        return games.getOrElse(indexCurrentGame) { games.first() }
     }
 
     fun getGuessSignScreenViewModel(): GuessSignScreenViewModel{
-        return GuessSignScreenViewModel(category = this.category, game = getCurrentGame())
+        return GuessSignScreenViewModel(category = this.category, game = getCurrentGame(), delegate = this)
+    }
+
+    fun allGamesAreCompleted(): Boolean{
+        return indexCurrentGame >= games.size
+    }
+
+    fun goToNextScreen(answerWasCorrect: Boolean?){
+        answerWasCorrect?.let {
+            if(it){
+                gamesAnsweredCorrect++
+            }
+        }
+        indexCurrentGame++
     }
 }
 

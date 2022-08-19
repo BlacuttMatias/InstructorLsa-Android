@@ -9,16 +9,18 @@ import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel): ViewModel() {
+class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel, delegate: GameScreenViewModel): ViewModel() {
     val game: GameViewModel
     val category: CategoryViewModel
     var answerWasSelected by mutableStateOf(false)
     var showContinueView by mutableStateOf(false)
     var answerSelected: AnswerOption? = null
+    var delegate: GameScreenViewModel
 
     init{
         this.game = game
         this.category = category
+        this.delegate = delegate
     }
 
     fun didTapAnswerOption(answerOption: AnswerOption){
@@ -56,6 +58,6 @@ class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel)
     }
 
     fun didTapContinueButton(){
-
+        delegate.goToNextScreen(answerSelected?.isCorrect)
     }
 }

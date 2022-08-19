@@ -10,6 +10,7 @@ import com.example.instructorlsa.ui.screens.home.HomeScreen
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.SignLearningScreen
 import com.example.instructorlsa.ui.screens.learningSection.signs.SignsScreen
 import com.example.instructorlsa.ui.screens.login.LoginScreen
+import com.example.instructorlsa.ui.screens.practiceSection.ResultGames.ResultGamesScreen
 import com.example.instructorlsa.ui.screens.practiceSection.startPractice.GameScreen
 import com.example.instructorlsa.ui.screens.practiceSection.startPractice.StartPracticeScreen
 import com.example.instructorlsa.viewmodels.InstructorLsaConfig
@@ -68,6 +69,9 @@ fun Navigation() {
             val screenViewModel = GameScreenViewModel(category = InstructorLsaConfig.getPracticeCategory())
             GameScreen(navController = navController, screenViewModel = screenViewModel)
         }
+        composable(NavigationRoute.ResultGames.route){
+            ResultGamesScreen(navController = navController)
+        }
     }
 }
 
@@ -79,5 +83,6 @@ enum class NavigationRoute(val route: String){
     SignLearning("learning/sign"),
     CategoriesPractice("practice/categories"),
     StartPractice("practice/start"),
+    ResultGames("practice/resultGames"),
     GamePractice("practice/game")
 }
