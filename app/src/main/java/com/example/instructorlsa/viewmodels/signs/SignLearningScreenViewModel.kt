@@ -24,7 +24,23 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
     }
 
     fun getCurrentSign(): SignViewModel{
-        return signs[currentIndex]
+        var defaultSign: SignViewModel = signs.last()
+        if(currentIndex<0){
+            defaultSign = signs.first()
+        }
+        return signs.getOrElse(currentIndex) { defaultSign }
+    }
+
+    fun setPreviousIndex(){
+        if(currentIndex > 0){
+            currentIndex--
+        }
+    }
+
+    fun setNextIndex(){
+        if(currentIndex < signs.size-1){
+            currentIndex++
+        }
     }
 
     fun didBackButtonClicked(){
@@ -37,11 +53,11 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
                 )
                 val a = signService.updateSignState(requestBody)
                 getCurrentSign().isCompleted = true
-                currentIndex--
+                setPreviousIndex()
             }
         }
         else{
-            currentIndex--
+            setPreviousIndex()
         }
     }
 
@@ -55,11 +71,11 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
                 )
                 signService.updateSignState(requestBody)
                 getCurrentSign().isCompleted = true
-                currentIndex++
+                setNextIndex()
             }
         }
         else{
-            currentIndex++
+            setNextIndex()
         }
     }
 }
