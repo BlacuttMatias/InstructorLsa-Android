@@ -29,17 +29,15 @@ fun GameScreen(navController: NavController, screenViewModel: GameScreenViewMode
     Scaffold(
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
-        if(screenViewModel.allGamesAreCompleted()){
+        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
+            GuessSignGameScreen(screenViewModel = screenViewModel.getGuessSignScreenViewModel(), navController = navController)
+        }
+        if(screenViewModel.allGamesAreCompleted){
             InstructorLsaConfig.resultGames = screenViewModel.getResultGames()
             navController.navigate(NavigationRoute.ResultGames.route){
                 popUpTo(NavigationRoute.GamePractice.route) {
                     inclusive = true
                 }
-            }
-        }
-        else{
-            Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
-                GuessSignGameScreen(screenViewModel = screenViewModel.getGuessSignScreenViewModel(), navController = navController)
             }
         }
     }
