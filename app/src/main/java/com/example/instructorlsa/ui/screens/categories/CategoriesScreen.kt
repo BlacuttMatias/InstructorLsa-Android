@@ -36,7 +36,7 @@ import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 @Composable
 fun CategoriesScreen(navController: NavController, screenViewModel: CategoriesScreenViewModel) {
     val titleText = stringResource(id = R.string.categories)
-    val titleTopTabBarText = stringResource(id = R.string.home_learning_section)
+    val titleTopTabBarText = screenViewModel.titleText
     val categories = screenViewModel.getAllCategories()
     Scaffold(
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }

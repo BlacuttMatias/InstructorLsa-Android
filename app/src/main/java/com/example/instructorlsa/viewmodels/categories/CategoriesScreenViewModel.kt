@@ -6,9 +6,11 @@ import com.example.instructorlsa.R
 class CategoriesScreenViewModel(navigationStrategy: CategoryNavigationStrategy) {
 
     var navigationStrategy: CategoryNavigationStrategy
+    var titleText: String
 
     init{
         this.navigationStrategy = navigationStrategy
+        this.titleText = navigationStrategy.getTitleText()
     }
 
     fun getAllCategories(): List<CategoryViewModel> {
