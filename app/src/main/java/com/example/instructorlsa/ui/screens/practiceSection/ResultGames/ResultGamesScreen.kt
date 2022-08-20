@@ -42,19 +42,29 @@ fun ResultGamesScreen(navController: NavController, screenViewModel: ResultGames
             Text(text = congratulationsText)
             Spacer(modifier = Modifier.height(50.dp))
             MainButton(text = playAgainButtonText) {
-
+                navController.navigate(NavigationRoute.GamePractice.route){
+                    popUpTo(NavigationRoute.ResultGames.route) {
+                        inclusive = true
+                    }
+                }
             }
             Spacer(modifier = Modifier.height(30.dp))
             MainButton(text = mainMenuButtonText) {
-
+                navController.navigate(NavigationRoute.Home.route) {
+                    popUpTo(0)
+                }
             }
             Spacer(modifier = Modifier.height(30.dp))
             MainButton(text = learningSectionButtonText) {
-
+                navController.navigate(NavigationRoute.CategoriesLearning.route){
+                    popUpTo(NavigationRoute.Home.route)
+                }
             }
             Spacer(modifier = Modifier.height(30.dp))
             MainButton(text = selectionCategoryButtonText) {
-
+                navController.navigate(NavigationRoute.CategoriesPractice.route){
+                    popUpTo(NavigationRoute.Home.route)
+                }
             }
             Spacer(modifier = Modifier.height(30.dp))
             SloganFooterText()
