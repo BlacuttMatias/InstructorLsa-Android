@@ -1,10 +1,7 @@
 package com.example.instructorlsa.ui.screens.practiceSection.Games.components
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -34,11 +31,15 @@ fun AnimatedStateResultIcon(isVisible: Boolean, isPositiveResult: Boolean) {
         painterId = R.drawable.ic_cancel
         color = Color.Red
     }
-    AnimatedVisibility(visible = isVisible, enter = scaleIn(animationSpec = tween(500))) {
-        Icon(painterResource(id = painterId),
-            contentDescription = null,
-            Modifier.size(70.dp).clip(CircleShape),
-            tint = color
-        )
+    AnimatedVisibility(visible = isVisible,
+        enter = scaleIn(animationSpec = tween(500))
+    ) {
+        if(isVisible){
+            Icon(painterResource(id = painterId),
+                contentDescription = null,
+                Modifier.size(70.dp).clip(CircleShape),
+                tint = color
+            )
+        }
     }
 }
