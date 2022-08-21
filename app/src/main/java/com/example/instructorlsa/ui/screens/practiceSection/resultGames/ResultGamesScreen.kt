@@ -37,11 +37,11 @@ fun ResultGamesScreen(navController: NavController, screenViewModel: ResultGames
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
             Spacer(modifier = Modifier.height(20.dp))
             TitleText(text = titleText)
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             ResultCircleProgressAnimated(screenViewModel.result.toFloat())
-            Spacer(modifier = Modifier.height(50.dp))
+            Spacer(modifier = Modifier.height(40.dp))
             Text(text = congratulationsText)
-            Spacer(modifier = Modifier.height(50.dp))
+            Spacer(modifier = Modifier.height(40.dp))
             MainButton(text = playAgainButtonText) {
                 navController.navigate(NavigationRoute.GamePractice.route){
                     popUpTo(NavigationRoute.ResultGames.route) {
@@ -49,19 +49,19 @@ fun ResultGamesScreen(navController: NavController, screenViewModel: ResultGames
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             MainButton(text = mainMenuButtonText) {
                 navController.navigate(NavigationRoute.Home.route) {
                     popUpTo(0)
                 }
             }
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             MainButton(text = learningSectionButtonText) {
                 navController.navigate(NavigationRoute.CategoriesLearning.route){
                     popUpTo(NavigationRoute.Home.route)
                 }
             }
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             MainButton(text = selectionCategoryButtonText) {
                 navController.navigate(NavigationRoute.CategoriesPractice.route){
                     popUpTo(NavigationRoute.Home.route)
