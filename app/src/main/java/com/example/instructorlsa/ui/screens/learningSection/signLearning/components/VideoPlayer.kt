@@ -13,7 +13,6 @@ import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLo
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ui.PlayerControlView
-import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.ui.StyledPlayerView
 
 @Composable
@@ -34,6 +33,11 @@ fun VideoPlayer(urlVideo: String){
         AndroidView(factory = {
             playerView
         })
+        DisposableEffect(player){
+            onDispose {
+                player.release()
+            }
+        }
     }
 }
 
