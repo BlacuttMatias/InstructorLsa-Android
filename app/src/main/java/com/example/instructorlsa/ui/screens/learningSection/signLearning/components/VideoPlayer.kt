@@ -16,7 +16,7 @@ import com.google.android.exoplayer2.ui.PlayerControlView
 import com.google.android.exoplayer2.ui.StyledPlayerView
 
 @Composable
-fun VideoPlayer(urlVideo: String){
+fun VideoPlayer(urlVideo: String, playWhenReady: Boolean = false, repeatVideo: Boolean = false){
     
     Column(Modifier.fillMaxWidth().height(220.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
 
@@ -27,6 +27,10 @@ fun VideoPlayer(urlVideo: String){
 
         player.setMediaItem(mediaItem)
         playerView.player = player
+        player.playWhenReady = playWhenReady
+        if(repeatVideo){
+            player.repeatMode = ExoPlayer.REPEAT_MODE_ALL
+        }
         LaunchedEffect(player) {
             player.prepare()
         }
