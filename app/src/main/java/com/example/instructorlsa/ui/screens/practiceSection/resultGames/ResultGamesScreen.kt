@@ -1,4 +1,4 @@
-package com.example.instructorlsa.ui.screens.practiceSection.ResultGames
+package com.example.instructorlsa.ui.screens.practiceSection.resultGames
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,8 +18,7 @@ import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.SloganFooterText
 import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
-import com.example.instructorlsa.ui.screens.practiceSection.Games.GuessSignGameScreen
-import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
+import com.example.instructorlsa.ui.screens.practiceSection.resultGames.components.ResultCircleProgressAnimated
 import com.example.instructorlsa.viewmodels.games.resultGames.ResultGamesScreenViewModel
 
 @Composable
@@ -38,6 +37,7 @@ fun ResultGamesScreen(navController: NavController, screenViewModel: ResultGames
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
             TitleText(text = titleText)
             Spacer(modifier = Modifier.height(50.dp))
+            ResultCircleProgressAnimated()
             Spacer(modifier = Modifier.height(50.dp))
             Text(text = congratulationsText)
             Spacer(modifier = Modifier.height(50.dp))

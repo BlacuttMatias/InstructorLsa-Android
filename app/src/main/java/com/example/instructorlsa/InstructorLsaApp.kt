@@ -10,7 +10,7 @@ import com.example.instructorlsa.ui.screens.home.HomeScreen
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.SignLearningScreen
 import com.example.instructorlsa.ui.screens.learningSection.signs.SignsScreen
 import com.example.instructorlsa.ui.screens.login.LoginScreen
-import com.example.instructorlsa.ui.screens.practiceSection.ResultGames.ResultGamesScreen
+import com.example.instructorlsa.ui.screens.practiceSection.resultGames.ResultGamesScreen
 import com.example.instructorlsa.ui.screens.practiceSection.startPractice.GameScreen
 import com.example.instructorlsa.ui.screens.practiceSection.startPractice.StartPracticeScreen
 import com.example.instructorlsa.viewmodels.InstructorLsaConfig
@@ -20,7 +20,6 @@ import com.example.instructorlsa.viewmodels.categories.CategoryPracticeNavigatio
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
 import com.example.instructorlsa.viewmodels.games.resultGames.ResultGamesScreenViewModel
-import com.example.instructorlsa.viewmodels.signs.MockDataSigns
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignsScreenViewModel
 import com.example.instructorlsa.viewmodels.startPractice.StartPracticeViewModel
