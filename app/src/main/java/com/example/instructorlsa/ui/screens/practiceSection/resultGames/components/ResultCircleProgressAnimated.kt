@@ -29,8 +29,7 @@ fun ResultCircleProgressAnimated(
     animDelay: Int = 0
 ){
     var progressValue by remember { mutableStateOf(0.0f) }
-
-
+    
     val value by animateFloatAsState(
         targetValue = progressValue,
         animationSpec = tween(
@@ -39,7 +38,6 @@ fun ResultCircleProgressAnimated(
             easing = LinearOutSlowInEasing
         )
     )
-
     Box(
         modifier = Modifier.size(size),
         contentAlignment = Alignment.Center
@@ -59,29 +57,7 @@ fun ResultCircleProgressAnimated(
             fontWeight = FontWeight.Bold
         )
     }
-
     LaunchedEffect(progressValue) {
         progressValue = percentage
     }
-//    var progressValue by remember { mutableStateOf(0.0f) }
-//
-//
-//    val value by animateFloatAsState(
-//        targetValue = progressValue,
-//        animationSpec = tween(
-//            durationMillis = 100,
-//            delayMillis = 50,
-//            easing = LinearOutSlowInEasing
-//        )
-//    )
-//
-//    CircularProgressIndicator(
-//        progress = value,
-//        modifier = Modifier.size(80.dp)
-//    )
-//
-//    LaunchedEffect(progressValue) {
-//        progressValue = 0.75f
-//    }
-
 }
