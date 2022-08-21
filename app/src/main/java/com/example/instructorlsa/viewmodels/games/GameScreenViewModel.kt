@@ -1,5 +1,6 @@
 package com.example.instructorlsa.viewmodels.games
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -42,7 +43,7 @@ class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
     }
 
     fun getResultGames(): Double{
-        return gamesAnsweredCorrect.toDouble()
+        return gamesAnsweredCorrect.toDouble() / games.size.toDouble()
     }
 }
 

@@ -35,9 +35,10 @@ fun ResultGamesScreen(navController: NavController, screenViewModel: ResultGames
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
+            Spacer(modifier = Modifier.height(20.dp))
             TitleText(text = titleText)
-            Spacer(modifier = Modifier.height(50.dp))
-            ResultCircleProgressAnimated()
+            Spacer(modifier = Modifier.height(40.dp))
+            ResultCircleProgressAnimated(screenViewModel.result.toFloat())
             Spacer(modifier = Modifier.height(50.dp))
             Text(text = congratulationsText)
             Spacer(modifier = Modifier.height(50.dp))

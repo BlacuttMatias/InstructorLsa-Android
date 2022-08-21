@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun ResultCircleProgressAnimated(
-    percentage: Float = 0.75f,
+    percentage: Float,
     fontSize: TextUnit = 28.sp,
     size: Dp = 80.dp,
     color: Color = MaterialTheme.colors.primary,
