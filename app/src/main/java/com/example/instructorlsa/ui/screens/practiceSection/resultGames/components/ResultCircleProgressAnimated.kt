@@ -28,10 +28,10 @@ fun ResultCircleProgressAnimated(
     animDuration: Int = 1000,
     animDelay: Int = 0
 ){
-    var progressValue by remember { mutableStateOf(0.0f) }
+    var progressPercentage by remember { mutableStateOf(0.0f) }
     
-    val value by animateFloatAsState(
-        targetValue = progressValue,
+    val animatedProgressPercentage by animateFloatAsState(
+        targetValue = progressPercentage,
         animationSpec = tween(
             durationMillis = animDuration,
             delayMillis = animDelay,
@@ -46,18 +46,18 @@ fun ResultCircleProgressAnimated(
             drawArc(
                 color = color,
                 -90f,
-                360*value,
+                360*animatedProgressPercentage,
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
         }
         Text(
-            text = (value*100).toInt().toString() + "%",
+            text = (animatedProgressPercentage*100).toInt().toString() + "%",
             fontSize = fontSize,
             fontWeight = FontWeight.Bold
         )
     }
-    LaunchedEffect(progressValue) {
-        progressValue = percentage
+    LaunchedEffect(progressPercentage) {
+        progressPercentage = percentage
     }
 }
