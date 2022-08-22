@@ -17,7 +17,7 @@ object RetrofitBuilder {
         val headers = HashMap<String, String>()
         headers["Accept"] = "application/json"
         headers["Content-Type"] = "application/json"
-        headers["Authorization"] = InstructorLsaConfig.getUserToken()
+        headers["Authorization"] = "Token " + InstructorLsaConfig.getUserToken()
         return headers
     }
 }
