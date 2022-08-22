@@ -1,12 +1,15 @@
 package com.example.instructorlsa.viewmodels.games
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.instructorlsa.mappers.GameMapper
+import com.example.instructorlsa.services.GamesService
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.signs.SignViewModel
+import kotlinx.coroutines.launch
 
 class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
     var games: List<GameViewModel> = listOf()
@@ -14,10 +17,23 @@ class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
     var indexCurrentGame by mutableStateOf(0)
     var gamesAnsweredCorrect = 0
     var allGamesAreCompleted by mutableStateOf(false)
+    var gamesService = GamesService()
+    var gameMapper = GameMapper()
+    var isLoading by mutableStateOf(true)
 
     init{
         this.category = category
-        this.games = mockGames
+    }
+
+    fun loadInitData(){
+        viewModelScope.launch {
+            if(games.isEmpty()){
+                val gamesDto = gamesService.getGames(categoryName = category.name)
+                games =  gameMapper.map(gamesDto)
+                isLoading = false
+            }
+            isLoading = false
+        }
     }
 
     fun getCurrentGame(): GameViewModel{
@@ -62,17 +78,17 @@ val mockSign2 = SignViewModel(
 )
 
 val answerOptions1 = listOf(
-    AnswerOption(text = "Rojo", isCorrect = false),
-    AnswerOption(text = "Azul", isCorrect = true),
-    AnswerOption(text = "Celeste", isCorrect = false),
-    AnswerOption(text = "Violeta", isCorrect = false)
+    AnswerOptionViewModel(text = "Rojo", isCorrect = false),
+    AnswerOptionViewModel(text = "Azul", isCorrect = true),
+    AnswerOptionViewModel(text = "Celeste", isCorrect = false),
+    AnswerOptionViewModel(text = "Violeta", isCorrect = false)
 )
 
 val answerOptions2 = listOf(
-    AnswerOption(text = "Azul", isCorrect = false),
-    AnswerOption(text = "Celeste", isCorrect = false),
-    AnswerOption(text = "Rojo", isCorrect = true),
-    AnswerOption(text = "Violeta", isCorrect = false)
+    AnswerOptionViewModel(text = "Azul", isCorrect = false),
+    AnswerOptionViewModel(text = "Celeste", isCorrect = false),
+    AnswerOptionViewModel(text = "Rojo", isCorrect = true),
+    AnswerOptionViewModel(text = "Violeta", isCorrect = false)
 )
 
 val mockGames = listOf(

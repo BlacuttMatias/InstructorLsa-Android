@@ -14,7 +14,7 @@ class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel,
     val category: CategoryViewModel
     var answerWasSelected by mutableStateOf(false)
     var showContinueView by mutableStateOf(false)
-    var answerSelected: AnswerOption? = null
+    var answerSelected: AnswerOptionViewModel? = null
     var delegate: GameScreenViewModel
 
     init{
@@ -23,7 +23,7 @@ class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel,
         this.delegate = delegate
     }
 
-    fun didTapAnswerOption(answerOption: AnswerOption){
+    fun didTapAnswerOption(answerOption: AnswerOptionViewModel){
         answerWasSelected = true
         answerSelected = answerOption
         viewModelScope.launch{
@@ -32,7 +32,7 @@ class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel,
         }
     }
 
-    fun isTheAnswerSelected(answerOption: AnswerOption): Boolean{
+    fun isTheAnswerSelected(answerOption: AnswerOptionViewModel): Boolean{
         return answerOption == answerSelected
     }
 
@@ -45,15 +45,15 @@ class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel,
         }
     }
 
-    fun answerWasSelectedAndIsTheCorrect(answerOption: AnswerOption): Boolean{
+    fun answerWasSelectedAndIsTheCorrect(answerOption: AnswerOptionViewModel): Boolean{
         return answerWasSelected && answerOption.isCorrect
     }
 
-    fun answerWasSelectedAndIsNotCorrect(answerOption: AnswerOption): Boolean{
+    fun answerWasSelectedAndIsNotCorrect(answerOption: AnswerOptionViewModel): Boolean{
         return answerWasSelected && answerSelected == answerOption && !answerOption.isCorrect
     }
 
-    fun showStateAnswer(answerOption: AnswerOption): Boolean{
+    fun showStateAnswer(answerOption: AnswerOptionViewModel): Boolean{
         return answerWasSelectedAndIsTheCorrect(answerOption) || answerWasSelectedAndIsNotCorrect(answerOption)
     }
 
