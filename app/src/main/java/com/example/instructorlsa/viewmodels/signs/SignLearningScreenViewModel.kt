@@ -43,16 +43,25 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
         }
     }
 
-    fun didBackButtonClicked(){
-        if(!getCurrentSign().isCompleted){
-            viewModelScope.launch {
+    private fun fetchUpdateSign(onSuccess: () -> Unit){
+        viewModelScope.launch {
+            try{
                 val requestBody = SignBodyPost(
                     signId = getCurrentSign().id
                 )
                 signService.updateSignState(requestBody)
                 getCurrentSign().isCompleted = true
-                setPreviousIndex()
+                onSuccess.invoke()
             }
+            catch(e: Exception){
+
+            }
+        }
+    }
+
+    fun didBackButtonClicked(){
+        if(!getCurrentSign().isCompleted){
+            fetchUpdateSign { setPreviousIndex() }
         }
         else{
             setPreviousIndex()
@@ -61,14 +70,7 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
 
     fun didNextButtonClicked(){
         if(!getCurrentSign().isCompleted){
-            viewModelScope.launch {
-                val requestBody = SignBodyPost(
-                    signId = getCurrentSign().id
-                )
-                signService.updateSignState(requestBody)
-                getCurrentSign().isCompleted = true
-                setNextIndex()
-            }
+            fetchUpdateSign { setNextIndex() }
         }
         else{
             setNextIndex()
