@@ -11,7 +11,7 @@ object InstructorLsaConfig {
     var learningSigns: List<SignViewModel> = listOf()
     var resultGames: Double = 0.0
     var indexSignToLearn: Int = 0
-    var user: User = User(null, null, null)
+    var user: User = User(null, null, null, null)
 
     fun setLearningCategory(category: CategoryViewModel){
         categoryLearningViewModel = category

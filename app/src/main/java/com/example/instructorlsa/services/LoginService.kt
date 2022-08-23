@@ -9,7 +9,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface LoginApiService{
-    @POST("instructorlsa/login")
+    @POST("login")
     suspend fun login(@Body body: LoginPostBody): Response<LoginResponse>
 }
 

@@ -15,7 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import kotlinx.coroutines.launch
 
 class LoginScreenViewModel(application: Context) : ViewModel() {
-    var googleUser by mutableStateOf(User(null,null,null))
+    var googleUser by mutableStateOf(User(null,null,null, null))
 
     private var _loadingState = MutableLiveData(false)
     val loading: LiveData<Boolean> = _loadingState
@@ -25,15 +25,16 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
         checkSignedInUser(application.applicationContext)
     }
 
-    fun fetchSignInUser(email: String?, name: String?, token: String?) {
+    fun fetchSignInUser(email: String?, token: String?, firstName: String?, lastName: String?) {
         showLoading()
         viewModelScope.launch {
-            val body = LoginPostBody(username = name, email = email, token = token)
+            val body = LoginPostBody(firstName = firstName, lastName = lastName, email = email, token = token)
             val response = loginService.login(body)
             if (response.isSuccessful){
                 val user = User(
                     email = email,
-                    name = name,
+                    firstName = firstName,
+                    lastName = lastName,
                     token = token
                 )
                 InstructorLsaConfig.user = user
@@ -51,12 +52,18 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
 
         if (gsa != null) {
             viewModelScope.launch{
-                val body = LoginPostBody(username = gsa.displayName, email = gsa.email, token = gsa.idToken)
+                val body = LoginPostBody(
+                    firstName = gsa.givenName,
+                    lastName = gsa.familyName,
+                    email = gsa.email,
+                    token = gsa.idToken
+                )
                 val response = loginService.login(body)
                 if(response.isSuccessful){
                     val user = User(
                         email = gsa.email,
-                        name = gsa.displayName,
+                        firstName = gsa.givenName,
+                        lastName = gsa.familyName,
                         token = gsa.idToken
                     )
                     InstructorLsaConfig.user = user
