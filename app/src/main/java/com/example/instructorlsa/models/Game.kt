@@ -5,7 +5,7 @@ data class Game(
     val name: String,
     val type: String,
     val description: String?,
-    val sign: Sign,
+    val sign: SignGame,
     val options: List<AnswerOptionGame>
 )
 

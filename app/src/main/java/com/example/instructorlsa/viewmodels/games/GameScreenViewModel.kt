@@ -28,11 +28,18 @@ class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
     fun loadInitData(){
         viewModelScope.launch {
             if(games.isEmpty()){
-                val gamesDto = gamesService.getGames(categoryName = category.name)
-                games =  gameMapper.map(gamesDto)
+                try{
+                    val gamesDto = gamesService.getGames(categoryName = category.name).body()
+                    games = gamesDto?.let { gameMapper.map(it) }.orEmpty()
+                    isLoading = false
+                }
+                catch(e: Exception){
+
+                }
+            }
+            else{
                 isLoading = false
             }
-            isLoading = false
         }
     }
 

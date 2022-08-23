@@ -9,3 +9,11 @@ data class Sign(
     @SerializedName("categoria") val categoryId: Int,
     @SerializedName("realizado") var completed: Boolean
 )
+
+data class SignGame(
+    val id: Int,
+    val name: String,
+    val urlVideo: String,
+    @SerializedName("categoria") val categoryId: Int,
+    @SerializedName("realizado") var completed: Boolean
+)
