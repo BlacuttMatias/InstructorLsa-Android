@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.instructorlsa.models.SignBodyPut
+import com.example.instructorlsa.models.SignBodyPost
 import com.example.instructorlsa.services.SignService
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import kotlinx.coroutines.launch
@@ -46,12 +46,10 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
     fun didBackButtonClicked(){
         if(!getCurrentSign().isCompleted){
             viewModelScope.launch {
-                val requestBody = SignBodyPut(
-                    signId = getCurrentSign().id,
-                    categoryName = category.name,
-                    completed = true
+                val requestBody = SignBodyPost(
+                    signId = getCurrentSign().id
                 )
-                val a = signService.updateSignState(requestBody)
+                signService.updateSignState(requestBody)
                 getCurrentSign().isCompleted = true
                 setPreviousIndex()
             }
@@ -64,10 +62,8 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
     fun didNextButtonClicked(){
         if(!getCurrentSign().isCompleted){
             viewModelScope.launch {
-                val requestBody = SignBodyPut(
-                    signId = getCurrentSign().id,
-                    categoryName = category.name,
-                    completed = true
+                val requestBody = SignBodyPost(
+                    signId = getCurrentSign().id
                 )
                 signService.updateSignState(requestBody)
                 getCurrentSign().isCompleted = true
