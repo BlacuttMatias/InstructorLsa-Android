@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.*
+import com.example.instructorlsa.mappers.BodyPostLoginMapper
 import com.example.instructorlsa.models.LoginPostBody
 import com.example.instructorlsa.models.User
 import com.example.instructorlsa.services.LoginService
@@ -20,52 +21,19 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
     private var _loadingState = MutableLiveData(false)
     val loading: LiveData<Boolean> = _loadingState
     val loginService = LoginService()
+    val bodyPostLoginMapper = BodyPostLoginMapper()
 
     init {
         checkSignedInUser(application.applicationContext)
     }
 
-    fun fetchSignInUser(email: String?, token: String?, firstName: String?, lastName: String?) {
-        showLoading()
+    private fun fetchLogin(email: String?, token: String?, firstName: String?, lastName: String?){
         viewModelScope.launch {
-            val body = LoginPostBody(firstName = firstName, lastName = lastName, email = email, token = token)
-            val response = loginService.login(body)
-            if (response.isSuccessful){
-                val user = User(
-                    email = email,
-                    firstName = firstName,
-                    lastName = lastName,
-                    token = token
-                )
-                InstructorLsaConfig.user = user
-                googleUser = user
-            }
-            else{
-                //TODO
-            }
-        }
-    }
-
-    private fun checkSignedInUser(applicationContext: Context) {
-        showLoading()
-        val gsa = GoogleSignIn.getLastSignedInAccount(applicationContext)
-
-        if (gsa != null) {
-            viewModelScope.launch{
-                val body = LoginPostBody(
-                    firstName = gsa.givenName,
-                    lastName = gsa.familyName,
-                    email = gsa.email,
-                    token = gsa.idToken
-                )
+            try{
+                val user = User(email = email, firstName = firstName, lastName = lastName, token = token)
+                val body = bodyPostLoginMapper.map(user)
                 val response = loginService.login(body)
-                if(response.isSuccessful){
-                    val user = User(
-                        email = gsa.email,
-                        firstName = gsa.givenName,
-                        lastName = gsa.familyName,
-                        token = gsa.idToken
-                    )
+                if (response.isSuccessful){
                     InstructorLsaConfig.user = user
                     googleUser = user
                 }
@@ -73,6 +41,23 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
                     //TODO
                 }
             }
+            catch(e: Exception){
+
+            }
+        }
+    }
+
+    fun fetchSignInUser(email: String?, token: String?, firstName: String?, lastName: String?) {
+        showLoading()
+        fetchLogin(email = email, token = token, firstName = firstName, lastName = lastName)
+    }
+
+    private fun checkSignedInUser(applicationContext: Context) {
+        showLoading()
+        val gsa = GoogleSignIn.getLastSignedInAccount(applicationContext)
+
+        if (gsa != null) {
+            fetchLogin(email = gsa.email, token = gsa.idToken, firstName = gsa.givenName, lastName = gsa.familyName)
         }
         else{
             hideLoading()
