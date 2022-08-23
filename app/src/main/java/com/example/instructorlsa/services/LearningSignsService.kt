@@ -11,11 +11,11 @@ import retrofit2.http.Query
 
 interface LearningSignsApiService{
     @GET("sign/category")
-    suspend fun getSigns(@HeaderMap headers: Map<String, String>, @Query("category") categoryName: String): List<Sign>
+    suspend fun getSigns(@HeaderMap headers: Map<String, String>, @Query("category") categoryName: String): Response<List<Sign>>
 }
 
 class LearningSignsService {
-    suspend fun getLearningSigns(categoryName: String): List<Sign>{
+    suspend fun getLearningSigns(categoryName: String): Response<List<Sign>>{
         return RetrofitBuilder.getRetrofitInstance()
             .create(LearningSignsApiService::class.java)
             .getSigns(headers = RetrofitBuilder.getHeaders(), categoryName = categoryName)
