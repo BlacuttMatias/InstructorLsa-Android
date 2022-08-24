@@ -5,8 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
-    fun getRetrofitInstance(): Retrofit{
-        val baseUrl = "https://demo8670899.mockable.io/"
+    fun getRetrofitInstance(baseUrl: String = "https://demo8670899.mockable.io/"): Retrofit{
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -17,8 +16,7 @@ object RetrofitBuilder {
         val headers = HashMap<String, String>()
         headers["Accept"] = "application/json"
         headers["Content-Type"] = "application/json"
-        headers["token"] = InstructorLsaConfig.getUserToken()
-        headers["email"] = InstructorLsaConfig.getUserEmail()
+        headers["Authorization"] = "Token " + InstructorLsaConfig.getUserToken()
         return headers
     }
 }

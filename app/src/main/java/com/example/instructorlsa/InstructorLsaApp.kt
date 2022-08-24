@@ -10,11 +10,19 @@ import com.example.instructorlsa.ui.screens.home.HomeScreen
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.SignLearningScreen
 import com.example.instructorlsa.ui.screens.learningSection.signs.SignsScreen
 import com.example.instructorlsa.ui.screens.login.LoginScreen
+import com.example.instructorlsa.ui.screens.practiceSection.resultGames.ResultGamesScreen
+import com.example.instructorlsa.ui.screens.practiceSection.startPractice.GameScreen
+import com.example.instructorlsa.ui.screens.practiceSection.startPractice.StartPracticeScreen
 import com.example.instructorlsa.viewmodels.InstructorLsaConfig
+import com.example.instructorlsa.viewmodels.categories.CategoriesScreenViewModel
+import com.example.instructorlsa.viewmodels.categories.CategoryLearningNavigation
+import com.example.instructorlsa.viewmodels.categories.CategoryPracticeNavigation
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
-import com.example.instructorlsa.viewmodels.signs.MockDataSigns
+import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
+import com.example.instructorlsa.viewmodels.games.resultGames.ResultGamesScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignsScreenViewModel
+import com.example.instructorlsa.viewmodels.startPractice.StartPracticeViewModel
 
 
 @Composable
@@ -34,7 +42,8 @@ fun Navigation() {
             HomeScreen(navController = navController)
         }
         composable(NavigationRoute.CategoriesLearning.route){
-            CategoriesScreen(navController)
+            val screenViewModel = CategoriesScreenViewModel(navigationStrategy = CategoryLearningNavigation())
+            CategoriesScreen(navController, screenViewModel = screenViewModel)
         }
         composable(NavigationRoute.Signs.route){
             SignsScreen(navController = navController, screenViewModel = SignsScreenViewModel(
@@ -48,6 +57,25 @@ fun Navigation() {
                 currentIndex = InstructorLsaConfig.indexSignToLearn
             ))
         }
+        composable(NavigationRoute.CategoriesPractice.route){
+            val screenViewModel = CategoriesScreenViewModel(navigationStrategy = CategoryPracticeNavigation())
+            CategoriesScreen(navController, screenViewModel = screenViewModel)
+        }
+        composable(NavigationRoute.StartPractice.route){
+            val screenViewModel = StartPracticeViewModel(category = InstructorLsaConfig.getPracticeCategory())
+            StartPracticeScreen(navController = navController, screenViewModel)
+        }
+        composable(NavigationRoute.GamePractice.route){
+            val screenViewModel = GameScreenViewModel(category = InstructorLsaConfig.getPracticeCategory())
+            GameScreen(navController = navController, screenViewModel = screenViewModel)
+        }
+        composable(NavigationRoute.ResultGames.route){
+            val screenViewModel = ResultGamesScreenViewModel(
+                category = InstructorLsaConfig.getPracticeCategory(),
+                result = InstructorLsaConfig.resultGames
+            )
+            ResultGamesScreen(navController = navController, screenViewModel = screenViewModel)
+        }
     }
 }
 
@@ -56,5 +84,9 @@ enum class NavigationRoute(val route: String){
     Home("Home"),
     CategoriesLearning("learning/categories"),
     Signs("learning/signs"),
-    SignLearning("learning/sign")
+    SignLearning("learning/sign"),
+    CategoriesPractice("practice/categories"),
+    StartPractice("practice/start"),
+    ResultGames("practice/resultGames"),
+    GamePractice("practice/game")
 }

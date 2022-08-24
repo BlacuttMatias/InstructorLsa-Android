@@ -7,9 +7,11 @@ import com.example.instructorlsa.viewmodels.signs.SignViewModel
 
 object InstructorLsaConfig {
     var categoryLearningViewModel: CategoryViewModel? = null
+    var categoryPracticeViewModel: CategoryViewModel? = null
     var learningSigns: List<SignViewModel> = listOf()
+    var resultGames: Double = 0.0
     var indexSignToLearn: Int = 0
-    var user: User = User(null, null, null)
+    var user: User = User(null, null, null, null)
 
     fun setLearningCategory(category: CategoryViewModel){
         categoryLearningViewModel = category
@@ -19,6 +21,14 @@ object InstructorLsaConfig {
         return categoryLearningViewModel ?:  CategoryViewModel("Colores", R.drawable.ic_color_pencils)
     }
 
+    fun setPracticeCategory(category: CategoryViewModel){
+        categoryPracticeViewModel = category
+    }
+
+    fun getPracticeCategory(): CategoryViewModel{
+        return categoryPracticeViewModel ?:  CategoryViewModel("Colores", R.drawable.ic_color_pencils)
+    }
+
     fun getUserToken(): String{
         return user.token ?: ""
     }
@@ -26,6 +36,4 @@ object InstructorLsaConfig {
     fun getUserEmail(): String{
         return user.email ?: ""
     }
-
-
 }

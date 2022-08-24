@@ -29,13 +29,15 @@ import com.example.instructorlsa.ui.screens.categories.components.CategoryCard
 import com.example.instructorlsa.ui.theme.InstructorLsaTheme
 import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.categories.CategoriesScreenViewModel
+import com.example.instructorlsa.viewmodels.categories.CategoryLearningNavigation
+import com.example.instructorlsa.viewmodels.categories.CategoryPracticeNavigation
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 
 @Composable
-fun CategoriesScreen(navController: NavController) {
+fun CategoriesScreen(navController: NavController, screenViewModel: CategoriesScreenViewModel) {
     val titleText = stringResource(id = R.string.categories)
-    val titleTopTabBarText = stringResource(id = R.string.home_learning_section)
-    val categories = CategoriesScreenViewModel().getAllCategories()
+    val titleTopTabBarText = screenViewModel.titleText
+    val categories = screenViewModel.getAllCategories()
     Scaffold(
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
@@ -50,8 +52,7 @@ fun CategoriesScreen(navController: NavController) {
             ) {
                 items(categories){ category ->
                     CategoryCard(category = category){
-                        InstructorLsaConfig.setLearningCategory(category)
-                        navController.navigate(NavigationRoute.Signs.route)
+                        screenViewModel.navigateToNextScreen(navController, category)
                     }
                 }
             }
@@ -65,6 +66,6 @@ fun CategoriesScreen(navController: NavController) {
 @Composable
 fun CategoriesScreenPreview() {
     InstructorLsaTheme {
-        CategoriesScreen(rememberNavController())
+        CategoriesScreen(rememberNavController(), CategoriesScreenViewModel(navigationStrategy = CategoryLearningNavigation()))
     }
 }

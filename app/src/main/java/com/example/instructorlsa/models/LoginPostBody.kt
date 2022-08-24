@@ -1,7 +1,8 @@
 package com.example.instructorlsa.models
 
 data class LoginPostBody(
-    val username: String?,
+    val firstName: String?,
+    val lastName: String?,
     val email: String?,
     val token: String?
 )

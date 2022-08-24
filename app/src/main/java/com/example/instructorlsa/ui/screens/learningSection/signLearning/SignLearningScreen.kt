@@ -17,6 +17,7 @@ import com.example.instructorlsa.ui.screens.learningSection.signLearning.compone
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.VideoPlayer
 import com.example.instructorlsa.ui.theme.InstructorLsaTheme
 import com.example.instructorlsa.viewmodels.categories.CategoriesScreenViewModel
+import com.example.instructorlsa.viewmodels.categories.CategoryLearningNavigation
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignViewModel
 
@@ -56,15 +57,13 @@ fun SignLearningScreen(screenViewModel: SignLearningScreenViewModel, navControll
             SloganFooterText()
         }
     }
-
-
 }
 
 @Preview(showBackground = true)
 @Composable
 fun SignLearningScreenPreview() {
     InstructorLsaTheme {
-        val category = CategoriesScreenViewModel().getAllCategories().first()
+        val category = CategoriesScreenViewModel(navigationStrategy = CategoryLearningNavigation()).getAllCategories().first()
         val sign = SignViewModel(
             id = 1,
             name = "Una seña",

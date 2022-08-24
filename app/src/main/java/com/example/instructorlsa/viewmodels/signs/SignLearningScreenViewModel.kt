@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.instructorlsa.models.SignBodyPut
+import com.example.instructorlsa.models.SignBodyPost
 import com.example.instructorlsa.services.SignService
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import kotlinx.coroutines.launch
@@ -24,42 +24,56 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
     }
 
     fun getCurrentSign(): SignViewModel{
-        return signs[currentIndex]
+        var defaultSign: SignViewModel = signs.last()
+        if(currentIndex<0){
+            defaultSign = signs.first()
+        }
+        return signs.getOrElse(currentIndex) { defaultSign }
+    }
+
+    fun setPreviousIndex(){
+        if(currentIndex > 0){
+            currentIndex--
+        }
+    }
+
+    fun setNextIndex(){
+        if(currentIndex < signs.size-1){
+            currentIndex++
+        }
+    }
+
+    private fun fetchUpdateSign(onSuccess: () -> Unit){
+        viewModelScope.launch {
+            try{
+                val requestBody = SignBodyPost(
+                    signId = getCurrentSign().id
+                )
+                signService.updateSignState(requestBody)
+                getCurrentSign().isCompleted = true
+                onSuccess.invoke()
+            }
+            catch(e: Exception){
+
+            }
+        }
     }
 
     fun didBackButtonClicked(){
         if(!getCurrentSign().isCompleted){
-            viewModelScope.launch {
-                val requestBody = SignBodyPut(
-                    signId = getCurrentSign().id,
-                    categoryName = category.name,
-                    completed = true
-                )
-                val a = signService.updateSignState(requestBody)
-                getCurrentSign().isCompleted = true
-                currentIndex--
-            }
+            fetchUpdateSign { setPreviousIndex() }
         }
         else{
-            currentIndex--
+            setPreviousIndex()
         }
     }
 
     fun didNextButtonClicked(){
         if(!getCurrentSign().isCompleted){
-            viewModelScope.launch {
-                val requestBody = SignBodyPut(
-                    signId = getCurrentSign().id,
-                    categoryName = category.name,
-                    completed = true
-                )
-                signService.updateSignState(requestBody)
-                getCurrentSign().isCompleted = true
-                currentIndex++
-            }
+            fetchUpdateSign { setNextIndex() }
         }
         else{
-            currentIndex++
+            setNextIndex()
         }
     }
 }
