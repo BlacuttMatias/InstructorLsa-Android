@@ -20,6 +20,7 @@ import com.example.instructorlsa.ui.screens.practiceSection.Games.GuessSignGameS
 import com.example.instructorlsa.ui.screens.practiceSection.Games.WriteTheSignGameScreen
 import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
+import com.example.instructorlsa.viewmodels.games.GameType
 
 @Composable
 fun GameScreen(navController: NavController, screenViewModel: GameScreenViewModel) {
@@ -43,8 +44,21 @@ fun GameScreen(navController: NavController, screenViewModel: GameScreenViewMode
             }
             else{
                 Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally){
-                    //GuessSignGameScreen(screenViewModel = screenViewModel.getGuessSignScreenViewModel(), navController = navController)
-                    WriteTheSignGameScreen(screenViewModel = screenViewModel.getWriteSignScreenViewModel(), navController = navController)
+                    when(screenViewModel.getCurrentGame().type){
+                        GameType.GuessTheSign -> {
+                            GuessSignGameScreen(screenViewModel = screenViewModel.getGuessSignScreenViewModel(), navController = navController)
+                        }
+                        GameType.WriteTheSign -> {
+                            WriteTheSignGameScreen(screenViewModel = screenViewModel.getWriteSignScreenViewModel(), navController = navController)
+                        }
+                        GameType.SignTheWord -> {
+
+                        }
+                        GameType.Unknown -> {
+                            
+                        }
+                    }
+
                 }
             }
         }
