@@ -37,7 +37,7 @@ fun WriteTheSignGameScreen(screenViewModel: WriteTheSignScreenViewModel, navCont
             Spacer(modifier = Modifier.height(90.dp))
         }
 
-        GameTextField(initText = "", delegate = screenViewModel)
+        GameTextField(delegate = screenViewModel)
         Spacer(modifier = Modifier.height(30.dp))
 
         MainButton(text = "Confirmar") {

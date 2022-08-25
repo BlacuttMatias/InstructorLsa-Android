@@ -9,7 +9,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import com.example.instructorlsa.viewmodels.games.writeTheSignScreenViewModel.TextFieldDelegate
@@ -17,8 +16,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun GameTextField(initText: String = "", delegate: TextFieldDelegate){
-    var text by remember { mutableStateOf(initText) }
+fun GameTextField(delegate: TextFieldDelegate){
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     val scope = rememberCoroutineScope()
     val view = LocalView.current
@@ -31,10 +29,9 @@ fun GameTextField(initText: String = "", delegate: TextFieldDelegate){
     }
 
     TextField(
-        value = text,
+        value = delegate.getTypedText(),
         onValueChange = {
-            text = it
-            delegate.setTextTyped(text)
+            delegate.setTypedText(it)
         },
         singleLine = true,
         label = { Text(text = "Ingresá la palabra signada") },

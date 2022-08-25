@@ -14,7 +14,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 interface TextFieldDelegate{
-    fun setTextTyped(text: String)
+    fun setTypedText(text: String)
+    fun getTypedText(): String
 }
 
 class WriteTheSignScreenViewModel(game: GameViewModel, category: CategoryViewModel, delegate: GameScreenViewModel): ViewModel(), TextFieldDelegate {
@@ -23,7 +24,7 @@ class WriteTheSignScreenViewModel(game: GameViewModel, category: CategoryViewMod
     var gameWasCompleted by mutableStateOf(false)
     var showContinueView by mutableStateOf(false)
     var delegate: GameScreenViewModel
-    var gameAnswer: String = ""
+    var gameAnswer by mutableStateOf("")
 
     init{
         this.game = game
@@ -49,6 +50,7 @@ class WriteTheSignScreenViewModel(game: GameViewModel, category: CategoryViewMod
 
     fun didTapContinueButton(){
         delegate.goToNextScreen(gameAnsweredCorrectly())
+        gameAnswer = ""
     }
 
     fun didTapConfirmButton(){
@@ -59,7 +61,11 @@ class WriteTheSignScreenViewModel(game: GameViewModel, category: CategoryViewMod
         }
     }
 
-    override fun setTextTyped(text: String) {
+    override fun setTypedText(text: String) {
         gameAnswer = text
+    }
+
+    override fun getTypedText(): String {
+        return gameAnswer
     }
 }
