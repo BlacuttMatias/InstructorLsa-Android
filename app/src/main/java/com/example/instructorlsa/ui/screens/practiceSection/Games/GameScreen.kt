@@ -55,7 +55,7 @@ fun GameScreen(navController: NavController, screenViewModel: GameScreenViewMode
 
                         }
                         GameType.Unknown -> {
-                            
+
                         }
                     }
 
