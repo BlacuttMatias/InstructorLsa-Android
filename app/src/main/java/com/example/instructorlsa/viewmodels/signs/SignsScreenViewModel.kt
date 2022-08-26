@@ -16,6 +16,7 @@ class SignsScreenViewModel(category: CategoryViewModel): ViewModel() {
     var category: CategoryViewModel
     var signs by mutableStateOf(listOf<SignViewModel>())
     var loading by mutableStateOf(true)
+    var isError by mutableStateOf(false)
     val service = LearningSignsService()
     val signMapper = SignMapper()
 
@@ -32,7 +33,7 @@ class SignsScreenViewModel(category: CategoryViewModel): ViewModel() {
                 }
             }
             catch(e: Exception){
-
+                isError = true
             }
             finally {
                 loading = false

@@ -17,6 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.instructorlsa.NavigationRoute
 import com.example.instructorlsa.R
 import com.example.instructorlsa.ui.common.components.TitleText
+import com.example.instructorlsa.ui.common.components.errorScreen.ErrorScreen
 import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.example.instructorlsa.ui.screens.categories.components.CategoryCard
@@ -37,7 +38,10 @@ fun SignsScreen(navController: NavController, screenViewModel: SignsScreenViewMo
     Scaffold(
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
-        if(screenViewModel.loading){
+        if(screenViewModel.isError) {
+            ErrorScreen(nacController = navController)
+        }
+        else if (screenViewModel.loading) {
             FullScreenLoader()
             screenViewModel.loadInitData()
         }
