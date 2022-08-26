@@ -6,6 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.toLowerCase
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.instructorlsa.ui.common.components.extensions.lowercaseAndUnaccent
+import com.example.instructorlsa.ui.common.components.extensions.unaccent
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.games.AnswerOptionViewModel
 import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
@@ -37,7 +39,7 @@ class WriteTheSignScreenViewModel(game: GameViewModel, category: CategoryViewMod
     }
 
     fun gameAnsweredCorrectly(): Boolean{
-        return gameAnswer.lowercase() == getCorrectAnswer().lowercase()
+        return gameAnswer.lowercaseAndUnaccent() == getCorrectAnswer().lowercaseAndUnaccent()
     }
 
     fun correctStateText(): String{
