@@ -2,6 +2,8 @@ package com.example.instructorlsa.services
 
 import com.example.instructorlsa.models.ResponseLearningSigns
 import com.example.instructorlsa.models.Sign
+import com.example.instructorlsa.ui.common.components.extensions.lowercaseAndUnaccent
+import com.example.instructorlsa.ui.common.components.extensions.uppercaseAndUnaccent
 import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import retrofit2.Response
 import retrofit2.http.GET
@@ -18,6 +20,6 @@ class LearningSignsService {
     suspend fun getLearningSigns(categoryName: String): Response<List<Sign>>{
         return RetrofitBuilder.getRetrofitInstance()
             .create(LearningSignsApiService::class.java)
-            .getSigns(headers = RetrofitBuilder.getHeaders(), categoryName = categoryName)
+            .getSigns(headers = RetrofitBuilder.getHeaders(), categoryName = categoryName.uppercaseAndUnaccent())
     }
 }

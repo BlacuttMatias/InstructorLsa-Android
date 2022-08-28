@@ -36,7 +36,6 @@ import com.example.instructorlsa.viewmodels.games.GuessSignScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel
 import org.intellij.lang.annotations.JdkConstants
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun GuessSignGameScreen(screenViewModel: GuessSignScreenViewModel, navController: NavController) {
     val titleText = screenViewModel.game.name

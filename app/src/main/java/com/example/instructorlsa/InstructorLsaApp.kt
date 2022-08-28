@@ -17,7 +17,6 @@ import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.categories.CategoriesScreenViewModel
 import com.example.instructorlsa.viewmodels.categories.CategoryLearningNavigation
 import com.example.instructorlsa.viewmodels.categories.CategoryPracticeNavigation
-import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
 import com.example.instructorlsa.viewmodels.games.resultGames.ResultGamesScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel
@@ -52,7 +51,7 @@ fun Navigation() {
         }
         composable(NavigationRoute.SignLearning.route){
             SignLearningScreen(navController = navController, screenViewModel = SignLearningScreenViewModel(
-                category = CategoryViewModel("Colores", 0),
+                category = InstructorLsaConfig.getLearningCategory(),
                 signs = InstructorLsaConfig.learningSigns,
                 currentIndex = InstructorLsaConfig.indexSignToLearn
             ))
