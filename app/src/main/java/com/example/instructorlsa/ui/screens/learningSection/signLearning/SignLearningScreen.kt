@@ -15,7 +15,6 @@ import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.BackNavigateButton
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.NextNavigateButton
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.VideoPlayer
-import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.loadWebUrl
 import com.example.instructorlsa.ui.theme.InstructorLsaTheme
 import com.example.instructorlsa.viewmodels.categories.CategoriesScreenViewModel
 import com.example.instructorlsa.viewmodels.categories.CategoryLearningNavigation
@@ -34,7 +33,7 @@ fun SignLearningScreen(screenViewModel: SignLearningScreenViewModel, navControll
             Spacer(modifier = Modifier.height(50.dp))
             TitleText(text = titleText)
             Spacer(modifier = Modifier.height(60.dp))
-            loadWebUrl(urlVideo = screenViewModel.getCurrentSign().urlVideo)
+            VideoPlayer(urlVideo = screenViewModel.getCurrentSign().urlVideo)
             Spacer(modifier = Modifier.height(60.dp))
             Row(horizontalArrangement = Arrangement.Center) {
                 if(screenViewModel.currentIndex > 0){

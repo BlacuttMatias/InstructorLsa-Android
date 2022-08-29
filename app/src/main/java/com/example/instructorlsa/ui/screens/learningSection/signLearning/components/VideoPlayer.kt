@@ -21,51 +21,6 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 
 @Composable
 fun VideoPlayer(urlVideo: String, playWhenReady: Boolean = false, repeatVideo: Boolean = false){
-    
-    Column(
-        Modifier
-            .fillMaxWidth()
-            .height(220.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-
-        val context = LocalContext.current
-        val player by remember {mutableStateOf(ExoPlayer.Builder(context).build())}
-        val playerView by remember {mutableStateOf(StyledPlayerView(context))}
-        val mediaItem = MediaItem.fromUri(urlVideo)
-
-        player.setMediaItem(mediaItem)
-        playerView.player = player
-        player.playWhenReady = playWhenReady
-        if(repeatVideo){
-            player.repeatMode = ExoPlayer.REPEAT_MODE_ALL
-        }
-        LaunchedEffect(player) {
-            player.prepare()
-        }
-        AndroidView(factory = {
-            playerView
-        })
-        DisposableEffect(player){
-            onDispose {
-                player.release()
-            }
-        }
-    }
-}
-
-// For displaying preview in
-// the Android Studio IDE emulator
-@Preview(showBackground = true)
-@Composable
-fun VideoPlayerPreview() {
-    VideoPlayer(urlVideo = "https://cdn.videvo.net/videvo_files/video/free/2020-05/large_watermarked/3d_ocean_1590675653_preview.mp4")
-}
-
-@Composable
-fun loadWebUrl(urlVideo: String) {
-
-    var frameVideo =
-        "<html><body>Video From YouTube<br><iframe width=\"250\"height=\"200\"  src=\"$urlVideo\"frameborder=\"0\" allow=\"autoplay\" allowfullscreen></iframe></body></html>";
-
     AndroidView(factory = {
         WebView(it).apply {
             layoutParams = ViewGroup.LayoutParams(
@@ -99,4 +54,12 @@ fun loadWebUrl(urlVideo: String) {
     },
         modifier = Modifier.fillMaxWidth().height(250.dp)
     )
+}
+
+// For displaying preview in
+// the Android Studio IDE emulator
+@Preview(showBackground = true)
+@Composable
+fun VideoPlayerPreview() {
+    VideoPlayer(urlVideo = "https://cdn.videvo.net/videvo_files/video/free/2020-05/large_watermarked/3d_ocean_1590675653_preview.mp4")
 }
