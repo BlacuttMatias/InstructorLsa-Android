@@ -6,7 +6,7 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface SignApiService{
-    @POST("sign")
+    @POST("sign/")
     suspend fun updateSignState(@HeaderMap headers: Map<String, String>, @Body body: SignBodyPost): Response<ResponseSignUpdate>
 }
 

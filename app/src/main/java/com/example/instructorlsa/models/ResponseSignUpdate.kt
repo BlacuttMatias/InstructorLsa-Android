@@ -1,5 +1,3 @@
 package com.example.instructorlsa.models
 
-data class ResponseSignUpdate(
-    val signId: Int?
-)
+typealias ResponseSignUpdate = String?
