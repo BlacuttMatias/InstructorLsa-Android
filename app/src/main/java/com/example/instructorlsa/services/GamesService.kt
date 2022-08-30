@@ -8,7 +8,7 @@ import retrofit2.http.HeaderMap
 import retrofit2.http.Query
 
 interface GamesApiService{
-    @GET("instructorlsa/practice/games")
+    @GET("practice/games")
     suspend fun getSigns(@HeaderMap headers: Map<String, String>, @Query("categoryName") categoryName: String): Response<List<Game>>
 }
 
