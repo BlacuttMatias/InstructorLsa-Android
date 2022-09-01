@@ -1,5 +1,8 @@
 package com.example.instructorlsa.ui.screens.learningSection.signLearning
 
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -11,6 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.instructorlsa.ui.common.components.SloganFooterText
 import com.example.instructorlsa.ui.common.components.TitleText
+import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.BackNavigateButton
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.NextNavigateButton
@@ -29,32 +33,37 @@ fun SignLearningScreen(screenViewModel: SignLearningScreenViewModel, navControll
     Scaffold(
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
-        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
-            Spacer(modifier = Modifier.height(50.dp))
-            TitleText(text = titleText)
-            Spacer(modifier = Modifier.height(60.dp))
-            VideoPlayer(urlVideo = screenViewModel.getCurrentSign().urlVideo)
-            Spacer(modifier = Modifier.height(60.dp))
-            Row(horizontalArrangement = Arrangement.Center) {
-                if(screenViewModel.currentIndex > 0){
-                    BackNavigateButton {
-                        screenViewModel.didBackButtonClicked()
+        if(screenViewModel.screenLoading){
+            FullScreenLoader()
+        }
+        else{
+            Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
+                Spacer(modifier = Modifier.height(50.dp))
+                TitleText(text = titleText)
+                Spacer(modifier = Modifier.height(60.dp))
+                VideoPlayer(urlVideo = screenViewModel.getCurrentSign().urlVideo, delegate = screenViewModel)
+                Spacer(modifier = Modifier.height(60.dp))
+                Row(horizontalArrangement = Arrangement.Center) {
+                    if(screenViewModel.currentIndex > 0){
+                        BackNavigateButton {
+                            screenViewModel.didBackButtonClicked()
+                        }
+                    }
+                    else{
+                        Spacer(modifier = Modifier.width(60.dp))
+                    }
+                    Spacer(modifier = Modifier.width(50.dp))
+                    if(screenViewModel.currentIndex < screenViewModel.signs.size-1){
+                        NextNavigateButton {
+                            screenViewModel.didNextButtonClicked()
+                        }
+                    }
+                    else{
+                        Spacer(modifier = Modifier.width(60.dp))
                     }
                 }
-                else{
-                    Spacer(modifier = Modifier.width(60.dp))
-                }
-                Spacer(modifier = Modifier.width(50.dp))
-                if(screenViewModel.currentIndex < screenViewModel.signs.size-1){
-                    NextNavigateButton {
-                        screenViewModel.didNextButtonClicked()
-                    }
-                }
-                else{
-                    Spacer(modifier = Modifier.width(60.dp))
-                }
+                SloganFooterText()
             }
-            SloganFooterText()
         }
     }
 }

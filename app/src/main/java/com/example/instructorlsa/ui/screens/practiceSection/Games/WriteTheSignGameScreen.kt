@@ -19,6 +19,7 @@ import com.example.instructorlsa.ui.screens.learningSection.signLearning.compone
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AnimatedStateResultIcon
 import com.example.instructorlsa.viewmodels.games.writeTheSignScreenViewModel.WriteTheSignScreenViewModel
+import com.example.instructorlsa.viewmodels.signs.VideoLoaderManager
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -40,7 +41,7 @@ fun WriteTheSignGameScreen(screenViewModel: WriteTheSignScreenViewModel, navCont
         Spacer(modifier = Modifier.height(30.dp))
         TitleText(text = titleText)
         Spacer(modifier = Modifier.height(30.dp))
-        VideoPlayer(urlVideo = screenViewModel.game.sign.urlVideo, playWhenReady = true)
+        VideoPlayer(urlVideo = screenViewModel.game.sign.urlVideo, playWhenReady = true, delegate = VideoLoaderManager())
         Spacer(modifier = Modifier.height(20.dp))
         AnimatedStateResultIcon(isVisible = screenViewModel.gameWasCompleted,
             isPositiveResult = (screenViewModel.gameAnsweredCorrectly())
