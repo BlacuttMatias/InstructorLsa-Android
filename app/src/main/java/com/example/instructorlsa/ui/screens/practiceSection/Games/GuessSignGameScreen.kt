@@ -30,17 +30,17 @@ fun GuessSignGameScreen(screenViewModel: GuessSignScreenViewModel, navController
                 isPositiveResult = (screenViewModel.answerSelected?.isCorrect ?: false)
             )
             if(screenViewModel.answerWasSelected){
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(10.dp))
             }
             else{
-                Spacer(modifier = Modifier.height(90.dp))
+                Spacer(modifier = Modifier.height(80.dp))
             }
 
             screenViewModel.game.answerOptions.forEach { answerOption ->
                 OptionButton(text = answerOption.text, showState = screenViewModel.showStateAnswer(answerOption),isCorrect = answerOption.isCorrect) {
                     screenViewModel.didTapAnswerOption(answerOption)
                 }
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(15.dp))
             }
             AlertDialogResultGame(
                 isVisble = screenViewModel.showContinueView,
