@@ -12,6 +12,7 @@ import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.games.AnswerOptionViewModel
 import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
 import com.example.instructorlsa.viewmodels.games.GameViewModel
+import com.example.instructorlsa.viewmodels.signs.VideoLoaderManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -20,7 +21,11 @@ interface TextFieldDelegate{
     fun getTypedText(): String
 }
 
-class WriteTheSignScreenViewModel(game: GameViewModel, category: CategoryViewModel, delegate: GameScreenViewModel): ViewModel(), TextFieldDelegate {
+class WriteTheSignScreenViewModel(
+    game: GameViewModel, category: CategoryViewModel,
+    delegate: GameScreenViewModel
+): VideoLoaderManager(), TextFieldDelegate
+{
     val game: GameViewModel
     val category: CategoryViewModel
     var gameWasCompleted by mutableStateOf(false)
@@ -32,6 +37,7 @@ class WriteTheSignScreenViewModel(game: GameViewModel, category: CategoryViewMod
         this.game = game
         this.category = category
         this.delegate = delegate
+        showLoadingFor()
     }
 
     private fun getCorrectAnswer(): String{

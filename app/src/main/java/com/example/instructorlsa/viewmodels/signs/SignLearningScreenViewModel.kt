@@ -1,6 +1,5 @@
 package com.example.instructorlsa.viewmodels.signs
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,18 +8,44 @@ import androidx.lifecycle.viewModelScope
 import com.example.instructorlsa.models.SignBodyPost
 import com.example.instructorlsa.services.SignService
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignViewModel>, currentIndex: Int): ViewModel() {
+open class VideoLoaderManager: ViewModel() {
+    var videoLoading by mutableStateOf(false)
+    fun showVideoLoading(){
+        videoLoading = true
+    }
+    fun hideVideoLoading(){
+        videoLoading = false
+    }
+
+    fun showLoadingFor(milliSeconds: Long = 1800){
+        viewModelScope.launch {
+            showVideoLoading()
+            delay(timeMillis = milliSeconds)
+            hideVideoLoading()
+        }
+    }
+}
+
+class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignViewModel>, currentIndex: Int):
+    VideoLoaderManager() {
     var category: CategoryViewModel
     var signs by mutableStateOf(listOf<SignViewModel>())
     var currentIndex by mutableStateOf(0)
+    var screenLoading by mutableStateOf(false)
     val signService = SignService()
 
     init {
         this.category = category
         this.signs = signs
         this.currentIndex = currentIndex
+        showLoadingFor(2000)
+    }
+
+    fun isLoading(): Boolean{
+        return screenLoading || videoLoading
     }
 
     fun getCurrentSign(): SignViewModel{
@@ -49,8 +74,10 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
                 val requestBody = SignBodyPost(
                     signId = getCurrentSign().id
                 )
+                screenLoading = true
                 signService.updateSignState(requestBody)
                 getCurrentSign().isCompleted = true
+                screenLoading = false
                 onSuccess.invoke()
             }
             catch(e: Exception){
@@ -66,6 +93,7 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
         else{
             setPreviousIndex()
         }
+        showLoadingFor()
     }
 
     fun didNextButtonClicked(){
@@ -75,5 +103,9 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
         else{
             setNextIndex()
         }
+        showLoadingFor()
     }
+
+
+
 }

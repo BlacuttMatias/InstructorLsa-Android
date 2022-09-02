@@ -14,11 +14,13 @@ import androidx.navigation.NavController
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.extensions.noRippleClickable
+import com.example.instructorlsa.ui.common.components.loadingScreen.OverlapFullScreenLoader
 import com.example.instructorlsa.ui.common.components.textFields.GameTextField
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.VideoPlayer
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AnimatedStateResultIcon
 import com.example.instructorlsa.viewmodels.games.writeTheSignScreenViewModel.WriteTheSignScreenViewModel
+import com.example.instructorlsa.viewmodels.signs.VideoLoaderManager
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -27,44 +29,46 @@ fun WriteTheSignGameScreen(screenViewModel: WriteTheSignScreenViewModel, navCont
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
-            .noRippleClickable {
-                focusManager.clearFocus()
-                keyboardController?.hide()
-            },
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        Spacer(modifier = Modifier.height(30.dp))
-        TitleText(text = titleText)
-        Spacer(modifier = Modifier.height(30.dp))
-        VideoPlayer(urlVideo = screenViewModel.game.sign.urlVideo, playWhenReady = true)
-        Spacer(modifier = Modifier.height(20.dp))
-        AnimatedStateResultIcon(isVisible = screenViewModel.gameWasCompleted,
-            isPositiveResult = (screenViewModel.gameAnsweredCorrectly())
-        )
-        if(screenViewModel.gameWasCompleted){
+    OverlapFullScreenLoader(showLoader = screenViewModel.videoLoading) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .noRippleClickable {
+                    focusManager.clearFocus()
+                    keyboardController?.hide()
+                },
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+            Spacer(modifier = Modifier.height(30.dp))
+            TitleText(text = titleText)
+            Spacer(modifier = Modifier.height(30.dp))
+            VideoPlayer(urlVideo = screenViewModel.game.sign.urlVideo, playWhenReady = true, delegate = screenViewModel)
             Spacer(modifier = Modifier.height(20.dp))
-        }
-        else{
-            Spacer(modifier = Modifier.height(90.dp))
-        }
-
-        GameTextField(delegate = screenViewModel)
-        Spacer(modifier = Modifier.height(30.dp))
-
-        MainButton(text = "Confirmar") {
-            screenViewModel.didTapConfirmButton()
-        }
-
-        AlertDialogResultGame(
-            isVisble = screenViewModel.showContinueView,
-            title = screenViewModel.correctStateText(),
-            onClickContinueButton = {
-                screenViewModel.didTapContinueButton()
+            AnimatedStateResultIcon(isVisible = screenViewModel.gameWasCompleted,
+                isPositiveResult = (screenViewModel.gameAnsweredCorrectly())
+            )
+            if(screenViewModel.gameWasCompleted){
+                Spacer(modifier = Modifier.height(20.dp))
             }
-        )
+            else{
+                Spacer(modifier = Modifier.height(90.dp))
+            }
+
+            GameTextField(delegate = screenViewModel)
+            Spacer(modifier = Modifier.height(30.dp))
+
+            MainButton(text = "Confirmar") {
+                screenViewModel.didTapConfirmButton()
+            }
+
+            AlertDialogResultGame(
+                isVisble = screenViewModel.showContinueView,
+                title = screenViewModel.correctStateText(),
+                onClickContinueButton = {
+                    screenViewModel.didTapContinueButton()
+                }
+            )
+        }
     }
 }
