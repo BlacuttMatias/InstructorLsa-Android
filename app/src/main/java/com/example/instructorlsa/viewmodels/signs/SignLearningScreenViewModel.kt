@@ -20,7 +20,7 @@ open class VideoLoaderManager: ViewModel() {
         videoLoading = false
     }
 
-    fun showLoadingFor(milliSeconds: Long){
+    fun showLoadingFor(milliSeconds: Long = 1800){
         viewModelScope.launch {
             showVideoLoading()
             delay(timeMillis = milliSeconds)
@@ -41,6 +41,11 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
         this.category = category
         this.signs = signs
         this.currentIndex = currentIndex
+        showLoadingFor(2000)
+    }
+
+    fun isLoading(): Boolean{
+        return screenLoading || videoLoading
     }
 
     fun getCurrentSign(): SignViewModel{
@@ -88,7 +93,7 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
         else{
             setPreviousIndex()
         }
-        showLoadingFor(1500)
+        showLoadingFor()
     }
 
     fun didNextButtonClicked(){
@@ -98,7 +103,7 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
         else{
             setNextIndex()
         }
-        showLoadingFor(1500)
+        showLoadingFor()
     }
 
 

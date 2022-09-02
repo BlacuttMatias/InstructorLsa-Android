@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.instructorlsa.ui.common.components.SloganFooterText
 import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
+import com.example.instructorlsa.ui.common.components.loadingScreen.OverlapFullScreenLoader
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.BackNavigateButton
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.NextNavigateButton
@@ -33,10 +34,7 @@ fun SignLearningScreen(screenViewModel: SignLearningScreenViewModel, navControll
     Scaffold(
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
-        if(screenViewModel.screenLoading){
-            FullScreenLoader()
-        }
-        else{
+        OverlapFullScreenLoader(showLoader = screenViewModel.isLoading()) {
             Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
                 Spacer(modifier = Modifier.height(50.dp))
                 TitleText(text = titleText)

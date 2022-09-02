@@ -22,7 +22,7 @@ fun TopTabBarLsa(titleText: String, navController: NavController?, showCloseSess
         title = { TitleTopBarText(text = titleText) },
         navigationIcon = if (navController?.previousBackStackEntry != null) {
             {
-                IconButton(onClick = { navController?.navigateUp() }) {
+                IconButton(onClick = { navController.navigateUp() }) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
                         contentDescription = "Back"
