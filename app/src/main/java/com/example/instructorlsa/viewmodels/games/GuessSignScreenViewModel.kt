@@ -6,10 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
+import com.example.instructorlsa.viewmodels.signs.VideoLoaderManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel, delegate: GameScreenViewModel): ViewModel() {
+class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel, delegate: GameScreenViewModel): VideoLoaderManager() {
     val game: GameViewModel
     val category: CategoryViewModel
     var answerWasSelected by mutableStateOf(false)
@@ -21,6 +22,7 @@ class GuessSignScreenViewModel(game: GameViewModel, category: CategoryViewModel,
         this.game = game
         this.category = category
         this.delegate = delegate
+        showLoadingFor()
     }
 
     fun didTapAnswerOption(answerOption: AnswerOptionViewModel){

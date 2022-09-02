@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.buttons.OptionButton
+import com.example.instructorlsa.ui.common.components.loadingScreen.OverlapFullScreenLoader
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.VideoPlayer
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AnimatedStateResultIcon
@@ -18,34 +19,36 @@ import com.example.instructorlsa.viewmodels.signs.VideoLoaderManager
 fun GuessSignGameScreen(screenViewModel: GuessSignScreenViewModel, navController: NavController) {
     val titleText = screenViewModel.game.name
 
-    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
-        Spacer(modifier = Modifier.height(30.dp))
-        TitleText(text = titleText)
-        Spacer(modifier = Modifier.height(30.dp))
-        VideoPlayer(urlVideo = screenViewModel.game.sign.urlVideo, playWhenReady = true, delegate = VideoLoaderManager())
-        Spacer(modifier = Modifier.height(20.dp))
-        AnimatedStateResultIcon(isVisible = screenViewModel.answerWasSelected,
-            isPositiveResult = (screenViewModel.answerSelected?.isCorrect ?: false)
-        )
-        if(screenViewModel.answerWasSelected){
+    OverlapFullScreenLoader(showLoader = screenViewModel.videoLoading) {
+        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
+            Spacer(modifier = Modifier.height(30.dp))
+            TitleText(text = titleText)
+            Spacer(modifier = Modifier.height(30.dp))
+            VideoPlayer(urlVideo = screenViewModel.game.sign.urlVideo, playWhenReady = true, delegate = screenViewModel)
             Spacer(modifier = Modifier.height(20.dp))
-        }
-        else{
-            Spacer(modifier = Modifier.height(90.dp))
-        }
+            AnimatedStateResultIcon(isVisible = screenViewModel.answerWasSelected,
+                isPositiveResult = (screenViewModel.answerSelected?.isCorrect ?: false)
+            )
+            if(screenViewModel.answerWasSelected){
+                Spacer(modifier = Modifier.height(20.dp))
+            }
+            else{
+                Spacer(modifier = Modifier.height(90.dp))
+            }
 
-        screenViewModel.game.answerOptions.forEach { answerOption ->
-            OptionButton(text = answerOption.text, showState = screenViewModel.showStateAnswer(answerOption),isCorrect = answerOption.isCorrect) {
-                screenViewModel.didTapAnswerOption(answerOption)
+            screenViewModel.game.answerOptions.forEach { answerOption ->
+                OptionButton(text = answerOption.text, showState = screenViewModel.showStateAnswer(answerOption),isCorrect = answerOption.isCorrect) {
+                    screenViewModel.didTapAnswerOption(answerOption)
+                }
+                Spacer(modifier = Modifier.height(20.dp))
             }
-            Spacer(modifier = Modifier.height(20.dp))
+            AlertDialogResultGame(
+                isVisble = screenViewModel.showContinueView,
+                title = screenViewModel.correctStateText(),
+                onClickContinueButton = {
+                    screenViewModel.didTapContinueButton()
+                }
+            )
         }
-        AlertDialogResultGame(
-            isVisble = screenViewModel.showContinueView,
-            title = screenViewModel.correctStateText(),
-            onClickContinueButton = {
-                screenViewModel.didTapContinueButton()
-            }
-        )
     }
 }
