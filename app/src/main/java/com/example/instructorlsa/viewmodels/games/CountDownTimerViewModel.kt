@@ -6,17 +6,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.instructorlsa.viewmodels.games.writeTheSignScreenViewModel.FinishCountdownDelegate
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class CountDownTimerViewModel: ViewModel() {
+class CountDownTimerViewModel(delegate: FinishCountdownDelegate): ViewModel() {
     var initValue = 30000
     var animatedProgressPercentage by mutableStateOf(1.0f)
     private var jobTimer: Job? = null
+    var delegate: FinishCountdownDelegate
 
-    fun restartTimer(){
-        animatedProgressPercentage = 1.0f
+    init{
+        this.delegate = delegate
     }
 
     fun startCountdown(){
@@ -24,8 +26,9 @@ class CountDownTimerViewModel: ViewModel() {
             while(animatedProgressPercentage >= 0.0f){
                 delay(50)
                 animatedProgressPercentage -= 50/(initValue.toFloat())
-                if(animatedProgressPercentage < 0.0f){
+                if(animatedProgressPercentage <= 0.0f){
                     animatedProgressPercentage = 0.0f
+                    delegate.didFinishCountdown()
                 }
             }
         }

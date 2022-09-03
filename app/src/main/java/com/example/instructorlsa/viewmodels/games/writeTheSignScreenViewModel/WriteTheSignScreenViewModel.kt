@@ -22,10 +22,14 @@ interface TextFieldDelegate{
     fun getTypedText(): String
 }
 
+interface FinishCountdownDelegate{
+    fun didFinishCountdown()
+}
+
 class WriteTheSignScreenViewModel(
     game: GameViewModel, category: CategoryViewModel,
     delegate: GameScreenViewModel
-): VideoLoaderManager(), TextFieldDelegate
+): VideoLoaderManager(), TextFieldDelegate, FinishCountdownDelegate
 {
     val game: GameViewModel
     val category: CategoryViewModel
@@ -33,12 +37,13 @@ class WriteTheSignScreenViewModel(
     var showContinueView by mutableStateOf(false)
     var delegate: GameScreenViewModel
     var gameAnswer by mutableStateOf("")
-    var countDownViewModel: CountDownTimerViewModel = CountDownTimerViewModel()
+    var countDownViewModel: CountDownTimerViewModel
 
     init{
         this.game = game
         this.category = category
         this.delegate = delegate
+        this.countDownViewModel = CountDownTimerViewModel(delegate = this)
         showLoadingFor {
             countDownViewModel.startCountdown()
         }
@@ -80,5 +85,9 @@ class WriteTheSignScreenViewModel(
 
     override fun getTypedText(): String {
         return gameAnswer
+    }
+
+    override fun didFinishCountdown() {
+        didTapConfirmButton()
     }
 }
