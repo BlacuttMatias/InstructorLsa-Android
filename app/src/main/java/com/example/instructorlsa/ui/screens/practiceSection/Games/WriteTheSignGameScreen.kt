@@ -19,6 +19,7 @@ import com.example.instructorlsa.ui.common.components.textFields.GameTextField
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.VideoPlayer
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AnimatedStateResultIcon
+import com.example.instructorlsa.ui.screens.practiceSection.Games.components.CountDownTimer
 import com.example.instructorlsa.viewmodels.games.writeTheSignScreenViewModel.WriteTheSignScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.VideoLoaderManager
 
@@ -42,6 +43,7 @@ fun WriteTheSignGameScreen(screenViewModel: WriteTheSignScreenViewModel, navCont
         ){
             Spacer(modifier = Modifier.height(30.dp))
             TitleText(text = titleText)
+            CountDownTimer(viewModel = screenViewModel.countDownViewModel)
             Spacer(modifier = Modifier.height(30.dp))
             VideoPlayer(urlVideo = screenViewModel.game.sign.urlVideo, playWhenReady = true, delegate = screenViewModel)
             Spacer(modifier = Modifier.height(20.dp))

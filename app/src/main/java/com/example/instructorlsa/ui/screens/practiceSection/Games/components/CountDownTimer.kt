@@ -20,29 +20,16 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.instructorlsa.viewmodels.games.CountDownTimerViewModel
 
 @Composable
 fun CountDownTimer(
-    percentage: Float = 0.0f,
-    play: Boolean = true,
     fontSize: TextUnit = 28.sp,
     size: Dp = 100.dp,
     color: Color = MaterialTheme.colors.primary,
     strokeWidth: Dp = 10.dp,
-    animDuration: Int = 30000,
-    animDelay: Int = 0
+    viewModel: CountDownTimerViewModel
 ){
-    var progressPercentage by remember { mutableStateOf(1.0f) }
-    val backgroundCircleColor = MaterialTheme.colors.secondaryVariant
-
-    val animatedProgressPercentage by animateFloatAsState(
-        targetValue = progressPercentage,
-        animationSpec = tween(
-            durationMillis = animDuration,
-            delayMillis = animDelay,
-            easing = LinearEasing
-        )
-    )
     Box(
         modifier = Modifier.size(size),
         contentAlignment = Alignment.Center
@@ -51,22 +38,15 @@ fun CountDownTimer(
             drawArc(
                 color = color,
                 -90f,
-                -(360*animatedProgressPercentage),
+                -(360*viewModel.animatedProgressPercentage),
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
         }
-        var progressSeconds = (animatedProgressPercentage*animDuration/1000).toInt() + 1
-        if (animatedProgressPercentage == 0.0f){
-            progressSeconds = 0
-        }
         Text(
-            text = progressSeconds.toString(),
+            text = viewModel.progressSeconds(),
             fontSize = fontSize,
             fontWeight = FontWeight.Bold
         )
-    }
-    LaunchedEffect(progressPercentage) {
-        progressPercentage = percentage
     }
 }

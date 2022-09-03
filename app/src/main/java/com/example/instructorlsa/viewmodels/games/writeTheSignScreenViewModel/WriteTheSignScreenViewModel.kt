@@ -10,6 +10,7 @@ import com.example.instructorlsa.ui.common.components.extensions.lowercaseAndUna
 import com.example.instructorlsa.ui.common.components.extensions.unaccent
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.games.AnswerOptionViewModel
+import com.example.instructorlsa.viewmodels.games.CountDownTimerViewModel
 import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
 import com.example.instructorlsa.viewmodels.games.GameViewModel
 import com.example.instructorlsa.viewmodels.signs.VideoLoaderManager
@@ -32,12 +33,15 @@ class WriteTheSignScreenViewModel(
     var showContinueView by mutableStateOf(false)
     var delegate: GameScreenViewModel
     var gameAnswer by mutableStateOf("")
+    var countDownViewModel: CountDownTimerViewModel = CountDownTimerViewModel()
 
     init{
         this.game = game
         this.category = category
         this.delegate = delegate
-        showLoadingFor()
+        showLoadingFor {
+            countDownViewModel.startCountdown()
+        }
     }
 
     private fun getCorrectAnswer(): String{
@@ -63,6 +67,7 @@ class WriteTheSignScreenViewModel(
 
     fun didTapConfirmButton(){
         gameWasCompleted = true
+        countDownViewModel.stopCountdown()
         viewModelScope.launch{
             delay(700)
             showContinueView = true
