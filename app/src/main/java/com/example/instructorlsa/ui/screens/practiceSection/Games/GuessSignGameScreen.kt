@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.instructorlsa.ui.common.components.TitleText
@@ -12,6 +13,7 @@ import com.example.instructorlsa.ui.common.components.loadingScreen.OverlapFullS
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.VideoPlayer
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AnimatedStateResultIcon
+import com.example.instructorlsa.ui.screens.practiceSection.Games.components.CountDownTimer
 import com.example.instructorlsa.viewmodels.games.GuessSignScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.VideoLoaderManager
 
@@ -21,9 +23,23 @@ fun GuessSignGameScreen(screenViewModel: GuessSignScreenViewModel, navController
 
     OverlapFullScreenLoader(showLoader = screenViewModel.videoLoading) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
-            Spacer(modifier = Modifier.height(30.dp))
-            TitleText(text = titleText)
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(10.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box(Modifier.weight(0.8f))
+                TitleText(text = titleText, textAlign = TextAlign.Center)
+                Column(
+                    modifier = Modifier.weight(0.8f),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CountDownTimer(viewModel = screenViewModel.countDownViewModel)
+                    Spacer(modifier = Modifier.height(40.dp))
+                }
+            }
+            Spacer(modifier = Modifier.height(10.dp))
             VideoPlayer(urlVideo = screenViewModel.game.sign.urlVideo, playWhenReady = true, delegate = screenViewModel)
             Spacer(modifier = Modifier.height(20.dp))
             AnimatedStateResultIcon(isVisible = screenViewModel.answerWasSelected,
