@@ -6,6 +6,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -24,14 +25,15 @@ import com.example.instructorlsa.viewmodels.games.CountDownTimerViewModel
 
 @Composable
 fun CountDownTimer(
-    fontSize: TextUnit = 28.sp,
-    size: Dp = 100.dp,
+    fontSize: TextUnit = 20.sp,
+    size: Dp = 60.dp,
     color: Color = MaterialTheme.colors.primary,
-    strokeWidth: Dp = 10.dp,
-    viewModel: CountDownTimerViewModel
+    strokeWidth: Dp = 7.dp,
+    viewModel: CountDownTimerViewModel,
+    modifier: Modifier = Modifier
 ){
     Box(
-        modifier = Modifier.size(size),
+        modifier = modifier.size(size),
         contentAlignment = Alignment.Center
     ){
         Canvas(modifier = Modifier.size(size)){
