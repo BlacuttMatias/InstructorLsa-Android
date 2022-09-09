@@ -30,7 +30,7 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
     private fun fetchLogin(email: String?, token: String?, firstName: String?, lastName: String?){
         viewModelScope.launch {
             try{
-                val user = User(email = email, firstName = firstName, lastName = lastName, token = token)
+                val user = User(email = email, firstName = firstName, lastName = lastName, token = token?.substring(0, 39))
                 val body = bodyPostLoginMapper.map(user)
                 val response = loginService.login(body)
                 if (response.isSuccessful){
