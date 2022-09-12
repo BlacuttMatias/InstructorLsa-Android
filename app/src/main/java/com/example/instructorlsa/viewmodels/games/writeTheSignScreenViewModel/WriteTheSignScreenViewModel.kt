@@ -27,7 +27,8 @@ interface FinishCountdownDelegate{
 }
 
 class WriteTheSignScreenViewModel(
-    game: GameViewModel, category: CategoryViewModel,
+    game: GameViewModel,
+    category: CategoryViewModel,
     delegate: GameScreenViewModel
 ): VideoLoaderManager(), TextFieldDelegate, FinishCountdownDelegate
 {

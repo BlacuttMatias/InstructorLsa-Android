@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.instructorlsa.mappers.GameMapper
 import com.example.instructorlsa.services.GamesService
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
+import com.example.instructorlsa.viewmodels.games.signTheWord.SignTheWordGameViewModel
 import com.example.instructorlsa.viewmodels.games.writeTheSignScreenViewModel.WriteTheSignScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignViewModel
 import kotlinx.coroutines.launch
@@ -54,6 +55,10 @@ class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
 
     fun getWriteSignScreenViewModel(): WriteTheSignScreenViewModel{
         return WriteTheSignScreenViewModel(category = this.category, game = getCurrentGame(), delegate = this)
+    }
+
+    fun getSignWordScreenViewModel(): SignTheWordGameViewModel{
+        return SignTheWordGameViewModel(category = this.category, game = getCurrentGame(), delegate = this)
     }
 
     fun goToNextScreen(answerWasCorrect: Boolean?){
