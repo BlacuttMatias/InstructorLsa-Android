@@ -84,6 +84,7 @@ class CaptureVideoContract : ActivityResultContract<String, Boolean>() {
     override fun createIntent(context: Context, input: String): Intent {
         return Intent(MediaStore.ACTION_VIDEO_CAPTURE)
             .putExtra(MediaStore.EXTRA_OUTPUT, input)
+            .putExtra(MediaStore.EXTRA_DURATION_LIMIT, 6)
 //            .addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
 //            .addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
     }
