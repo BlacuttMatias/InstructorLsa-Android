@@ -40,16 +40,12 @@ import java.io.File
 fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navController: NavController) {
     val titleText = screenViewModel.game.name
     val context = LocalContext.current
-    var launcher = rememberLauncherForActivityResult(CaptureVideoContract()){
-        Log.d("ASDASDASDSADASD", it.toString())
+    var launcherVideoCapture = rememberLauncherForActivityResult(CaptureVideoContract()){
+        screenViewModel.checkIfAnswerIsCorrect()
     }
 
     var launcherPermissions = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){
-        val hasPermission = ActivityCompat.checkSelfPermission(
-            context,
-            Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
-        screenViewModel.hasPermission = hasPermission
+        screenViewModel.permissionsWasRequested(context)
     }
 
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
@@ -59,25 +55,21 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
         TitleText(text = screenViewModel.game.sign.name)
         Spacer(modifier = Modifier.height(20.dp))
         MainButton(text = screenViewModel.getMainButtonText()) {
-            launcherPermissions.launch(
-                arrayOf(
-//                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.CAMERA
-                )
-            )
-        }
-        if(screenViewModel.hasPermission){
-            val file = File(context.filesDir,"example1.mp4")
-            val uri = FileProvider.getUriForFile(
-                context,
-                BuildConfig.APPLICATION_ID + ".provider",
-                file
-            )
-            Log.d("22222222222222222222", file.length().toString())
-            if (!file.exists()) {
-
-                file.createNewFile()
+            if(screenViewModel.hasPermission){
+                launcherVideoCapture.launch(screenViewModel.getUriFile(context))
             }
+            else{
+                launcherPermissions.launch(
+                    arrayOf(
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA
+                    )
+                )
+            }
+        }
+        if(screenViewModel.mustShowVideoCapture){
+            launcherVideoCapture.launch(screenViewModel.getUriFile(context))
+            screenViewModel.mustShowVideoCapture = false
 //            val builder = VmPolicy.Builder()
 //            StrictMode.setVmPolicy(builder.build())
 //            Log.d("ASDASDASDASD", file.toString() + "  " + file.toURI().toString())
@@ -85,8 +77,7 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
 //            if (!file.exists()) {
 //                file.createNewFile()
 //            }
-            Log.d("11111111111111111", uri.toString())
-            launcher.launch(uri)
+
 //            val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Environment.getExternalStorageDirectory().path +"videocapture_example.mp4")
 //            startActivity(context, intent, null)
         }
