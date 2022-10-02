@@ -13,7 +13,7 @@ import java.nio.file.Files
 
 interface SignVideoApiService{
     @Multipart
-    @POST("signVideo/")
+    @POST("signVideo")
     suspend fun checkSignVideo(
         @HeaderMap headers: Map<String, String>,
         @Part("idSena") idSign: RequestBody,
@@ -23,11 +23,11 @@ interface SignVideoApiService{
 
 class SignVideoService {
     suspend fun checkSignVideo(idSign: String, videoFile: File): Response<ResponseCheckSignVideo> {
-        val mediaTypeVideo = MediaType.parse("video/mp4")//okhttp3.MultipartBody.FORM
+        val mediaTypeVideo = MediaType.parse("video/mp4")//MultipartBody.FORM
         val requestBodyVideoFile = RequestBody.create(mediaTypeVideo, videoFile)
         val multipartVideoBody = MultipartBody.Part.createFormData("file", videoFile.name, requestBodyVideoFile)
         val requestBodyIdSign = RequestBody.create(MediaType.parse("text/plain"), idSign)
-        return RetrofitBuilder.getRetrofitInstance()
+        return RetrofitBuilder.getRetrofitMockInstance()
             .create(SignVideoApiService::class.java)
             .checkSignVideo(headers = RetrofitBuilder.getHeadersWithMultipart(), idSign = requestBodyIdSign, file = multipartVideoBody)
     }

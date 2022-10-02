@@ -14,6 +14,13 @@ object RetrofitBuilder {
             .build()
     }
 
+    fun getRetrofitMockInstance(baseUrl: String = "https://demo8670899.mockable.io"): Retrofit{
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
     fun getHeaders(): HashMap<String, String>{
         val headers = HashMap<String, String>()
         headers["Accept"] = "application/json"
@@ -25,7 +32,6 @@ object RetrofitBuilder {
     fun getHeadersWithMultipart(): HashMap<String, String>{
         val headers = HashMap<String, String>()
         headers["Accept"] = "application/json"
-        headers["Content-Type"] = "multipart/form-data"
         headers["Authorization"] = token
         return headers
     }
