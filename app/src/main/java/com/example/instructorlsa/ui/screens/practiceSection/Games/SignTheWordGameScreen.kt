@@ -32,6 +32,9 @@ import androidx.navigation.NavController
 import com.example.instructorlsa.BuildConfig
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
+import com.example.instructorlsa.ui.common.components.errorScreen.ErrorScreen
+import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
+import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
 import com.example.instructorlsa.viewmodels.games.signTheWord.SignTheWordGameViewModel
 import java.io.File
 
@@ -48,28 +51,42 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
         screenViewModel.permissionsWasRequested(context)
     }
 
-    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
-        Spacer(modifier = Modifier.height(20.dp))
-        TitleText(text = titleText)
-        Spacer(modifier = Modifier.height(20.dp))
-        TitleText(text = screenViewModel.game.sign.name)
-        Spacer(modifier = Modifier.height(20.dp))
-        MainButton(text = screenViewModel.getMainButtonText()) {
-            if(screenViewModel.hasPermission){
-                launcherVideoCapture.launch(screenViewModel.getUriFile(context))
-            }
-            else{
-                launcherPermissions.launch(
-                    arrayOf(
+    if(screenViewModel.isError) {
+        ErrorScreen(nacController = navController)
+    }
+    else if (screenViewModel.loading) {
+        FullScreenLoader()
+    }
+    else{
+        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
+            Spacer(modifier = Modifier.height(20.dp))
+            TitleText(text = titleText)
+            Spacer(modifier = Modifier.height(20.dp))
+            TitleText(text = screenViewModel.game.sign.name)
+            Spacer(modifier = Modifier.height(20.dp))
+            MainButton(text = screenViewModel.getMainButtonText()) {
+                if(screenViewModel.hasPermission){
+                    launcherVideoCapture.launch(screenViewModel.getUriFile(context))
+                }
+                else{
+                    launcherPermissions.launch(
+                        arrayOf(
 //                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.CAMERA
+                            Manifest.permission.CAMERA
+                        )
                     )
-                )
+                }
             }
-        }
-        if(screenViewModel.mustShowVideoCapture){
-            launcherVideoCapture.launch(screenViewModel.getUriFile(context))
-            screenViewModel.mustShowVideoCapture = false
+            AlertDialogResultGame(
+                isVisble = screenViewModel.showContinueView,
+                title = screenViewModel.correctStateText(),
+                onClickContinueButton = {
+                    screenViewModel.didTapContinueButton()
+                }
+            )
+            if(screenViewModel.mustShowVideoCapture){
+                launcherVideoCapture.launch(screenViewModel.getUriFile(context))
+                screenViewModel.mustShowVideoCapture = false
 //            val builder = VmPolicy.Builder()
 //            StrictMode.setVmPolicy(builder.build())
 //            Log.d("ASDASDASDASD", file.toString() + "  " + file.toURI().toString())
@@ -80,6 +97,7 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
 
 //            val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Environment.getExternalStorageDirectory().path +"videocapture_example.mp4")
 //            startActivity(context, intent, null)
+            }
         }
     }
 }
