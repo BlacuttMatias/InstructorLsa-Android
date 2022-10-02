@@ -5,6 +5,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
+    val token = "Token asd23123"// + InstructorLsaConfig.getUserToken()
+
     fun getRetrofitInstance(baseUrl: String = "http://instructorlsa.herokuapp.com"): Retrofit{
         return Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -16,7 +18,15 @@ object RetrofitBuilder {
         val headers = HashMap<String, String>()
         headers["Accept"] = "application/json"
         headers["Content-Type"] = "application/json"
-        headers["Authorization"] = "Token " + InstructorLsaConfig.getUserToken()
+        headers["Authorization"] = token
+        return headers
+    }
+
+    fun getHeadersWithMultipart(): HashMap<String, String>{
+        val headers = HashMap<String, String>()
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "multipart/form-data"
+        headers["Authorization"] = token
         return headers
     }
 }
