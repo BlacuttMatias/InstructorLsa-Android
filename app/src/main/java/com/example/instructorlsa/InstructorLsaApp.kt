@@ -64,10 +64,19 @@ fun Navigation() {
         }
         composable(NavigationRoute.StartPractice.route){
             val screenViewModel = StartPracticeViewModel(category = InstructorLsaConfig.getPracticeCategory())
+            InstructorLsaConfig.comeFromInfoScreen = false
             StartPracticeScreen(navController = navController, screenViewModel)
         }
         composable(NavigationRoute.GamePractice.route){
-            val screenViewModel = GameScreenViewModel(category = InstructorLsaConfig.getPracticeCategory())
+            var screenViewModel = GameScreenViewModel(category = InstructorLsaConfig.getPracticeCategory())
+            if(InstructorLsaConfig.comeFromInfoScreen){
+                screenViewModel = GameScreenViewModel(
+                    category = InstructorLsaConfig.getPracticeCategory(),
+                    games = InstructorLsaConfig.currentGames,
+                    indexCurrentGame = InstructorLsaConfig.indexCurrentGame,
+                    gamesAnsweredCorrect = InstructorLsaConfig.gamesAnsweredCorrect
+                )
+            }
             GameScreen(navController = navController, screenViewModel = screenViewModel)
         }
         composable(NavigationRoute.ResultGames.route){
@@ -75,10 +84,12 @@ fun Navigation() {
                 category = InstructorLsaConfig.getPracticeCategory(),
                 result = InstructorLsaConfig.resultGames
             )
+            InstructorLsaConfig.comeFromInfoScreen = false
             ResultGamesScreen(navController = navController, screenViewModel = screenViewModel)
         }
         composable(NavigationRoute.InfoGame.route){
             val screenViewModel = InfoSignTheWordScreenViewModel(category = InstructorLsaConfig.getPracticeCategory())
+            InstructorLsaConfig.comeFromInfoScreen = true
             InfoSignTheWordScreen(navController = navController, screenViewModel = screenViewModel)
         }
     }

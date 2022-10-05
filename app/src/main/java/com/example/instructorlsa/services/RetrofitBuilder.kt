@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
-    val token = "Token asd23123"// + InstructorLsaConfig.getUserToken()
+    val token = "Token " + InstructorLsaConfig.getUserToken()
 
     fun getRetrofitInstance(baseUrl: String = "http://instructorlsa.herokuapp.com"): Retrofit{
         return Retrofit.Builder()

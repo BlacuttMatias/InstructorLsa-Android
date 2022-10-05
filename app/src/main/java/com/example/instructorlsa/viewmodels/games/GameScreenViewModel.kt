@@ -7,13 +7,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.instructorlsa.mappers.GameMapper
 import com.example.instructorlsa.services.GamesService
+import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.games.signTheWord.SignTheWordGameViewModel
 import com.example.instructorlsa.viewmodels.games.writeTheSignScreenViewModel.WriteTheSignScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignViewModel
 import kotlinx.coroutines.launch
 
-class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
+class GameScreenViewModel(
+    category: CategoryViewModel,
+    games: List<GameViewModel> = listOf(),
+    indexCurrentGame: Int = 0,
+    gamesAnsweredCorrect: Int = 0
+): ViewModel() {
     var games: List<GameViewModel> = listOf()
     val category: CategoryViewModel
     var indexCurrentGame by mutableStateOf(0)
@@ -26,6 +32,12 @@ class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
 
     init{
         this.category = category
+        this.games = games
+        this.indexCurrentGame = indexCurrentGame
+        this.gamesAnsweredCorrect = gamesAnsweredCorrect
+        if(games.isNotEmpty()){
+            isLoading = false
+        }
     }
 
     fun loadInitData(){
@@ -47,7 +59,7 @@ class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
     }
 
     fun shouldShowInfoButton(): Boolean{
-        return currentGameType == GameType.GuessTheSign
+        return currentGameType == GameType.SignTheWord
     }
 
     fun getCurrentGame(): GameViewModel{
@@ -71,6 +83,9 @@ class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
     }
 
     fun getSignWordScreenViewModel(): SignTheWordGameViewModel{
+        InstructorLsaConfig.currentGames = games
+        InstructorLsaConfig.indexCurrentGame = indexCurrentGame
+        InstructorLsaConfig.gamesAnsweredCorrect = gamesAnsweredCorrect
         return SignTheWordGameViewModel(category = this.category, game = getCurrentGame(), delegate = this)
     }
 

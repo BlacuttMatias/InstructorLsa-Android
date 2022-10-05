@@ -1,5 +1,6 @@
 package com.example.instructorlsa.ui.screens.practiceSection.startPractice
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -28,7 +29,13 @@ fun GameScreen(navController: NavController, screenViewModel: GameScreenViewMode
     val titleTopTabBarText = screenViewModel.category.name
 
     Scaffold(
-        topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
+        topBar = {
+            TopTabBarLsa(
+                titleText = titleTopTabBarText,
+                navController = navController,
+                showInfoButton = screenViewModel.shouldShowInfoButton()
+            )
+        }
     ) {
         if(screenViewModel.isLoading){
             FullScreenLoader()
@@ -47,10 +54,12 @@ fun GameScreen(navController: NavController, screenViewModel: GameScreenViewMode
                 Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally){
                     when(screenViewModel.getCurrentGame().type){
                         GameType.GuessTheSign -> {
-                            GuessSignGameScreen(screenViewModel = screenViewModel.getGuessSignScreenViewModel(), navController = navController)
+                            SignTheWordGameScreen(screenViewModel = screenViewModel.getSignWordScreenViewModel(), navController = navController)
+                            //GuessSignGameScreen(screenViewModel = screenViewModel.getGuessSignScreenViewModel(), navController = navController)
                         }
                         GameType.WriteTheSign -> {
-                            WriteTheSignGameScreen(screenViewModel = screenViewModel.getWriteSignScreenViewModel(), navController = navController)
+                            SignTheWordGameScreen(screenViewModel = screenViewModel.getSignWordScreenViewModel(), navController = navController)
+                            //WriteTheSignGameScreen(screenViewModel = screenViewModel.getWriteSignScreenViewModel(), navController = navController)
                         }
                         GameType.SignTheWord -> {
                             SignTheWordGameScreen(screenViewModel = screenViewModel.getSignWordScreenViewModel(), navController = navController)
