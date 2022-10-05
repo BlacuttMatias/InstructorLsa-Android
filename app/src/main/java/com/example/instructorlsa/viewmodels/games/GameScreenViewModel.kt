@@ -17,6 +17,7 @@ class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
     var games: List<GameViewModel> = listOf()
     val category: CategoryViewModel
     var indexCurrentGame by mutableStateOf(0)
+    var currentGameType by mutableStateOf(GameType.Unknown)
     var gamesAnsweredCorrect = 0
     var allGamesAreCompleted by mutableStateOf(false)
     var gamesService = GamesService()
@@ -45,8 +46,20 @@ class GameScreenViewModel(category: CategoryViewModel): ViewModel() {
         }
     }
 
+    fun shouldShowInfoButton(): Boolean{
+        return currentGameType == GameType.GuessTheSign
+    }
+
     fun getCurrentGame(): GameViewModel{
-        return games.getOrElse(indexCurrentGame) { games.first() }
+        val currentGame = games.getOrElse(indexCurrentGame) {
+            GameViewModel(name = "",
+                type = GameType.Unknown,
+                sign = mockSign1,
+                answerOptions = answerOptions1
+            )
+        }
+        currentGameType = currentGame.type
+        return currentGame
     }
 
     fun getGuessSignScreenViewModel(): GuessSignScreenViewModel{

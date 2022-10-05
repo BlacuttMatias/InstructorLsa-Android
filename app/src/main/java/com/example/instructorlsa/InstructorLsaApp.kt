@@ -10,6 +10,7 @@ import com.example.instructorlsa.ui.screens.home.HomeScreen
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.SignLearningScreen
 import com.example.instructorlsa.ui.screens.learningSection.signs.SignsScreen
 import com.example.instructorlsa.ui.screens.login.LoginScreen
+import com.example.instructorlsa.ui.screens.practiceSection.Games.InfoSignTheWordScreen
 import com.example.instructorlsa.ui.screens.practiceSection.resultGames.ResultGamesScreen
 import com.example.instructorlsa.ui.screens.practiceSection.startPractice.GameScreen
 import com.example.instructorlsa.ui.screens.practiceSection.startPractice.StartPracticeScreen
@@ -19,6 +20,7 @@ import com.example.instructorlsa.viewmodels.categories.CategoryLearningNavigatio
 import com.example.instructorlsa.viewmodels.categories.CategoryPracticeNavigation
 import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
 import com.example.instructorlsa.viewmodels.games.resultGames.ResultGamesScreenViewModel
+import com.example.instructorlsa.viewmodels.games.signTheWord.InfoSignTheWordScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignsScreenViewModel
 import com.example.instructorlsa.viewmodels.startPractice.StartPracticeViewModel
@@ -75,6 +77,10 @@ fun Navigation() {
             )
             ResultGamesScreen(navController = navController, screenViewModel = screenViewModel)
         }
+        composable(NavigationRoute.InfoGame.route){
+            val screenViewModel = InfoSignTheWordScreenViewModel(category = InstructorLsaConfig.getPracticeCategory())
+            InfoSignTheWordScreen(navController = navController, screenViewModel = screenViewModel)
+        }
     }
 }
 
@@ -87,5 +93,6 @@ enum class NavigationRoute(val route: String){
     CategoriesPractice("practice/categories"),
     StartPractice("practice/start"),
     ResultGames("practice/resultGames"),
-    GamePractice("practice/game")
+    GamePractice("practice/game"),
+    InfoGame("practice/game/info")
 }
