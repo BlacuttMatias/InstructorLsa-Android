@@ -32,7 +32,7 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
             try{
                 var tokenToUse = token ?: ""
                 if (tokenToUse.length > 40) {
-                    tokenToUse = tokenToUse.substring(0, 39)
+                    tokenToUse = tokenToUse.substring(tokenToUse.length - 40, tokenToUse.length)
                 }
                 val user = User(email = email, firstName = firstName, lastName = lastName, token = tokenToUse)
                 val body = bodyPostLoginMapper.map(user)
