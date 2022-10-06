@@ -1,5 +1,6 @@
 package com.example.instructorlsa.viewmodels.signs
 
+import android.content.IntentSender
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -20,11 +21,12 @@ open class VideoLoaderManager: ViewModel() {
         videoLoading = false
     }
 
-    fun showLoadingFor(milliSeconds: Long = 1800){
+    fun showLoadingFor(milliSeconds: Long = 1800, onFinished: () -> Unit = {}){
         viewModelScope.launch {
             showVideoLoading()
             delay(timeMillis = milliSeconds)
             hideVideoLoading()
+            onFinished.invoke()
         }
     }
 }
