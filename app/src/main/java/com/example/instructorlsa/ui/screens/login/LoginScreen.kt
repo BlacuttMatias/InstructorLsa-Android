@@ -36,7 +36,7 @@ fun LoginScreen(navController: NavController) {
                         email = gsa.email,
                         firstName = gsa.givenName,
                         lastName = gsa.familyName,
-                        token = gsa.idToken
+                        token = gsa.id
                     )
                 } else {
                     isError.value = true
