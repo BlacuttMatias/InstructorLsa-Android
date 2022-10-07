@@ -20,14 +20,11 @@ import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.errorScreen.ErrorScreen
 import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
-import com.example.instructorlsa.ui.screens.categories.components.CategoryCard
 import com.example.instructorlsa.ui.screens.learningSection.signs.components.SignToLearnView
 import com.example.instructorlsa.ui.theme.InstructorLsaTheme
 import com.example.instructorlsa.viewmodels.InstructorLsaConfig
-import com.example.instructorlsa.viewmodels.categories.CategoriesScreenViewModel
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.signs.MockDataSigns
-import com.example.instructorlsa.viewmodels.signs.SignViewModel
 import com.example.instructorlsa.viewmodels.signs.SignsScreenViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -39,7 +36,7 @@ fun SignsScreen(navController: NavController, screenViewModel: SignsScreenViewMo
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
         if(screenViewModel.isError) {
-            ErrorScreen(nacController = navController)
+            ErrorScreen(navController = navController)
         }
         else if (screenViewModel.loading) {
             FullScreenLoader()

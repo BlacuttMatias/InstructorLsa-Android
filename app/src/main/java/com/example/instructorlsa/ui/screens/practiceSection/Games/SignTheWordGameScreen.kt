@@ -4,14 +4,8 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Environment
-import android.os.FileUtils
-import android.os.StrictMode
-import android.os.StrictMode.VmPolicy
 import android.provider.MediaStore
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,11 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat
-import androidx.core.content.FileProvider
-import androidx.core.net.toUri
 import androidx.navigation.NavController
-import com.example.instructorlsa.BuildConfig
 import com.example.instructorlsa.ui.common.components.BodyText
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
@@ -37,7 +27,6 @@ import com.example.instructorlsa.ui.common.components.errorScreen.ErrorScreen
 import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
 import com.example.instructorlsa.viewmodels.games.signTheWord.SignTheWordGameViewModel
-import java.io.File
 
 
 @Composable
@@ -53,7 +42,7 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
     }
 
     if(screenViewModel.isError) {
-        ErrorScreen(nacController = navController)
+        ErrorScreen(navController = navController)
     }
     else if (screenViewModel.loading) {
         FullScreenLoader()

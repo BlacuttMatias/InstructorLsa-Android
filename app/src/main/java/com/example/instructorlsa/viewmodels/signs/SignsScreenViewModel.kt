@@ -27,9 +27,15 @@ class SignsScreenViewModel(category: CategoryViewModel): ViewModel() {
     fun loadInitData(){
         viewModelScope.launch {
             try{
-                val signsDto = service.getLearningSigns(categoryName = category.name).body()
-                if (signsDto != null) {
-                    signs =  signsDto.map { sign -> signMapper.map(sign) }
+                val response = service.getLearningSigns(categoryName = category.name)
+                if(response.isSuccessful){
+                    val signsDto = response.body()
+                    if (signsDto != null) {
+                        signs =  signsDto.map { sign -> signMapper.map(sign) }
+                    }
+                }
+                else {
+                    isError = true
                 }
             }
             catch(e: Exception){
