@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.instructorlsa.NavigationRoute
 import com.example.instructorlsa.R
+import com.example.instructorlsa.ui.common.components.FooterColumn
 import com.example.instructorlsa.ui.common.components.FooterSloganAndIcon
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
@@ -53,21 +54,28 @@ fun InfoSignTheWordScreen(screenViewModel: InfoSignTheWordScreenViewModel, navCo
             Spacer(modifier = Modifier.height(30.dp))
             val bullet = "\u2022"
             val paragraphStyle = ParagraphStyle(textIndent = TextIndent(restLine = 12.sp))
-            Row() {
-                Spacer(modifier = Modifier.width(10.dp))
-                Text(
-                    text = buildAnnotatedString {
-                        messages.forEach {
-                            withStyle(style = paragraphStyle) {
-                                append(bullet)
-                                append("\t\t")
-                                append(it)
-                                append("\n")
-                            }
+
+            Text(
+                text = buildAnnotatedString {
+                    messages.forEach {
+                        withStyle(style = paragraphStyle) {
+                            append(bullet)
+                            append("\t\t")
+                            append(it)
+                            append("\n")
                         }
-                    },
-                    fontSize = 18.sp
-                )
+                    }
+                },
+                fontSize = 16.sp,
+                modifier = Modifier.padding(horizontal = 20.dp)
+            )
+
+
+            FooterColumn {
+                MainButton(text = "Entendido") {
+                    navController.navigateUp()
+                }
+                Spacer(modifier = Modifier.height(20.dp))
             }
 
 //            LazyColumn {

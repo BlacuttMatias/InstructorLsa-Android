@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.instructorlsa.constants.Constants
 import com.example.instructorlsa.ui.common.components.BodyText
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
@@ -99,7 +100,7 @@ class CaptureVideoContract : ActivityResultContract<Uri,  Uri?>() {
     override fun createIntent(context: Context, input: Uri): Intent {
         return Intent(MediaStore.ACTION_VIDEO_CAPTURE)
             .putExtra(MediaStore.EXTRA_OUTPUT, input)
-            .putExtra(MediaStore.EXTRA_DURATION_LIMIT, 6)
+            .putExtra(MediaStore.EXTRA_DURATION_LIMIT, Constants.secondsToTakeVideo)
             .addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
             .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
     }
