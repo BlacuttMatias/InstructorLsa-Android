@@ -30,6 +30,7 @@ import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.navigation.NavController
 import com.example.instructorlsa.BuildConfig
+import com.example.instructorlsa.ui.common.components.BodyText
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.errorScreen.ErrorScreen
@@ -61,9 +62,11 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
             Spacer(modifier = Modifier.height(20.dp))
             TitleText(text = titleText)
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             TitleText(text = screenViewModel.game.sign.name)
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(40.dp))
+            BodyText(text = screenViewModel.getBodyText())
+            Spacer(modifier = Modifier.height(50.dp))
             MainButton(text = screenViewModel.getMainButtonText()) {
                 if(screenViewModel.hasPermission){
                     launcherVideoCapture.launch(screenViewModel.getUriFile(context))

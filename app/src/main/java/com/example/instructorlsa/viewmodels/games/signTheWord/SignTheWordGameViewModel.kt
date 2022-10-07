@@ -103,4 +103,8 @@ class SignTheWordGameViewModel(
         delegate.goToNextScreen(gameCompletedCorrectly)
         showContinueView = false
     }
+
+    fun getBodyText(): String {
+        return "A continuación deberás grabarte realizando la seña de la palabra \"" + game.sign.name + "\""
+    }
 }
