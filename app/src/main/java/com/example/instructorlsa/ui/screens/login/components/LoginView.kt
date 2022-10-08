@@ -16,16 +16,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.instructorlsa.NavigationRoute
 import com.example.instructorlsa.R
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.SloganFooterText
 import com.example.instructorlsa.ui.common.components.TitleText
+import com.example.instructorlsa.ui.common.components.errorScreen.ErrorScreen
 import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.example.instructorlsa.viewmodels.login.LoginScreenViewModel
 
 @Composable
 fun LoginView(
+    navController: NavController,
     onClick: () -> Unit,
     isError: Boolean = false,
     mSignInViewModel: LoginScreenViewModel
@@ -39,7 +42,14 @@ fun LoginView(
     Scaffold(
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = null, showCloseSession = false) }
     ){
-        if (isLoading == true && !isError) {
+        if(mSignInViewModel.isError){
+            ErrorScreen(
+                navController = navController,
+                buttonText = "Volver a intentar",
+                screenRoute = NavigationRoute.Login
+            )
+        }
+        else if (isLoading ?: false) {
             FullScreenLoader()
         } else {
 
@@ -60,19 +70,6 @@ fun LoginView(
                     onClick.invoke()
                 }
                 SloganFooterText()
-            }
-
-            when {
-                isError -> {
-                    isError.let {
-                        Text(
-                            "Error",
-                            style = MaterialTheme.typography.h6,
-                            color = MaterialTheme.colors.error
-                        )
-                        mSignInViewModel.hideLoading()
-                    }
-                }
             }
         }
     }

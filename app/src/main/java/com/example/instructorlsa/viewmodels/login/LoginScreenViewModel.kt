@@ -22,6 +22,7 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
     val loading: LiveData<Boolean> = _loadingState
     val loginService = LoginService()
     val bodyPostLoginMapper = BodyPostLoginMapper()
+    var isError by mutableStateOf(false)
 
     init {
         checkSignedInUser(application.applicationContext)
@@ -42,11 +43,11 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
                     googleUser = user
                 }
                 else{
-                    //TODO
+                    showError()
                 }
             }
             catch(e: Exception){
-
+                showError()
             }
         }
     }
@@ -74,5 +75,10 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
 
     fun showLoading() {
         _loadingState.value = true
+    }
+
+    fun showError() {
+        isError = true
+        hideLoading()
     }
 }

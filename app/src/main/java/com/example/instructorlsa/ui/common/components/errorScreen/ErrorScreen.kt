@@ -21,10 +21,13 @@ import com.example.instructorlsa.ui.common.components.FooterColumn
 import com.example.instructorlsa.ui.common.components.MainButton
 
 @Composable
-fun ErrorScreen(navController: NavController) {
+fun ErrorScreen(
+    navController: NavController,
+    buttonText: String = "Ir al inicio",
+    screenRoute: NavigationRoute = NavigationRoute.Home
+) {
     val errorTitle = "Algo salio mal"
     val errorBody = "Tuvimos un problema y no podemos continuar. Vuelva a intentarlo más tarde"
-    val errorButtonText = "Ir al inicio"
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -52,8 +55,8 @@ fun ErrorScreen(navController: NavController) {
         )
     }
     FooterColumn {
-        MainButton(text = errorButtonText) {
-            navController.navigate(NavigationRoute.Home.route){
+        MainButton(text = buttonText) {
+            navController.navigate(screenRoute.route){
                 popUpTo(0)
             }
         }
