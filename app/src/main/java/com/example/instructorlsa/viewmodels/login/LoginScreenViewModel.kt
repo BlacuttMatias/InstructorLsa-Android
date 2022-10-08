@@ -61,7 +61,7 @@ class LoginScreenViewModel(application: Context) : ViewModel() {
         val gsa = GoogleSignIn.getLastSignedInAccount(applicationContext)
 
         if (gsa != null) {
-            fetchLogin(email = gsa.email, token = gsa.idToken, firstName = gsa.givenName, lastName = gsa.familyName)
+            fetchLogin(email = gsa.email, token = gsa.id, firstName = gsa.givenName, lastName = gsa.familyName)
         }
         else{
             hideLoading()
