@@ -10,6 +10,6 @@ class SignMapper {
     }
 
     fun map(sign: SignGame): SignViewModel{
-        return SignViewModel(id = sign.id, name = sign.name, urlVideo = sign.urlVideo, isCompleted = sign.completed)
+        return SignViewModel(id = sign.id, name = sign.name, urlVideo = sign.urlVideo, isCompleted = sign.completed ?: true)
     }
 }

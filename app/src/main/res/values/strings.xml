@@ -22,6 +22,8 @@
     <string name="result_games_go_to_learning_section">Ir a Sección Aprendizaje</string>
     <string name="result_games_go_to_category_selection">Seleccionar otra categoría</string>
 
+    <string name="info_sign_the_word_game">Tips para grabarte</string>
+
     <string name="close_session">Cerrar sesión</string>
 
 </resources>

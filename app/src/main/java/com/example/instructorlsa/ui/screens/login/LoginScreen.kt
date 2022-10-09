@@ -25,8 +25,6 @@ fun LoginScreen(navController: NavController) {
 
     val mSignInViewModel by remember { mutableStateOf(LoginScreenViewModel(context))}
 
-    val isError = rememberSaveable { mutableStateOf(false) }
-
     val authResultLauncher =
         rememberLauncherForActivityResult(contract = GoogleApiContract()) { task ->
             try {
@@ -39,18 +37,20 @@ fun LoginScreen(navController: NavController) {
                         token = gsa.id
                     )
                 } else {
-                    isError.value = true
+                    mSignInViewModel.showError()
                 }
             } catch (e: ApiException) {
+                mSignInViewModel.showError()
                 Log.d("Error in AuthScreen%s", e.toString())
             }
         }
 
     LoginView(
+        navController = navController,
         onClick = {
             authResultLauncher.launch(signInRequestCode)
         },
-        isError = isError.value,
+        isError = mSignInViewModel.isError,
         mSignInViewModel = mSignInViewModel
     )
 

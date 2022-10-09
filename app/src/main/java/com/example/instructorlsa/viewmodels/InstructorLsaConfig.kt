@@ -3,6 +3,7 @@ package com.example.instructorlsa.viewmodels
 import com.example.instructorlsa.R
 import com.example.instructorlsa.models.User
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
+import com.example.instructorlsa.viewmodels.games.GameViewModel
 import com.example.instructorlsa.viewmodels.signs.SignViewModel
 
 object InstructorLsaConfig {
@@ -12,6 +13,10 @@ object InstructorLsaConfig {
     var resultGames: Double = 0.0
     var indexSignToLearn: Int = 0
     var user: User = User(null, null, null, null)
+    var currentGames: List<GameViewModel> = listOf()
+    var indexCurrentGame: Int = 0
+    var comeFromInfoScreen = false
+    var gamesAnsweredCorrect = 0
 
     fun setLearningCategory(category: CategoryViewModel){
         categoryLearningViewModel = category
