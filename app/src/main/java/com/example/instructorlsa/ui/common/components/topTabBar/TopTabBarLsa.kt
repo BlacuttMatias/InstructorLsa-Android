@@ -15,7 +15,13 @@ import com.example.instructorlsa.R
 import com.example.instructorlsa.googleApi.GoogleSignInClient
 
 @Composable
-fun TopTabBarLsa(titleText: String, navController: NavController?, showCloseSession: Boolean = true, showInfoButton: Boolean = false){
+fun TopTabBarLsa(
+    titleText: String,
+    navController: NavController?,
+    showCloseSession: Boolean = true,
+    showInfoButton: Boolean = false,
+    onBackButtonPressed: () -> Unit = { navController?.navigateUp() }
+){
     var showMenu by remember { mutableStateOf(false) }
     val closeSessionText = stringResource(id = R.string.close_session)
     val infoGameText = stringResource(id = R.string.info_sign_the_word_game)
@@ -24,7 +30,8 @@ fun TopTabBarLsa(titleText: String, navController: NavController?, showCloseSess
         title = { TitleTopBarText(text = titleText) },
         navigationIcon = if (navController?.previousBackStackEntry != null) {
             {
-                IconButton(onClick = { navController.navigateUp() }) {
+                IconButton(onClick = { onBackButtonPressed.invoke() }
+                ) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
                         contentDescription = "Back"
