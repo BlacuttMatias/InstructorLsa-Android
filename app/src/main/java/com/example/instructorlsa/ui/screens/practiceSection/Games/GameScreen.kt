@@ -54,12 +54,12 @@ fun GameScreen(navController: NavController, screenViewModel: GameScreenViewMode
                 Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally){
                     when(screenViewModel.getCurrentGame().type){
                         GameType.GuessTheSign -> {
-                            SignTheWordGameScreen(screenViewModel = screenViewModel.getSignWordScreenViewModel(), navController = navController)
-                            //GuessSignGameScreen(screenViewModel = screenViewModel.getGuessSignScreenViewModel(), navController = navController)
+                            //SignTheWordGameScreen(screenViewModel = screenViewModel.getSignWordScreenViewModel(), navController = navController)
+                            GuessSignGameScreen(screenViewModel = screenViewModel.getGuessSignScreenViewModel(), navController = navController)
                         }
                         GameType.WriteTheSign -> {
-                            SignTheWordGameScreen(screenViewModel = screenViewModel.getSignWordScreenViewModel(), navController = navController)
-                            //WriteTheSignGameScreen(screenViewModel = screenViewModel.getWriteSignScreenViewModel(), navController = navController)
+                            //SignTheWordGameScreen(screenViewModel = screenViewModel.getSignWordScreenViewModel(), navController = navController)
+                            WriteTheSignGameScreen(screenViewModel = screenViewModel.getWriteSignScreenViewModel(), navController = navController)
                         }
                         GameType.SignTheWord -> {
                             SignTheWordGameScreen(screenViewModel = screenViewModel.getSignWordScreenViewModel(), navController = navController)
