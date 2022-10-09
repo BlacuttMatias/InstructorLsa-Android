@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,6 +27,7 @@ import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.errorScreen.ErrorScreen
 import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
+import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogBack
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
 import com.example.instructorlsa.viewmodels.games.signTheWord.SignTheWordGameViewModel
 
@@ -76,6 +78,16 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
                 onClickContinueButton = {
                     screenViewModel.didTapContinueButton()
                 }
+            )
+            BackHandler(true) {
+                screenViewModel.delegate.shouldShowBackAlertDialog = true
+            }
+            AlertDialogBack(
+                isVisible = screenViewModel.delegate.shouldShowBackAlertDialog,
+                title = screenViewModel.delegate.getDialogBodyText(),
+                onClickConfirmButton = { navController.navigateUp() },
+                onClickCancelButton = { screenViewModel.delegate.onAlertDialogCancelButtonPressed() },
+                onDismissRequest = {  screenViewModel.delegate.onAlertDialogCancelButtonPressed() }
             )
             if(screenViewModel.mustShowVideoCapture){
                 launcherVideoCapture.launch(screenViewModel.getUriFile(context))

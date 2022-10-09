@@ -1,5 +1,6 @@
 package com.example.instructorlsa.ui.screens.practiceSection.Games
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -11,6 +12,7 @@ import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.buttons.OptionButton
 import com.example.instructorlsa.ui.common.components.loadingScreen.OverlapFullScreenLoader
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.VideoPlayer
+import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogBack
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AnimatedStateResultIcon
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.CountDownTimer
@@ -64,6 +66,16 @@ fun GuessSignGameScreen(screenViewModel: GuessSignScreenViewModel, navController
                 onClickContinueButton = {
                     screenViewModel.didTapContinueButton()
                 }
+            )
+            BackHandler(true) {
+                screenViewModel.delegate.shouldShowBackAlertDialog = true
+            }
+            AlertDialogBack(
+                isVisible = screenViewModel.delegate.shouldShowBackAlertDialog,
+                title = screenViewModel.delegate.getDialogBodyText(),
+                onClickConfirmButton = { navController.navigateUp() },
+                onClickCancelButton = { screenViewModel.delegate.onAlertDialogCancelButtonPressed() },
+                onDismissRequest = {  screenViewModel.delegate.onAlertDialogCancelButtonPressed() }
             )
         }
     }

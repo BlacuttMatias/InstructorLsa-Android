@@ -28,6 +28,7 @@ class GameScreenViewModel(
     var allGamesAreCompleted by mutableStateOf(false)
     var gamesService = GamesService()
     var gameMapper = GameMapper()
+    var shouldShowBackAlertDialog by mutableStateOf(false)
     var isLoading by mutableStateOf(true)
 
     init{
@@ -90,6 +91,7 @@ class GameScreenViewModel(
     }
 
     fun goToNextScreen(answerWasCorrect: Boolean?){
+        shouldShowBackAlertDialog = false
         answerWasCorrect?.let {
             if(it){
                 gamesAnsweredCorrect++
@@ -103,8 +105,20 @@ class GameScreenViewModel(
         }
     }
 
+    fun onBackButtonPressed() {
+        shouldShowBackAlertDialog = true
+    }
+
     fun getResultGames(): Double{
         return gamesAnsweredCorrect.toDouble() / games.size.toDouble()
+    }
+
+    fun getDialogBodyText(): String{
+        return "Al abandonar la práctica, perderás todo el progreso obtenido"
+    }
+
+    fun onAlertDialogCancelButtonPressed(){
+        shouldShowBackAlertDialog = false
     }
 }
 
