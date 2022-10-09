@@ -1,5 +1,6 @@
 package com.example.instructorlsa
 
+import android.util.Log
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost

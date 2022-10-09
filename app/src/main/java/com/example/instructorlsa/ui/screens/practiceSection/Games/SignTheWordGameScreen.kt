@@ -42,10 +42,7 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
         screenViewModel.permissionsWasRequested(context)
     }
 
-    if(screenViewModel.isError) {
-        ErrorScreen(navController = navController)
-    }
-    else if (screenViewModel.loading) {
+    if (screenViewModel.loading) {
         FullScreenLoader()
     }
     else{

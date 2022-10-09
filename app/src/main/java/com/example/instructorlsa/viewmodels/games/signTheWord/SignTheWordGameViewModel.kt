@@ -33,7 +33,6 @@ class SignTheWordGameViewModel(
     var mustShowVideoCapture by mutableStateOf(false)
     var showContinueView by mutableStateOf(false)
     var loading by mutableStateOf(false)
-    var isError by mutableStateOf(false)
     var signVideoService: SignVideoService
     var videoFile: File = File("")
     var gameCompletedCorrectly = false
@@ -77,9 +76,12 @@ class SignTheWordGameViewModel(
                     gameCompletedCorrectly = response.body()?.isCorrect ?: false
                     showContinueView = true
                 }
+                else{
+                    delegate.showError()
+                }
             }
             catch(e: Exception){
-                isError = true
+                delegate.showError()
             }
             finally {
                 loading = false

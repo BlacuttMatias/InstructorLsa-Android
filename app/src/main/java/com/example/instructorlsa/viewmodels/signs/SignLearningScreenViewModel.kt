@@ -38,6 +38,7 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
     var currentIndex by mutableStateOf(0)
     var screenLoading by mutableStateOf(false)
     val signService = SignService()
+    var isError by mutableStateOf(false)
 
     init {
         this.category = category
@@ -77,13 +78,18 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
                     signId = getCurrentSign().id
                 )
                 screenLoading = true
-                signService.updateSignState(requestBody)
-                getCurrentSign().isCompleted = true
-                screenLoading = false
-                onSuccess.invoke()
+                val response = signService.updateSignState(requestBody)
+                if(response.isSuccessful){
+                    getCurrentSign().isCompleted = true
+                    screenLoading = false
+                    onSuccess.invoke()
+                }
+                else{
+                    showError()
+                }
             }
             catch(e: Exception){
-
+                showError()
             }
         }
     }
@@ -108,6 +114,9 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
         showLoadingFor()
     }
 
-
+    fun showError(){
+        isError = true
+        screenLoading = false
+    }
 
 }
