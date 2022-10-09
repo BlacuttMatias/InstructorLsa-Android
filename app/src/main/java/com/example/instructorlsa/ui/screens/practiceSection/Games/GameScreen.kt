@@ -15,6 +15,7 @@ import com.example.instructorlsa.R
 import com.example.instructorlsa.ui.common.components.FooterSloganAndIcon
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
+import com.example.instructorlsa.ui.common.components.errorScreen.ErrorScreen
 import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.example.instructorlsa.ui.screens.practiceSection.Games.GuessSignGameScreen
@@ -37,7 +38,10 @@ fun GameScreen(navController: NavController, screenViewModel: GameScreenViewMode
             )
         }
     ) {
-        if(screenViewModel.isLoading){
+        if(screenViewModel.isError){
+            ErrorScreen(navController = navController)
+        }
+        else if(screenViewModel.isLoading){
             FullScreenLoader()
             screenViewModel.loadInitData()
         }
@@ -65,7 +69,7 @@ fun GameScreen(navController: NavController, screenViewModel: GameScreenViewMode
                             SignTheWordGameScreen(screenViewModel = screenViewModel.getSignWordScreenViewModel(), navController = navController)
                         }
                         GameType.Unknown -> {
-                            TODO("Show error screen")
+                            screenViewModel.showError()
                         }
                     }
 

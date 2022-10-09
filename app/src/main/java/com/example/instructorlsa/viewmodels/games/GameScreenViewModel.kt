@@ -29,6 +29,7 @@ class GameScreenViewModel(
     var gamesService = GamesService()
     var gameMapper = GameMapper()
     var isLoading by mutableStateOf(true)
+    var isError by mutableStateOf(false)
 
     init{
         this.category = category
@@ -44,12 +45,18 @@ class GameScreenViewModel(
         viewModelScope.launch {
             if(games.isEmpty()){
                 try{
-                    val gamesDto = gamesService.getGames(categoryName = category.name).body()
-                    games = gamesDto?.let { gameMapper.map(it) }.orEmpty()
-                    isLoading = false
+                    val response = gamesService.getGames(categoryName = category.name)
+                    if(response.isSuccessful){
+                        val gamesDto = response.body()
+                        games = gamesDto?.let { gameMapper.map(it) }.orEmpty()
+                        isLoading = false
+                    }
+                    else{
+                        showError()
+                    }
                 }
                 catch(e: Exception){
-
+                    showError()
                 }
             }
             else{
@@ -105,6 +112,11 @@ class GameScreenViewModel(
 
     fun getResultGames(): Double{
         return gamesAnsweredCorrect.toDouble() / games.size.toDouble()
+    }
+
+    fun showError(){
+        isError = true
+        isLoading = false
     }
 }
 
