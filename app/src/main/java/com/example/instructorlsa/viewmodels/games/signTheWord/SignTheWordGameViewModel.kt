@@ -76,6 +76,9 @@ class SignTheWordGameViewModel(
                     gameCompletedCorrectly = response.body()?.isCorrect ?: false
                     showContinueView = true
                 }
+                else{
+                    delegate.showError()
+                }
             }
             catch(e: Exception){
                 delegate.showError()
