@@ -88,9 +88,6 @@ fun WriteTheSignGameScreen(screenViewModel: WriteTheSignScreenViewModel, navCont
                     screenViewModel.didTapContinueButton()
                 }
             )
-            BackHandler(true) {
-                screenViewModel.delegate.shouldShowBackAlertDialog = true
-            }
             AlertDialogBack(
                 isVisible = screenViewModel.delegate.shouldShowBackAlertDialog,
                 title = screenViewModel.delegate.getDialogBodyText(),

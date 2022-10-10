@@ -1,5 +1,6 @@
 package com.example.instructorlsa.ui.screens.practiceSection.startPractice
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -54,6 +55,9 @@ fun GameScreen(navController: NavController, screenViewModel: GameScreenViewMode
             }
             else{
                 Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally){
+                    BackHandler(true) {
+                        screenViewModel.onBackButtonPressed()
+                    }
                     when(screenViewModel.getCurrentGame().type){
                         GameType.GuessTheSign -> {
                             //SignTheWordGameScreen(screenViewModel = screenViewModel.getSignWordScreenViewModel(), navController = navController)

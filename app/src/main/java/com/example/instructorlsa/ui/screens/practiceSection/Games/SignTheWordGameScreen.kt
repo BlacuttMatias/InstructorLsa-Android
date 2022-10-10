@@ -77,9 +77,6 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
                     screenViewModel.didTapContinueButton()
                 }
             )
-            BackHandler(true) {
-                screenViewModel.delegate.shouldShowBackAlertDialog = true
-            }
             AlertDialogBack(
                 isVisible = screenViewModel.delegate.shouldShowBackAlertDialog,
                 title = screenViewModel.delegate.getDialogBodyText(),
