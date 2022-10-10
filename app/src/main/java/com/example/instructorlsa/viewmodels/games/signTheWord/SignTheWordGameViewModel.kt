@@ -36,6 +36,7 @@ class SignTheWordGameViewModel(
     var signVideoService: SignVideoService
     var videoFile: File = File("")
     var gameCompletedCorrectly = false
+    var shouldShowNotPermissionsGrantedView by mutableStateOf(false)
 
     init{
         this.game = game
@@ -50,6 +51,7 @@ class SignTheWordGameViewModel(
             Manifest.permission.CAMERA
         ) == PackageManager.PERMISSION_GRANTED
         mustShowVideoCapture = hasPermission
+        shouldShowNotPermissionsGrantedView = !hasPermission
     }
 
     fun getUriFile(context: Context): Uri{
@@ -108,5 +110,26 @@ class SignTheWordGameViewModel(
 
     fun getBodyText(): String {
         return "A continuación deberás grabarte realizando la seña de la palabra \"" + game.sign.name + "\""
+    }
+
+    fun onDismissRequestNotPermissionsGrantedDialog(){
+        shouldShowNotPermissionsGrantedView = false
+    }
+
+    fun getNotPermissionsGrantedViewBodyText(): String{
+        return "Si no otorgas permiso para acceder a la cámara, se dará por incorrecta tu respuesta. ¿Deseas continuar de todas formas?"
+    }
+
+    fun getNotPermissionsGrantedViewConfirmButtonText(): String{
+        return "Continuar"
+    }
+
+    fun onClickCancelButtonNotPermissionsGrantedDialog(){
+        onDismissRequestNotPermissionsGrantedDialog()
+    }
+
+    fun onClickConfirmButtonNotPermissionsGrantedDialog(){
+        shouldShowNotPermissionsGrantedView = false
+        showContinueView = true
     }
 }
