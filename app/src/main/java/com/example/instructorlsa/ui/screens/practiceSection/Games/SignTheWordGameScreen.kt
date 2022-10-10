@@ -6,8 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
-import android.util.Log
-import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,9 +24,8 @@ import com.example.instructorlsa.constants.Constants
 import com.example.instructorlsa.ui.common.components.BodyText
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
-import com.example.instructorlsa.ui.common.components.errorScreen.ErrorScreen
 import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
-import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogBack
+import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogWithCancelAndConfirmButtons
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
 import com.example.instructorlsa.viewmodels.games.signTheWord.SignTheWordGameViewModel
 
@@ -77,14 +74,14 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
                     screenViewModel.didTapContinueButton()
                 }
             )
-            AlertDialogBack(
+            AlertDialogWithCancelAndConfirmButtons(
                 isVisible = screenViewModel.delegate.shouldShowBackAlertDialog,
                 title = screenViewModel.delegate.getDialogBodyText(),
                 onClickConfirmButton = { navController.navigateUp() },
                 onClickCancelButton = { screenViewModel.delegate.onAlertDialogCancelButtonPressed() },
                 onDismissRequest = {  screenViewModel.delegate.onAlertDialogCancelButtonPressed() }
             )
-            AlertDialogBack(
+            AlertDialogWithCancelAndConfirmButtons(
                 isVisible = screenViewModel.shouldShowNotPermissionsGrantedView,
                 title = screenViewModel.getNotPermissionsGrantedViewBodyText(),
                 confirmButtonText = screenViewModel.getNotPermissionsGrantedViewConfirmButtonText(),

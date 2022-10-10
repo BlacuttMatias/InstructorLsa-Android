@@ -1,6 +1,5 @@
 package com.example.instructorlsa.ui.screens.practiceSection.Games
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -8,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
@@ -20,12 +18,11 @@ import com.example.instructorlsa.ui.common.components.extensions.noRippleClickab
 import com.example.instructorlsa.ui.common.components.loadingScreen.OverlapFullScreenLoader
 import com.example.instructorlsa.ui.common.components.textFields.GameTextField
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.components.VideoPlayer
-import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogBack
+import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogWithCancelAndConfirmButtons
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AnimatedStateResultIcon
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.CountDownTimer
 import com.example.instructorlsa.viewmodels.games.writeTheSignScreenViewModel.WriteTheSignScreenViewModel
-import com.example.instructorlsa.viewmodels.signs.VideoLoaderManager
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -88,7 +85,7 @@ fun WriteTheSignGameScreen(screenViewModel: WriteTheSignScreenViewModel, navCont
                     screenViewModel.didTapContinueButton()
                 }
             )
-            AlertDialogBack(
+            AlertDialogWithCancelAndConfirmButtons(
                 isVisible = screenViewModel.delegate.shouldShowBackAlertDialog,
                 title = screenViewModel.delegate.getDialogBodyText(),
                 onClickConfirmButton = { navController.navigateUp() },
