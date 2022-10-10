@@ -38,6 +38,13 @@ object InstructorLsaConfig {
         return user.token ?: ""
     }
 
+    fun restartValueGames(){
+        currentGames = listOf()
+        indexCurrentGame = 0
+        comeFromInfoScreen = false
+        gamesAnsweredCorrect = 0
+    }
+
     fun getUserEmail(): String{
         return user.email ?: ""
     }

@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContract
@@ -76,15 +77,20 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
                     screenViewModel.didTapContinueButton()
                 }
             )
-            BackHandler(true) {
-                screenViewModel.delegate.shouldShowBackAlertDialog = true
-            }
             AlertDialogBack(
                 isVisible = screenViewModel.delegate.shouldShowBackAlertDialog,
                 title = screenViewModel.delegate.getDialogBodyText(),
                 onClickConfirmButton = { navController.navigateUp() },
                 onClickCancelButton = { screenViewModel.delegate.onAlertDialogCancelButtonPressed() },
                 onDismissRequest = {  screenViewModel.delegate.onAlertDialogCancelButtonPressed() }
+            )
+            AlertDialogBack(
+                isVisible = screenViewModel.shouldShowNotPermissionsGrantedView,
+                title = screenViewModel.getNotPermissionsGrantedViewBodyText(),
+                confirmButtonText = screenViewModel.getNotPermissionsGrantedViewConfirmButtonText(),
+                onClickConfirmButton = { screenViewModel.onClickConfirmButtonNotPermissionsGrantedDialog() },
+                onClickCancelButton = { screenViewModel.onClickCancelButtonNotPermissionsGrantedDialog() },
+                onDismissRequest = {  screenViewModel.onDismissRequestNotPermissionsGrantedDialog() }
             )
             if(screenViewModel.mustShowVideoCapture){
                 launcherVideoCapture.launch(screenViewModel.getUriFile(context))

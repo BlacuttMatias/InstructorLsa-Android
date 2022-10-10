@@ -18,6 +18,7 @@ import com.example.instructorlsa.ui.common.components.FooterSloganAndIcon
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
+import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.signs.SignsScreenViewModel
 import com.example.instructorlsa.viewmodels.startPractice.StartPracticeViewModel
 
@@ -36,6 +37,7 @@ fun StartPracticeScreen(navController: NavController, screenViewModel: StartPrac
             TitleText(text = titleText)
             Spacer(modifier = Modifier.height(70.dp))
             MainButton(text = startButtonText) {
+                InstructorLsaConfig.restartValueGames()
                 navController.navigate(NavigationRoute.GamePractice.route)
             }
             FooterSloganAndIcon(icon = icon)

@@ -1,5 +1,6 @@
 package com.example.instructorlsa.viewmodels.games
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -91,9 +92,6 @@ class GameScreenViewModel(
     }
 
     fun getSignWordScreenViewModel(): SignTheWordGameViewModel{
-        InstructorLsaConfig.currentGames = games
-        InstructorLsaConfig.indexCurrentGame = indexCurrentGame
-        InstructorLsaConfig.gamesAnsweredCorrect = gamesAnsweredCorrect
         return SignTheWordGameViewModel(category = this.category, game = getCurrentGame(), delegate = this)
     }
 
@@ -106,6 +104,9 @@ class GameScreenViewModel(
         }
         if(indexCurrentGame < games.size-1){
             indexCurrentGame++
+            InstructorLsaConfig.currentGames = games
+            InstructorLsaConfig.indexCurrentGame = indexCurrentGame
+            InstructorLsaConfig.gamesAnsweredCorrect = gamesAnsweredCorrect
         }
         else{
             allGamesAreCompleted = true

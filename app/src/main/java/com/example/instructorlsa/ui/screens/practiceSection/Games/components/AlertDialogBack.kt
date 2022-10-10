@@ -16,6 +16,8 @@ import com.example.instructorlsa.ui.common.components.MainButton
 fun AlertDialogBack(
     isVisible: Boolean,
     title: String,
+    cancelButtonText: String = "Cancelar",
+    confirmButtonText: String = "Aceptar",
     onClickConfirmButton: () -> Unit,
     onClickCancelButton: () -> Unit,
     onDismissRequest: () -> Unit = {}
@@ -40,12 +42,12 @@ fun AlertDialogBack(
                     TextButton(
                         onClick = { onClickCancelButton.invoke() }
                     ) {
-                        Text(text = "Cancelar", fontSize = 16.sp)
+                        Text(text = cancelButtonText, fontSize = 16.sp)
                     }
                     TextButton(modifier = Modifier.padding(end = 10.dp),
                         onClick = { onClickConfirmButton.invoke() }
                     ) {
-                        Text(text = "Aceptar", fontSize = 16.sp)
+                        Text(text = confirmButtonText, fontSize = 16.sp)
                     }
                 }
             }
