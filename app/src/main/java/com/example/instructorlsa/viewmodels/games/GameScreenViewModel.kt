@@ -92,9 +92,6 @@ class GameScreenViewModel(
     }
 
     fun getSignWordScreenViewModel(): SignTheWordGameViewModel{
-        InstructorLsaConfig.currentGames = games
-        InstructorLsaConfig.indexCurrentGame = indexCurrentGame
-        InstructorLsaConfig.gamesAnsweredCorrect = gamesAnsweredCorrect
         return SignTheWordGameViewModel(category = this.category, game = getCurrentGame(), delegate = this)
     }
 
@@ -107,6 +104,9 @@ class GameScreenViewModel(
         }
         if(indexCurrentGame < games.size-1){
             indexCurrentGame++
+            InstructorLsaConfig.currentGames = games
+            InstructorLsaConfig.indexCurrentGame = indexCurrentGame
+            InstructorLsaConfig.gamesAnsweredCorrect = gamesAnsweredCorrect
         }
         else{
             allGamesAreCompleted = true

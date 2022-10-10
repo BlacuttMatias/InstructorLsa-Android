@@ -65,7 +65,7 @@ fun Navigation() {
         }
         composable(NavigationRoute.StartPractice.route){
             val screenViewModel = StartPracticeViewModel(category = InstructorLsaConfig.getPracticeCategory())
-            InstructorLsaConfig.comeFromInfoScreen = false
+            InstructorLsaConfig.restartValueGames()
             StartPracticeScreen(navController = navController, screenViewModel)
         }
         composable(NavigationRoute.GamePractice.route){
@@ -85,7 +85,7 @@ fun Navigation() {
                 category = InstructorLsaConfig.getPracticeCategory(),
                 result = InstructorLsaConfig.resultGames
             )
-            InstructorLsaConfig.comeFromInfoScreen = false
+            InstructorLsaConfig.restartValueGames()
             ResultGamesScreen(navController = navController, screenViewModel = screenViewModel)
         }
         composable(NavigationRoute.InfoGame.route){
