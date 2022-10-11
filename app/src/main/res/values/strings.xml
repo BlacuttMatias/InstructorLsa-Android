@@ -16,7 +16,9 @@
     <string name="start_to_play">Empezar a Jugar</string>
 
     <string name="result_games_correct_answers">Respuestas Correctas</string>
-    <string name="result_games_congratulations">¡Felicidades!</string>
+    <string name="result_games_congratulations">¡Felicitaciones! ¡Seguí así!</string>
+    <string name="result_games_very_well">¡Muy bien!</string>
+    <string name="result_games_can_do_better">¡Hay que mejorar!</string>
     <string name="result_games_main_menu">Ir a Menú Principal</string>
     <string name="result_games_play_again">Volver a Jugar</string>
     <string name="result_games_go_to_learning_section">Ir a Sección Aprendizaje</string>

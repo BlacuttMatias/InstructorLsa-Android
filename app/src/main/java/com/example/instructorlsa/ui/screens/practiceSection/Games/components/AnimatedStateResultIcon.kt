@@ -37,7 +37,7 @@ fun AnimatedStateResultIcon(isVisible: Boolean, isPositiveResult: Boolean) {
         if(isVisible){
             Icon(painterResource(id = painterId),
                 contentDescription = null,
-                Modifier.size(70.dp).clip(CircleShape),
+                Modifier.size(60.dp).clip(CircleShape),
                 tint = color
             )
         }
