@@ -1,5 +1,5 @@
 package com.example.instructorlsa.constants
 
 object Constants {
-    val secondsToTakeVideo = 6
+    val secondsToTakeVideo = 4
 }
