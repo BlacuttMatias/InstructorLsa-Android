@@ -20,8 +20,8 @@ fun FooterTextAndIcon(text: String, icon: Painter) {
             Modifier.size(100.dp).clip(CircleShape),
             tint = Color.Unspecified
         )
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(30.dp))
         FooterText(text = text)
-        Spacer(modifier = Modifier.height(80.dp))
+        Spacer(modifier = Modifier.height(40.dp))
     }
 }

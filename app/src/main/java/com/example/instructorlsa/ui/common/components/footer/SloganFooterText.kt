@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import com.example.instructorlsa.R
 
 @Composable
-fun SloganFooterText(bottomSpace: Dp = 80.dp) {
+fun SloganFooterText(bottomSpace: Dp = 40.dp) {
     FooterColumn {
         SloganText()
         Spacer(modifier = Modifier.height(bottomSpace))

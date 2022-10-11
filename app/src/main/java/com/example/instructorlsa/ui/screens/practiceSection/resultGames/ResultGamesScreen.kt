@@ -67,8 +67,6 @@ fun ResultGamesScreen(navController: NavController, screenViewModel: ResultGames
                     popUpTo(NavigationRoute.Home.route)
                 }
             }
-            Spacer(modifier = Modifier.height(30.dp))
-            SloganFooterText()
         }
     }
 }
