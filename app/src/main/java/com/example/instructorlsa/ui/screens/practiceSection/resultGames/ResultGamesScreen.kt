@@ -25,7 +25,7 @@ import com.example.instructorlsa.viewmodels.games.resultGames.ResultGamesScreenV
 fun ResultGamesScreen(navController: NavController, screenViewModel: ResultGamesScreenViewModel) {
     val titleTopTabBarText = screenViewModel.category.name
     val titleText = stringResource(id = R.string.result_games_correct_answers)
-    val congratulationsText = stringResource(R.string.result_games_congratulations)
+    val congratulationsText = stringResource(screenViewModel.getCongratulationsTextId())
     val playAgainButtonText = stringResource(R.string.result_games_play_again)
     val mainMenuButtonText = stringResource(R.string.result_games_main_menu)
     val learningSectionButtonText = stringResource(R.string.result_games_go_to_learning_section)
