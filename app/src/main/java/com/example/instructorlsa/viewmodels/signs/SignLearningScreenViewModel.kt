@@ -1,6 +1,7 @@
 package com.example.instructorlsa.viewmodels.signs
 
 import android.content.IntentSender
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.instructorlsa.models.SignBodyPost
 import com.example.instructorlsa.services.SignService
+import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -45,6 +47,7 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
         this.signs = signs
         this.currentIndex = currentIndex
         showLoadingFor(2000)
+        fetchUpdateSignIfIsNotCompleted()
     }
 
     fun isLoading(): Boolean{
@@ -62,12 +65,20 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
     fun setPreviousIndex(){
         if(currentIndex > 0){
             currentIndex--
+            InstructorLsaConfig.indexSignToLearn = currentIndex
         }
     }
 
     fun setNextIndex(){
         if(currentIndex < signs.size-1){
             currentIndex++
+            InstructorLsaConfig.indexSignToLearn = currentIndex
+        }
+    }
+
+    private fun fetchUpdateSignIfIsNotCompleted(onSuccess: () -> Unit = {}){
+        if(!getCurrentSign().isCompleted){
+            fetchUpdateSign(onSuccess)
         }
     }
 
@@ -95,23 +106,15 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
     }
 
     fun didBackButtonClicked(){
-        if(!getCurrentSign().isCompleted){
-            fetchUpdateSign { setPreviousIndex() }
-        }
-        else{
-            setPreviousIndex()
-        }
+        setPreviousIndex()
         showLoadingFor()
+        fetchUpdateSignIfIsNotCompleted()
     }
 
     fun didNextButtonClicked(){
-        if(!getCurrentSign().isCompleted){
-            fetchUpdateSign { setNextIndex() }
-        }
-        else{
-            setNextIndex()
-        }
+        setNextIndex()
         showLoadingFor()
+        fetchUpdateSignIfIsNotCompleted()
     }
 
     fun showError(){
