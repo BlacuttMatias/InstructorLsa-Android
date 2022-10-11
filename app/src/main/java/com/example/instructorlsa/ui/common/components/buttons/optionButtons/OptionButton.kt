@@ -44,7 +44,7 @@ fun OptionButton(text: String, showState: Boolean = false, isCorrect: Boolean = 
 
 
     Button(modifier = Modifier.fillMaxWidth()
-            .height(50.dp)
+            .height(40.dp)
             .padding(horizontal = 10.dp),
         shape = CircleShape,
         colors = ButtonDefaults.buttonColors(backgroundColor = backgroundColorToShow.value),

@@ -41,9 +41,8 @@ fun GuessSignGameScreen(screenViewModel: GuessSignScreenViewModel, navController
                     Spacer(modifier = Modifier.height(40.dp))
                 }
             }
-            Spacer(modifier = Modifier.height(10.dp))
             VideoPlayer(urlVideo = screenViewModel.game.sign.urlVideo, playWhenReady = true, delegate = screenViewModel)
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             AnimatedStateResultIcon(isVisible = screenViewModel.answerWasSelected,
                 isPositiveResult = (screenViewModel.answerSelected?.isCorrect ?: false)
             )
@@ -51,7 +50,7 @@ fun GuessSignGameScreen(screenViewModel: GuessSignScreenViewModel, navController
                 Spacer(modifier = Modifier.height(10.dp))
             }
             else{
-                Spacer(modifier = Modifier.height(80.dp))
+                Spacer(modifier = Modifier.height(70.dp))
             }
 
             screenViewModel.game.answerOptions.forEach { answerOption ->
