@@ -46,7 +46,7 @@ fun InfoSignTheWordScreen(screenViewModel: InfoSignTheWordScreenViewModel, navCo
     val icon = painterResource(id = R.drawable.ic_icon_app)
 
     Scaffold(
-        topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
+        topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController, showCloseSession = false) }
     ) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
             Spacer(modifier = Modifier.height(20.dp))

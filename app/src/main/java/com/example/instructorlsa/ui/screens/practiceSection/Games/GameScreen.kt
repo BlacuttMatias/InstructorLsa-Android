@@ -32,6 +32,7 @@ fun GameScreen(navController: NavController, screenViewModel: GameScreenViewMode
             TopTabBarLsa(
                 titleText = titleTopTabBarText,
                 navController = navController,
+                showCloseSession = false,
                 showInfoButton = screenViewModel.shouldShowInfoButton(),
                 onBackButtonPressed = { screenViewModel.onBackButtonPressed() }
             )
