@@ -48,7 +48,7 @@ fun Navigation() {
         composable(NavigationRoute.CategoriesLearning.route){
             val screenViewModel = CategoriesScreenViewModel(
                 navigationStrategy = CategoryLearningNavigation(),
-                categoriesViewModel = InstructorLsaConfig.categoriesViewModel
+                categoriesViewModel = InstructorLsaConfig.getLearningCategories()
             )
             CategoriesScreen(navController, screenViewModel = screenViewModel)
         }

@@ -47,6 +47,10 @@ object InstructorLsaConfig {
         gamesAnsweredCorrect = 0
     }
 
+    fun getLearningCategories(): List<CategoryViewModel>{
+        return categoriesViewModel.map { it.copy(enabled = true) }
+    }
+
     fun getUserEmail(): String{
         return user.email ?: ""
     }
