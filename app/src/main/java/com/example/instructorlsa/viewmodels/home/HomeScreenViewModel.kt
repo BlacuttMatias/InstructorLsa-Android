@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 class HomeScreenViewModel: ViewModel() {
     var isLoading by mutableStateOf(true)
     var isError by mutableStateOf(false)
+    var isEnabledComprehensiveGamesButton by mutableStateOf(false)
     var categoriesService = CategoriesService()
     var categoryMapper = CategoryMapper()
     var categoriesViewModel: List<CategoryViewModel> = listOf()
@@ -28,6 +29,7 @@ class HomeScreenViewModel: ViewModel() {
                     if (categoriesDto != null) {
                         categoriesViewModel =  categoryMapper.map(categoriesDto)
                         InstructorLsaConfig.categoriesViewModel = categoriesViewModel
+                        isEnabledComprehensiveGamesButton = categoriesViewModel.any { it.enabled }
                     }
                 }
                 else {
