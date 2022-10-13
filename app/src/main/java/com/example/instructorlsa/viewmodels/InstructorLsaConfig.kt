@@ -2,6 +2,7 @@ package com.example.instructorlsa.viewmodels
 
 import com.example.instructorlsa.R
 import com.example.instructorlsa.models.User
+import com.example.instructorlsa.viewmodels.categories.CategoryType
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.games.GameViewModel
 import com.example.instructorlsa.viewmodels.signs.SignViewModel
@@ -17,13 +18,14 @@ object InstructorLsaConfig {
     var indexCurrentGame: Int = 0
     var comeFromInfoScreen = false
     var gamesAnsweredCorrect = 0
+    var categoriesViewModel: List<CategoryViewModel> = listOf()
 
     fun setLearningCategory(category: CategoryViewModel){
         categoryLearningViewModel = category
     }
 
     fun getLearningCategory(): CategoryViewModel{
-        return categoryLearningViewModel ?:  CategoryViewModel("Colores", R.drawable.ic_color_pencils)
+        return categoryLearningViewModel ?:  CategoryViewModel(0,"Colores", CategoryType.Colors, R.drawable.ic_color_pencils, true)
     }
 
     fun setPracticeCategory(category: CategoryViewModel){
@@ -31,7 +33,7 @@ object InstructorLsaConfig {
     }
 
     fun getPracticeCategory(): CategoryViewModel{
-        return categoryPracticeViewModel ?:  CategoryViewModel("Colores", R.drawable.ic_color_pencils)
+        return categoryPracticeViewModel ?:  CategoryViewModel(0,"Colores", CategoryType.Colors, R.drawable.ic_color_pencils, true)
     }
 
     fun getUserToken(): String{
@@ -43,6 +45,10 @@ object InstructorLsaConfig {
         indexCurrentGame = 0
         comeFromInfoScreen = false
         gamesAnsweredCorrect = 0
+    }
+
+    fun getLearningCategories(): List<CategoryViewModel>{
+        return categoriesViewModel.map { it.copy(enabled = true) }
     }
 
     fun getUserEmail(): String{

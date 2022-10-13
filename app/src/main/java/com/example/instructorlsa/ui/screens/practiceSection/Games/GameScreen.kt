@@ -8,17 +8,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.instructorlsa.NavigationRoute
-import com.example.instructorlsa.R
-import com.example.instructorlsa.ui.common.components.FooterSloganAndIcon
-import com.example.instructorlsa.ui.common.components.MainButton
-import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.errorScreen.ErrorScreen
 import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.example.instructorlsa.ui.screens.practiceSection.Games.GuessSignGameScreen
 import com.example.instructorlsa.ui.screens.practiceSection.Games.SignTheWordGameScreen
 import com.example.instructorlsa.ui.screens.practiceSection.Games.WriteTheSignGameScreen
-import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogBack
 import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
 import com.example.instructorlsa.viewmodels.games.GameType

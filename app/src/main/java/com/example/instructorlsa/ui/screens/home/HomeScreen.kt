@@ -21,11 +21,14 @@ import com.example.instructorlsa.ui.common.components.FooterSloganAndIcon
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.SloganFooterText
 import com.example.instructorlsa.ui.common.components.TitleText
+import com.example.instructorlsa.ui.common.components.errorScreen.ErrorScreen
+import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.example.instructorlsa.ui.theme.InstructorLsaTheme
+import com.example.instructorlsa.viewmodels.home.HomeScreenViewModel
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, screenViewModel: HomeScreenViewModel) {
     val titleText = stringResource(id = R.string.home_main_menu)
     val learningSectionButtonText = stringResource(id = R.string.home_learning_section)
     val practiceSectionButtonText = stringResource(id = R.string.home_practice_section)
@@ -36,22 +39,31 @@ fun HomeScreen(navController: NavController) {
     Scaffold(
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
     ) {
-        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
-            Spacer(modifier = Modifier.height(20.dp))
-            TitleText(text = titleText)
-            Spacer(modifier = Modifier.height(70.dp))
-            MainButton(text = learningSectionButtonText) {
-                navController.navigate(NavigationRoute.CategoriesLearning.route)
-            }
-            Spacer(modifier = Modifier.height(40.dp))
-            MainButton(text = practiceSectionButtonText) {
-                navController.navigate(NavigationRoute.CategoriesPractice.route)
-            }
-            Spacer(modifier = Modifier.height(40.dp))
-            MainButton(text = comprehensiveGamesButtonText) {
+        if(screenViewModel.isError){
+            ErrorScreen(navController = navController)
+        }
+        else if (screenViewModel.isLoading){
+            FullScreenLoader()
+            screenViewModel.loadCategories()
+        }
+        else{
+            Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
+                Spacer(modifier = Modifier.height(20.dp))
+                TitleText(text = titleText)
+                Spacer(modifier = Modifier.height(70.dp))
+                MainButton(text = learningSectionButtonText) {
+                    navController.navigate(NavigationRoute.CategoriesLearning.route)
+                }
+                Spacer(modifier = Modifier.height(40.dp))
+                MainButton(text = practiceSectionButtonText) {
+                    navController.navigate(NavigationRoute.CategoriesPractice.route)
+                }
+                Spacer(modifier = Modifier.height(40.dp))
+                MainButton(text = comprehensiveGamesButtonText, isEnabled = screenViewModel.isEnabledComprehensiveGamesButton) {
 
+                }
+                FooterSloganAndIcon(icon = icon)
             }
-            FooterSloganAndIcon(icon = icon)
         }
     }
     
@@ -62,6 +74,6 @@ fun HomeScreen(navController: NavController) {
 @Composable
 fun HomeScreenPreview() {
     InstructorLsaTheme {
-        HomeScreen(rememberNavController())
+        HomeScreen(rememberNavController(), HomeScreenViewModel())
     }
 }

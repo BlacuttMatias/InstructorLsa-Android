@@ -3,33 +3,26 @@ package com.example.instructorlsa.viewmodels.categories
 import androidx.navigation.NavController
 import com.example.instructorlsa.R
 
-class CategoriesScreenViewModel(navigationStrategy: CategoryNavigationStrategy) {
+class CategoriesScreenViewModel(
+    navigationStrategy: CategoryNavigationStrategy,
+    categoriesViewModel: List<CategoryViewModel>
+) {
 
     var navigationStrategy: CategoryNavigationStrategy
     var titleText: String
+    val categoriesViewModel: List<CategoryViewModel>
 
     init{
         this.navigationStrategy = navigationStrategy
         this.titleText = navigationStrategy.getTitleText()
+        this.categoriesViewModel = categoriesViewModel
     }
 
     fun getAllCategories(): List<CategoryViewModel> {
-        return listOf(
-            CategoryViewModel("Números", R.drawable.ic_numbers),
-            CategoryViewModel("Modales", R.drawable.ic_people_manners),
-            CategoryViewModel("Personas", R.drawable.ic_people),
-            CategoryViewModel("Abecedario", R.drawable.ic_alphabet),
-            CategoryViewModel("Comidas", R.drawable.ic_foods),
-            CategoryViewModel("Geografía", R.drawable.ic_argentina),
-            CategoryViewModel("Colores", R.drawable.ic_color_pencils),
-            CategoryViewModel("Preguntas", R.drawable.ic_questions),
-            CategoryViewModel("Verbos", R.drawable.ic_call_verb),
-        )
+        return categoriesViewModel
     }
 
     fun navigateToNextScreen(navController: NavController, category: CategoryViewModel){
         navigationStrategy.navigateToNextScreen(navController = navController, category = category)
     }
 }
-
-

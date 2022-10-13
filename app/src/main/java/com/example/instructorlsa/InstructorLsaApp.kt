@@ -22,6 +22,7 @@ import com.example.instructorlsa.viewmodels.categories.CategoryPracticeNavigatio
 import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
 import com.example.instructorlsa.viewmodels.games.resultGames.ResultGamesScreenViewModel
 import com.example.instructorlsa.viewmodels.games.signTheWord.InfoSignTheWordScreenViewModel
+import com.example.instructorlsa.viewmodels.home.HomeScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignLearningScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignsScreenViewModel
 import com.example.instructorlsa.viewmodels.startPractice.StartPracticeViewModel
@@ -41,10 +42,14 @@ fun Navigation() {
             LoginScreen(navController = navController)
         }
         composable(NavigationRoute.Home.route) {
-            HomeScreen(navController = navController)
+            val screenViewModel = HomeScreenViewModel()
+            HomeScreen(navController = navController, screenViewModel = screenViewModel)
         }
         composable(NavigationRoute.CategoriesLearning.route){
-            val screenViewModel = CategoriesScreenViewModel(navigationStrategy = CategoryLearningNavigation())
+            val screenViewModel = CategoriesScreenViewModel(
+                navigationStrategy = CategoryLearningNavigation(),
+                categoriesViewModel = InstructorLsaConfig.getLearningCategories()
+            )
             CategoriesScreen(navController, screenViewModel = screenViewModel)
         }
         composable(NavigationRoute.Signs.route){
@@ -60,7 +65,10 @@ fun Navigation() {
             ))
         }
         composable(NavigationRoute.CategoriesPractice.route){
-            val screenViewModel = CategoriesScreenViewModel(navigationStrategy = CategoryPracticeNavigation())
+            val screenViewModel = CategoriesScreenViewModel(
+                navigationStrategy = CategoryPracticeNavigation(),
+                categoriesViewModel = InstructorLsaConfig.categoriesViewModel
+            )
             CategoriesScreen(navController, screenViewModel = screenViewModel)
         }
         composable(NavigationRoute.StartPractice.route){

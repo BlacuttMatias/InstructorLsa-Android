@@ -10,10 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.instructorlsa.ui.common.components.MainButton
 
 @Composable
-fun AlertDialogBack(
+fun AlertDialogWithCancelAndConfirmButtons(
     isVisible: Boolean,
     title: String,
     cancelButtonText: String = "Cancelar",
