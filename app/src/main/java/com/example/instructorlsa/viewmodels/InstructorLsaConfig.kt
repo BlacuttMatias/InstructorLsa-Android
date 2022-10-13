@@ -57,4 +57,8 @@ object InstructorLsaConfig {
     fun getUserEmail(): String{
         return user.email ?: ""
     }
+
+    fun isPracticeFlow(): Boolean{
+        return gamesServiceManager.isPractice()
+    }
 }

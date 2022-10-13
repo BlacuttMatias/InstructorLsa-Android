@@ -4,13 +4,28 @@ import androidx.lifecycle.ViewModel
 import com.example.instructorlsa.R
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 
-class ResultGamesScreenViewModel(category: CategoryViewModel, result: Double): ViewModel() {
+class ResultGamesScreenViewModel(category: CategoryViewModel, result: Double, isPractice: Boolean): ViewModel() {
     val result: Double
     val category: CategoryViewModel
+    val isPractice: Boolean
 
     init{
         this.result = result
         this.category = category
+        this.isPractice = isPractice
+    }
+
+    fun getTopBarTitle(): String{
+        if(isPractice){
+            return category.name
+        }
+        else{
+            return "Juegos Integrales"
+        }
+    }
+
+    fun shouldShowAdditionalButtons(): Boolean{
+        return isPractice
     }
 
     fun getCongratulationsTextId(): Int{

@@ -97,7 +97,8 @@ fun Navigation() {
         composable(NavigationRoute.ResultGames.route){
             val screenViewModel = ResultGamesScreenViewModel(
                 category = InstructorLsaConfig.getPracticeCategory(),
-                result = InstructorLsaConfig.resultGames
+                result = InstructorLsaConfig.resultGames,
+                isPractice = InstructorLsaConfig.isPracticeFlow()
             )
             InstructorLsaConfig.restartValueGames()
             ResultGamesScreen(navController = navController, screenViewModel = screenViewModel)

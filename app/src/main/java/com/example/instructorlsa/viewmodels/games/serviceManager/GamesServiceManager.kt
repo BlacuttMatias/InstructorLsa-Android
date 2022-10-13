@@ -9,6 +9,7 @@ import retrofit2.Response
 interface GamesServiceManager{
     suspend fun getGames(): Response<List<Game>>
     fun getTopBarTitle(): String
+    fun isPractice(): Boolean
 }
 
 class PracticeGamesServiceManager(category: CategoryViewModel): GamesServiceManager {
@@ -26,6 +27,10 @@ class PracticeGamesServiceManager(category: CategoryViewModel): GamesServiceMana
     override fun getTopBarTitle(): String {
         return category.name
     }
+
+    override fun isPractice(): Boolean {
+        return true
+    }
 }
 
 class ComprehensiveGamesServiceManager(): GamesServiceManager {
@@ -37,5 +42,9 @@ class ComprehensiveGamesServiceManager(): GamesServiceManager {
 
     override fun getTopBarTitle(): String {
         return "Juegos Integrales"
+    }
+
+    override fun isPractice(): Boolean {
+        return false
     }
 }
