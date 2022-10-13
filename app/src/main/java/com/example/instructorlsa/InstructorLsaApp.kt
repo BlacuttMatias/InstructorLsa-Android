@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.instructorlsa.ui.screens.categories.CategoriesScreen
+import com.example.instructorlsa.ui.screens.comprehensiveSection.StartComprehensiveGamesScreen
 import com.example.instructorlsa.ui.screens.home.HomeScreen
 import com.example.instructorlsa.ui.screens.learningSection.signLearning.SignLearningScreen
 import com.example.instructorlsa.ui.screens.learningSection.signs.SignsScreen
@@ -19,6 +20,7 @@ import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.categories.CategoriesScreenViewModel
 import com.example.instructorlsa.viewmodels.categories.CategoryLearningNavigation
 import com.example.instructorlsa.viewmodels.categories.CategoryPracticeNavigation
+import com.example.instructorlsa.viewmodels.comprehensiveGamesSection.StartComprehensiveGamesScreenViewModel
 import com.example.instructorlsa.viewmodels.games.GameScreenViewModel
 import com.example.instructorlsa.viewmodels.games.resultGames.ResultGamesScreenViewModel
 import com.example.instructorlsa.viewmodels.games.signTheWord.InfoSignTheWordScreenViewModel
@@ -101,6 +103,11 @@ fun Navigation() {
             InstructorLsaConfig.comeFromInfoScreen = true
             InfoSignTheWordScreen(navController = navController, screenViewModel = screenViewModel)
         }
+        composable(NavigationRoute.StartComprehensiveGames.route){
+            val screenViewModel = StartComprehensiveGamesScreenViewModel(categories = InstructorLsaConfig.categoriesViewModel)
+            InstructorLsaConfig.restartValueGames()
+            StartComprehensiveGamesScreen(navController = navController, screenViewModel)
+        }
     }
 }
 
@@ -114,5 +121,6 @@ enum class NavigationRoute(val route: String){
     StartPractice("practice/start"),
     ResultGames("practice/resultGames"),
     GamePractice("practice/game"),
-    InfoGame("practice/game/info")
+    InfoGame("practice/game/info"),
+    StartComprehensiveGames("comprehensive/start")
 }

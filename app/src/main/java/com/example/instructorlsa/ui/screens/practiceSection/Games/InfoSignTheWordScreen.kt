@@ -103,7 +103,7 @@ fun InfoSignTheWordScreen(screenViewModel: InfoSignTheWordScreenViewModel, navCo
 fun InfoSignTheWordScreenPreview() {
     InstructorLsaTheme {
         InfoSignTheWordScreen(
-            screenViewModel = InfoSignTheWordScreenViewModel(CategoryViewModel("Categoria", 0)),
+            screenViewModel = InfoSignTheWordScreenViewModel(CategoryViewModel(name = "Categoria", iconId = 0)),
             navController = rememberNavController()
         )
     }

@@ -60,7 +60,7 @@ fun HomeScreen(navController: NavController, screenViewModel: HomeScreenViewMode
                 }
                 Spacer(modifier = Modifier.height(40.dp))
                 MainButton(text = comprehensiveGamesButtonText, isEnabled = screenViewModel.isEnabledComprehensiveGamesButton) {
-
+                    navController.navigate(NavigationRoute.StartComprehensiveGames.route)
                 }
                 FooterSloganAndIcon(icon = icon)
             }
