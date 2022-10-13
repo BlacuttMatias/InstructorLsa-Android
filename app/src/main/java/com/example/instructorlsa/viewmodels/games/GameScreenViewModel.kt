@@ -10,6 +10,8 @@ import com.example.instructorlsa.mappers.GameMapper
 import com.example.instructorlsa.services.GamesService
 import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
+import com.example.instructorlsa.viewmodels.games.serviceManager.GamesServiceManager
+import com.example.instructorlsa.viewmodels.games.serviceManager.PracticeGamesServiceManager
 import com.example.instructorlsa.viewmodels.games.signTheWord.SignTheWordGameViewModel
 import com.example.instructorlsa.viewmodels.games.writeTheSignScreenViewModel.WriteTheSignScreenViewModel
 import com.example.instructorlsa.viewmodels.signs.SignViewModel
@@ -19,7 +21,8 @@ class GameScreenViewModel(
     category: CategoryViewModel,
     games: List<GameViewModel> = listOf(),
     indexCurrentGame: Int = 0,
-    gamesAnsweredCorrect: Int = 0
+    gamesAnsweredCorrect: Int = 0,
+    gamesServiceManager: GamesServiceManager
 ): ViewModel() {
     var games: List<GameViewModel> = listOf()
     val category: CategoryViewModel
@@ -27,7 +30,7 @@ class GameScreenViewModel(
     var currentGameType by mutableStateOf(GameType.Unknown)
     var gamesAnsweredCorrect = 0
     var allGamesAreCompleted by mutableStateOf(false)
-    var gamesService = GamesService()
+    var gamesServiceManager: GamesServiceManager
     var gameMapper = GameMapper()
     var shouldShowBackAlertDialog by mutableStateOf(false)
     var isLoading by mutableStateOf(true)
@@ -38,6 +41,7 @@ class GameScreenViewModel(
         this.games = games
         this.indexCurrentGame = indexCurrentGame
         this.gamesAnsweredCorrect = gamesAnsweredCorrect
+        this.gamesServiceManager = gamesServiceManager
         if(games.isNotEmpty()){
             isLoading = false
         }
@@ -47,7 +51,7 @@ class GameScreenViewModel(
         viewModelScope.launch {
             if(games.isEmpty()){
                 try{
-                    val response = gamesService.getGames(categoryName = category.name)
+                    val response = gamesServiceManager.getGames()
                     if(response.isSuccessful){
                         val gamesDto = response.body()
                         games = gamesDto?.let { gameMapper.map(it) }.orEmpty()
@@ -132,6 +136,10 @@ class GameScreenViewModel(
     fun showError(){
         isError = true
         isLoading = false
+    }
+
+    fun getTopBarTitle(): String{
+        return gamesServiceManager.getTopBarTitle()
     }
 }
 
