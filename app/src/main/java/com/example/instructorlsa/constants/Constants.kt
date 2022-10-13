@@ -5,7 +5,7 @@ import com.example.instructorlsa.viewmodels.categories.CategoryType
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 
 object Constants {
-    val secondsToTakeVideo = 6
+    val secondsToTakeVideo = 4
     val allBaseCategories = listOf(
         CategoryViewModel(0, "Números", CategoryType.Numbers , R.drawable.ic_numbers, true),
         CategoryViewModel(1, "Modales", CategoryType.Manners, R.drawable.ic_people_manners, true),

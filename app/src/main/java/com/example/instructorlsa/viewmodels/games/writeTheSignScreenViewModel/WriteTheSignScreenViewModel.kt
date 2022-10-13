@@ -55,7 +55,7 @@ class WriteTheSignScreenViewModel(
     }
 
     fun gameAnsweredCorrectly(): Boolean{
-        return gameAnswer.lowercaseAndUnaccent() == getCorrectAnswer().lowercaseAndUnaccent()
+        return gameAnswer.lowercaseAndUnaccent().trim() == getCorrectAnswer().lowercaseAndUnaccent().trim()
     }
 
     fun correctStateText(): String{

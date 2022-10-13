@@ -26,7 +26,7 @@ fun ErrorScreen(
     buttonText: String = "Ir al inicio",
     screenRoute: NavigationRoute = NavigationRoute.Home
 ) {
-    val errorTitle = "Algo salio mal"
+    val errorTitle = "Algo salió mal"
     val errorBody = "Tuvimos un problema y no podemos continuar. Vuelva a intentarlo más tarde"
 
     Column(

@@ -19,16 +19,22 @@ import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextIndent
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.instructorlsa.NavigationRoute
 import com.example.instructorlsa.R
+import com.example.instructorlsa.constants.Constants
 import com.example.instructorlsa.ui.common.components.FooterColumn
 import com.example.instructorlsa.ui.common.components.FooterSloganAndIcon
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
+import com.example.instructorlsa.ui.screens.home.HomeScreen
+import com.example.instructorlsa.ui.theme.InstructorLsaTheme
+import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.games.signTheWord.InfoSignTheWordScreenViewModel
 
 @Composable
@@ -89,5 +95,16 @@ fun InfoSignTheWordScreen(screenViewModel: InfoSignTheWordScreenViewModel, navCo
 //                }
 //            }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun InfoSignTheWordScreenPreview() {
+    InstructorLsaTheme {
+        InfoSignTheWordScreen(
+            screenViewModel = InfoSignTheWordScreenViewModel(CategoryViewModel("Categoria", 0)),
+            navController = rememberNavController()
+        )
     }
 }

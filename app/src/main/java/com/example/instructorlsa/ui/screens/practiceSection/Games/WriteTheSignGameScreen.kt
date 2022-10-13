@@ -58,7 +58,6 @@ fun WriteTheSignGameScreen(screenViewModel: WriteTheSignScreenViewModel, navCont
                     Spacer(modifier = Modifier.height(40.dp))
                 }
             }
-            Spacer(modifier = Modifier.height(10.dp))
             VideoPlayer(urlVideo = screenViewModel.game.sign.urlVideo, playWhenReady = true, delegate = screenViewModel)
             Spacer(modifier = Modifier.height(20.dp))
             AnimatedStateResultIcon(isVisible = screenViewModel.gameWasCompleted,
@@ -68,7 +67,7 @@ fun WriteTheSignGameScreen(screenViewModel: WriteTheSignScreenViewModel, navCont
                 Spacer(modifier = Modifier.height(20.dp))
             }
             else{
-                Spacer(modifier = Modifier.height(90.dp))
+                Spacer(modifier = Modifier.height(80.dp))
             }
 
             GameTextField(delegate = screenViewModel)
