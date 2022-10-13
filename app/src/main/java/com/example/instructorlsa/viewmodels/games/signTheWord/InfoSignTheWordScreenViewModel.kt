@@ -24,9 +24,10 @@ class InfoSignTheWordScreenViewModel(
 
     fun getMessages(): List<String>{
         return listOf(
-            "Recuerda que las manos y la cara deben salir en la grabación en todo momento",
+            "Recordá que las manos y la cara deben salir en la grabación en todo momento",
             "La secuencia para grabarte debería ser la siguiente: comenzar con la manos abajo, realizar la seña y luego terminar con las manos abajo",
-            "Recuerda que tienes un máximo de " + Constants.secondsToTakeVideo.toString() + " segundos para grabarte haciendo la seña"
+            "Tendrás un máximo de " + Constants.secondsToTakeVideo.toString() + " segundos para grabarte haciendo la seña",
+            "Deberás alejarte de la cámara lo suficiente para que se vea desde tu cintura hasta tu cabeza"
         )
     }
 }
