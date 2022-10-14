@@ -23,7 +23,7 @@ import com.example.instructorlsa.viewmodels.games.resultGames.ResultGamesScreenV
 
 @Composable
 fun ResultGamesScreen(navController: NavController, screenViewModel: ResultGamesScreenViewModel) {
-    val titleTopTabBarText = screenViewModel.category.name
+    val titleTopTabBarText = screenViewModel.getTopBarTitle()
     val titleText = stringResource(id = R.string.result_games_correct_answers)
     val congratulationsText = stringResource(screenViewModel.getCongratulationsTextId())
     val playAgainButtonText = stringResource(R.string.result_games_play_again)
@@ -55,16 +55,18 @@ fun ResultGamesScreen(navController: NavController, screenViewModel: ResultGames
                     popUpTo(0)
                 }
             }
-            Spacer(modifier = Modifier.height(20.dp))
-            MainButton(text = learningSectionButtonText) {
-                navController.navigate(NavigationRoute.CategoriesLearning.route){
-                    popUpTo(NavigationRoute.Home.route)
+            if(screenViewModel.shouldShowAdditionalButtons()){
+                Spacer(modifier = Modifier.height(20.dp))
+                MainButton(text = learningSectionButtonText) {
+                    navController.navigate(NavigationRoute.CategoriesLearning.route){
+                        popUpTo(NavigationRoute.Home.route)
+                    }
                 }
-            }
-            Spacer(modifier = Modifier.height(20.dp))
-            MainButton(text = selectionCategoryButtonText) {
-                navController.navigate(NavigationRoute.CategoriesPractice.route){
-                    popUpTo(NavigationRoute.Home.route)
+                Spacer(modifier = Modifier.height(20.dp))
+                MainButton(text = selectionCategoryButtonText) {
+                    navController.navigate(NavigationRoute.CategoriesPractice.route){
+                        popUpTo(NavigationRoute.Home.route)
+                    }
                 }
             }
         }

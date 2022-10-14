@@ -1,7 +1,9 @@
 package com.example.instructorlsa.viewmodels.comprehensiveGamesSection
 
 import androidx.lifecycle.ViewModel
+import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
+import com.example.instructorlsa.viewmodels.games.serviceManager.ComprehensiveGamesServiceManager
 
 class StartComprehensiveGamesScreenViewModel(
     categories: List<CategoryViewModel>
@@ -10,6 +12,7 @@ class StartComprehensiveGamesScreenViewModel(
 
     init{
         this.categoriesViewModel = categories
+        InstructorLsaConfig.gamesServiceManager = ComprehensiveGamesServiceManager()
     }
 
     fun getBodyIdText(): String{
@@ -17,6 +20,6 @@ class StartComprehensiveGamesScreenViewModel(
     }
 
     fun getCategoriesNamesToShow(): List<String>{
-        return categoriesViewModel.map { it.name }
+        return categoriesViewModel.filter { it.enabled }.map { it.name }
     }
 }

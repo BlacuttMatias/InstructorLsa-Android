@@ -20,7 +20,7 @@ import com.example.instructorlsa.viewmodels.games.GameType
 
 @Composable
 fun GameScreen(navController: NavController, screenViewModel: GameScreenViewModel) {
-    val titleTopTabBarText = screenViewModel.category.name
+    val titleTopTabBarText = screenViewModel.getTopBarTitle()
 
     Scaffold(
         topBar = {

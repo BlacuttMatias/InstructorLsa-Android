@@ -5,6 +5,8 @@ import com.example.instructorlsa.models.User
 import com.example.instructorlsa.viewmodels.categories.CategoryType
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.games.GameViewModel
+import com.example.instructorlsa.viewmodels.games.serviceManager.ComprehensiveGamesServiceManager
+import com.example.instructorlsa.viewmodels.games.serviceManager.GamesServiceManager
 import com.example.instructorlsa.viewmodels.signs.SignViewModel
 
 object InstructorLsaConfig {
@@ -19,6 +21,7 @@ object InstructorLsaConfig {
     var comeFromInfoScreen = false
     var gamesAnsweredCorrect = 0
     var categoriesViewModel: List<CategoryViewModel> = listOf()
+    var gamesServiceManager: GamesServiceManager = ComprehensiveGamesServiceManager()
 
     fun setLearningCategory(category: CategoryViewModel){
         categoryLearningViewModel = category
@@ -53,5 +56,9 @@ object InstructorLsaConfig {
 
     fun getUserEmail(): String{
         return user.email ?: ""
+    }
+
+    fun isPracticeFlow(): Boolean{
+        return gamesServiceManager.isPractice()
     }
 }
