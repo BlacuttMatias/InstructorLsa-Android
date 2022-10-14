@@ -96,6 +96,9 @@ class GameScreenViewModel(
     }
 
     fun getSignWordScreenViewModel(): SignTheWordGameViewModel{
+        InstructorLsaConfig.currentGames = games
+        InstructorLsaConfig.indexCurrentGame = indexCurrentGame
+        InstructorLsaConfig.gamesAnsweredCorrect = gamesAnsweredCorrect
         return SignTheWordGameViewModel(category = this.category, game = getCurrentGame(), delegate = this)
     }
 
