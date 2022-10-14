@@ -20,6 +20,6 @@ class StartComprehensiveGamesScreenViewModel(
     }
 
     fun getCategoriesNamesToShow(): List<String>{
-        return categoriesViewModel.map { it.name }
+        return categoriesViewModel.filter { it.enabled }.map { it.name }
     }
 }
