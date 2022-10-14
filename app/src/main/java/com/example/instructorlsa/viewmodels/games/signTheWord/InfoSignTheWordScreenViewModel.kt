@@ -6,16 +6,16 @@ import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
 import com.example.instructorlsa.viewmodels.games.GameViewModel
 
 class InfoSignTheWordScreenViewModel(
-    category: CategoryViewModel
+    topTitleBar: String = "Tips para grabarte"
 ): ViewModel() {
-    val category: CategoryViewModel
+    val topTitleBar: String
 
     init{
-        this.category = category
+        this.topTitleBar = topTitleBar
     }
 
     fun getTitleTopBar(): String{
-        return category.name
+        return topTitleBar
     }
 
     fun getTitle(): String{

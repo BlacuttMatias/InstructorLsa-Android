@@ -104,7 +104,7 @@ fun Navigation() {
             ResultGamesScreen(navController = navController, screenViewModel = screenViewModel)
         }
         composable(NavigationRoute.InfoGame.route){
-            val screenViewModel = InfoSignTheWordScreenViewModel(category = InstructorLsaConfig.getPracticeCategory())
+            val screenViewModel = InfoSignTheWordScreenViewModel(topTitleBar = InstructorLsaConfig.gamesServiceManager.getTopBarTitle())
             InstructorLsaConfig.comeFromInfoScreen = true
             InfoSignTheWordScreen(navController = navController, screenViewModel = screenViewModel)
         }
