@@ -21,7 +21,9 @@ class GameMapper {
             description = game.description,
             type = mapGameType(game.type),
             sign = signMapper.map(game.sign),
-            answerOptions = answerOptionMapper.map(game.options)
+            answerOptions = answerOptionMapper.map(game.options),
+            position = game.position,
+            category = game.category
         )
     }
 

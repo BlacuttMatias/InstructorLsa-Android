@@ -73,7 +73,10 @@ class SignTheWordGameViewModel(
         viewModelScope.launch {
             loading = true
             try{
-                val response = signVideoService.checkSignVideo(idSign = game.sign.id.toString(), videoFile = videoFile)
+                val response = signVideoService.checkSignVideo(idSign = game.sign.id.toString(),
+                    position = game.position.toString(),
+                    category = game.category ?: "",
+                    videoFile = videoFile)
                 if (response.isSuccessful) {
                     gameCompletedCorrectly = response.body()?.isCorrect ?: false
                     showContinueView = true
