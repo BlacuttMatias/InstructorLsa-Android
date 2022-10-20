@@ -8,7 +8,9 @@ data class GameViewModel(
     val description: String? = null,
     val type: GameType,
     val sign: SignViewModel,
-    val answerOptions: List<AnswerOptionViewModel>
+    val answerOptions: List<AnswerOptionViewModel>,
+    val position: Int? = null,
+    val category: String? = null
 )
 
 data class AnswerOptionViewModel(
