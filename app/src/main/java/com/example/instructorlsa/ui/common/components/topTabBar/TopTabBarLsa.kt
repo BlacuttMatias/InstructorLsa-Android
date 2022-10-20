@@ -42,6 +42,16 @@ fun TopTabBarLsa(
             null
         },
         actions = {
+            if(showInfoButton){
+                IconButton(onClick = {
+                    navController?.navigate(NavigationRoute.InfoGame.route)
+                }) {
+                    Icon(
+                        imageVector = Icons.Outlined.Info,
+                        contentDescription = ""
+                    )
+                }
+            }
             if(showCloseSession){
                 IconButton(onClick = { showMenu = !showMenu }) {
                     Icon(
@@ -52,13 +62,6 @@ fun TopTabBarLsa(
                 DropdownMenu(
                     expanded = showMenu,
                     onDismissRequest = { showMenu = false }) {
-                    if(showInfoButton){
-                        DropdownMenuItem(onClick = {
-                            navController?.navigate(NavigationRoute.InfoGame.route)
-                        }) {
-                            Text(text = infoGameText)
-                        }
-                    }
                     DropdownMenuItem(onClick = {
                         GoogleSignInClient.getClient(context).signOut().addOnCompleteListener {
                             navController?.navigate(NavigationRoute.Login.route){
