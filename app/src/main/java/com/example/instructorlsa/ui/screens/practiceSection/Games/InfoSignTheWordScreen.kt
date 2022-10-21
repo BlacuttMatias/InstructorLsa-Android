@@ -5,7 +5,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -48,7 +50,9 @@ fun InfoSignTheWordScreen(screenViewModel: InfoSignTheWordScreenViewModel, navCo
     Scaffold(
         topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController, showCloseSession = false) }
     ) {
-        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
+        Column(modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
             Spacer(modifier = Modifier.height(20.dp))
             TitleText(text = titleText)
             Spacer(modifier = Modifier.height(40.dp))
@@ -61,28 +65,35 @@ fun InfoSignTheWordScreen(screenViewModel: InfoSignTheWordScreenViewModel, navCo
             val bullet = "\u2022"
             val paragraphStyle = ParagraphStyle(textIndent = TextIndent(restLine = 12.sp))
 
-            Text(
-                text = buildAnnotatedString {
-                    messages.forEach {
-                        withStyle(style = paragraphStyle) {
-                            append(bullet)
-                            append("\t\t")
-                            append(it)
-                            append("\n")
+            Column(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .weight(1f, false)
+            ){
+                Text(
+                    text = buildAnnotatedString {
+                        messages.forEach {
+                            withStyle(style = paragraphStyle) {
+                                append(bullet)
+                                append("\t\t")
+                                append(it)
+                                append("\n")
+                            }
                         }
-                    }
-                },
-                fontSize = 16.sp,
-                modifier = Modifier.padding(horizontal = 20.dp)
-            )
-
-
-            FooterColumn {
-                MainButton(text = "Entendido") {
-                    navController.navigateUp()
-                }
-                Spacer(modifier = Modifier.height(20.dp))
+                    },
+                    fontSize = 16.sp,
+                    modifier = Modifier
+                        .padding(horizontal = 20.dp)
+                )
             }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            MainButton(text = "Entendido") {
+                navController.navigateUp()
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+
 
 //            LazyColumn {
 //                items(messages) {
