@@ -15,11 +15,11 @@ import java.nio.file.Files
 
 interface SignVideoApiService{
     @Multipart
-    @POST("signVideo")
+    @POST("send_video")
     suspend fun checkSignVideo(
         @HeaderMap headers: Map<String, String>,
-        @Part("idSena") idSign: RequestBody,
         @Part("position") position: RequestBody,
+        @Part("web") web: RequestBody,
         @Part("category") category: RequestBody,
         @Part file: MultipartBody.Part
     ): Response<ResponseCheckSignVideo>
@@ -33,10 +33,11 @@ class SignVideoService {
         val requestBodyIdSign = RequestBody.create(MediaType.parse("text/plain"), idSign)
         val requestBodyPositionSign = RequestBody.create(MediaType.parse("text/plain"), position)
         val requestBodyCategorySign = RequestBody.create(MediaType.parse("text/plain"), category)
-        return RetrofitBuilder.getRetrofitMockInstance()
+        val requestBodyIsWeb = RequestBody.create(MediaType.parse("text/plain"), "false")
+        return RetrofitBuilder.getRetrofitMockInstance("http://192.168.0.84:5000 ")
             .create(SignVideoApiService::class.java)
             .checkSignVideo(headers = RetrofitBuilder.getHeadersWithMultipart(),
-                idSign = requestBodyIdSign,
+                web = requestBodyIsWeb,
                 position = requestBodyPositionSign,
                 category = requestBodyCategorySign,
                 file = multipartVideoBody)
