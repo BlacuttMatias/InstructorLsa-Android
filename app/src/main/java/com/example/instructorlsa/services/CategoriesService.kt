@@ -15,7 +15,7 @@ interface CategoriesApiService{
 
 class CategoriesService {
     suspend fun getCategories(): Response<List<Category>> {
-        return RetrofitBuilder.getRetrofitMockInstance()
+        return RetrofitBuilder.getRetrofitInstance()
             .create(CategoriesApiService::class.java)
             .getCategories(headers = RetrofitBuilder.getHeaders())
     }

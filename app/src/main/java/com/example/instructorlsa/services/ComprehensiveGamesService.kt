@@ -8,13 +8,13 @@ import retrofit2.http.HeaderMap
 import retrofit2.http.Query
 
 interface ComprehensiveGamesApiService{
-    @GET("practice/games/comprehensive")
+    @GET("practice/games_v2")
     suspend fun getGames(@HeaderMap headers: Map<String, String>): Response<List<Game>>
 }
 
 class ComprehensiveGamesService {
     suspend fun getGames(): Response<List<Game>> {
-        return RetrofitBuilder.getRetrofitMockInstance()
+        return RetrofitBuilder.getRetrofitInstance()
             .create(ComprehensiveGamesApiService::class.java)
             .getGames(headers = RetrofitBuilder.getHeaders())
     }
