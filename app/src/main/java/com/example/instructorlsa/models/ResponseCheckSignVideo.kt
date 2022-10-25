@@ -1,5 +1,7 @@
 package com.example.instructorlsa.models
 
 data class ResponseCheckSignVideo(
-    val isCorrect: Boolean
+    val validation: String,
+    val response: String,
+    val prediction: String?
 )

@@ -13,6 +13,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.instructorlsa.BuildConfig
+import com.example.instructorlsa.mappers.ResultCheckVideoMapper
 import com.example.instructorlsa.services.SignVideoService
 import com.example.instructorlsa.viewmodels.InstructorLsaConfig
 import com.example.instructorlsa.viewmodels.categories.CategoryViewModel
@@ -37,12 +38,14 @@ class SignTheWordGameViewModel(
     var videoFile: File = File("")
     var gameCompletedCorrectly = false
     var shouldShowNotPermissionsGrantedView by mutableStateOf(false)
+    var resultResponseCheckVideoMapper: ResultCheckVideoMapper
 
     init{
         this.game = game
         this.category = category
         this.delegate = delegate
         this.signVideoService = SignVideoService()
+        this.resultResponseCheckVideoMapper = ResultCheckVideoMapper()
     }
 
     fun permissionsWasRequested(context: Context) {
@@ -78,7 +81,9 @@ class SignTheWordGameViewModel(
                     category = game.category ?: "",
                     videoFile = videoFile)
                 if (response.isSuccessful) {
-                    gameCompletedCorrectly = response.body()?.isCorrect ?: false
+                    Log.d("9999999999999999999999", response.body().toString())
+                    val result = resultResponseCheckVideoMapper.map(response.body())
+                    gameCompletedCorrectly = result.isCorrect()
                     showContinueView = true
                 }
                 else{
