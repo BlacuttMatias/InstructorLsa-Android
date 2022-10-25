@@ -38,6 +38,7 @@ class SignTheWordGameViewModel(
     var videoFile: File = File("")
     var gameCompletedCorrectly = false
     var shouldShowNotPermissionsGrantedView by mutableStateOf(false)
+    var shouldShowRetryView by mutableStateOf(false)
     var resultResponseCheckVideoMapper: ResultCheckVideoMapper
 
     init{
@@ -83,8 +84,13 @@ class SignTheWordGameViewModel(
                 if (response.isSuccessful) {
                     Log.d("9999999999999999999999", response.body().toString())
                     val result = resultResponseCheckVideoMapper.map(response.body())
-                    gameCompletedCorrectly = result.isCorrect()
-                    showContinueView = true
+                    if(result.hasToRetry()){
+                        shouldShowRetryView = true
+                    }
+                    else{
+                        gameCompletedCorrectly = result.isCorrect()
+                        showContinueView = true
+                    }
                 }
                 else{
                     delegate.showError()
@@ -138,6 +144,28 @@ class SignTheWordGameViewModel(
 
     fun onClickConfirmButtonNotPermissionsGrantedDialog(){
         shouldShowNotPermissionsGrantedView = false
+        showContinueView = true
+    }
+
+    fun getBodyRetryView(): String{
+        return "No se detectaron sus manos y cara correctamente. Desea volver a intertarlo o saltear el juego?\nSi saltea el juego se dará por incorrecta su respuesta."
+    }
+
+    fun getPrimaryButtonTextRetryView(): String{
+        return "Reintentar"
+    }
+
+    fun getSecondaryButtonTextRetryView(): String{
+        return "Saltear juego"
+    }
+
+    fun onClickPrimaryButtonRetryView(){
+        shouldShowRetryView = false
+    }
+
+    fun onClickSecondaryButtonRetryView(){
+        shouldShowRetryView = false
+        gameCompletedCorrectly = false
         showContinueView = true
     }
 }

@@ -27,6 +27,7 @@ import com.example.instructorlsa.ui.common.components.TitleText
 import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogWithCancelAndConfirmButtons
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
+import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogWPrimaryAndSecondaryButtons
 import com.example.instructorlsa.viewmodels.games.signTheWord.SignTheWordGameViewModel
 
 
@@ -88,6 +89,14 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
                 onClickConfirmButton = { screenViewModel.onClickConfirmButtonNotPermissionsGrantedDialog() },
                 onClickCancelButton = { screenViewModel.onClickCancelButtonNotPermissionsGrantedDialog() },
                 onDismissRequest = {  screenViewModel.onDismissRequestNotPermissionsGrantedDialog() }
+            )
+            AlertDialogWPrimaryAndSecondaryButtons(
+                isVisible = screenViewModel.shouldShowRetryView,
+                title = screenViewModel.getBodyRetryView(),
+                onClickPrimaryButton = { screenViewModel.onClickPrimaryButtonRetryView() },
+                onClickSecondaryButton = { screenViewModel.onClickSecondaryButtonRetryView() },
+                primaryButtonText = screenViewModel.getPrimaryButtonTextRetryView(),
+                secondaryButtonText = screenViewModel.getSecondaryButtonTextRetryView()
             )
             if(screenViewModel.mustShowVideoCapture){
                 launcherVideoCapture.launch(screenViewModel.getUriFile(context))
