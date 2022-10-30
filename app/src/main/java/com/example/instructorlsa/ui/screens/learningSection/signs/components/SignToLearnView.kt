@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.instructorlsa.R
@@ -37,11 +38,11 @@ fun SignToLearnView(sign: SignViewModel, onClick: () -> Unit){
         colors = ButtonDefaults.buttonColors(backgroundColor = backgroundColor),
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp)
-            .padding(horizontal = 10.dp),
+            .height(55.dp)
+            .padding(horizontal = 5.dp),
         shape = CircleShape
     ) {
-        Text(text = sign.name)
+        Text(text = sign.name, textAlign = TextAlign.Center)
     }
 }
 
