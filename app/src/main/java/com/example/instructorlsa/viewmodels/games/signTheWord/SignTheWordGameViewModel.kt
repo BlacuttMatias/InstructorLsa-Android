@@ -168,4 +168,13 @@ class SignTheWordGameViewModel(
         gameCompletedCorrectly = false
         showContinueView = true
     }
+
+    fun getSecondaryButtonText(): String{
+        return "Saltear juego"
+    }
+
+    fun onClickSecondaryButton(){
+        gameCompletedCorrectly = false
+        showContinueView = true
+    }
 }
