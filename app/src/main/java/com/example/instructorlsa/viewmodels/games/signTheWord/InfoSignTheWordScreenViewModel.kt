@@ -26,7 +26,7 @@ class InfoSignTheWordScreenViewModel(
         return listOf(
             "Es recomendable tener buena iluminación",
             "Te sugerimos que tus manos y tu cara estén en cuadro en todo momento para un mejor reconocimiento",
-            "Recomendamos comenzar con la manos abajo, realizar la seña y luego volverlas a bajar",
+            "Recomendamos comenzar con las manos abajo, realizar la seña y bajarlas",
             "Tendrás un máximo de " + Constants.secondsToTakeVideo.toString() + " segundos para grabarte haciendo la seña",
             "Tratá de alejarte de la cámara lo suficiente para que se vea desde tu cintura hasta tu cabeza"
         )
