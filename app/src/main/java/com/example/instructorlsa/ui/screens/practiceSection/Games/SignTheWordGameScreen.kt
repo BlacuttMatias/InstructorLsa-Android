@@ -24,9 +24,11 @@ import com.example.instructorlsa.constants.Constants
 import com.example.instructorlsa.ui.common.components.BodyText
 import com.example.instructorlsa.ui.common.components.MainButton
 import com.example.instructorlsa.ui.common.components.TitleText
+import com.example.instructorlsa.ui.common.components.buttons.SecondaryButton
 import com.example.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogWithCancelAndConfirmButtons
 import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogResultGame
+import com.example.instructorlsa.ui.screens.practiceSection.Games.components.AlertDialogWPrimaryAndSecondaryButtons
 import com.example.instructorlsa.viewmodels.games.signTheWord.SignTheWordGameViewModel
 
 
@@ -53,6 +55,10 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
             TitleText(text = screenViewModel.game.sign.name)
             Spacer(modifier = Modifier.height(40.dp))
             BodyText(text = screenViewModel.getBodyText())
+            Spacer(modifier = Modifier.height(50.dp))
+            SecondaryButton(text = screenViewModel.getSecondaryButtonText()) {
+                screenViewModel.onClickSecondaryButton()
+            }
             Spacer(modifier = Modifier.height(50.dp))
             MainButton(text = screenViewModel.getMainButtonText()) {
                 if(screenViewModel.hasPermission){
@@ -88,6 +94,14 @@ fun SignTheWordGameScreen(screenViewModel: SignTheWordGameViewModel, navControll
                 onClickConfirmButton = { screenViewModel.onClickConfirmButtonNotPermissionsGrantedDialog() },
                 onClickCancelButton = { screenViewModel.onClickCancelButtonNotPermissionsGrantedDialog() },
                 onDismissRequest = {  screenViewModel.onDismissRequestNotPermissionsGrantedDialog() }
+            )
+            AlertDialogWPrimaryAndSecondaryButtons(
+                isVisible = screenViewModel.shouldShowRetryView,
+                title = screenViewModel.getBodyRetryView(),
+                onClickPrimaryButton = { screenViewModel.onClickPrimaryButtonRetryView() },
+                onClickSecondaryButton = { screenViewModel.onClickSecondaryButtonRetryView() },
+                primaryButtonText = screenViewModel.getPrimaryButtonTextRetryView(),
+                secondaryButtonText = screenViewModel.getSecondaryButtonTextRetryView()
             )
             if(screenViewModel.mustShowVideoCapture){
                 launcherVideoCapture.launch(screenViewModel.getUriFile(context))
