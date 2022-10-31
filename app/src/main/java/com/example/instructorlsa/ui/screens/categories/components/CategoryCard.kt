@@ -1,6 +1,7 @@
 package com.example.instructorlsa.ui.screens.categories.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -12,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,16 +33,15 @@ fun CategoryCard(category: CategoryViewModel, onClick: () -> Unit){
     Card(
         elevation = 10.dp,
         onClick = onClick,
-        enabled = category.enabled,
-        modifier = Modifier.alpha(alpha)
+        enabled = category.enabled
     ) {
-        Column(modifier = Modifier.fillMaxSize(),
+        Column(modifier = Modifier.fillMaxSize().alpha(alpha),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
                 painter = painterResource(id = category.iconId),
                 contentDescription = null,
-                modifier = Modifier.size(100.dp)
+                modifier = Modifier.size(100.dp).background(Color.White)
             )
             Text(text = category.name)
         }
