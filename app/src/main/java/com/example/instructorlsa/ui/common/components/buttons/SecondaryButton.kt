@@ -1,16 +1,15 @@
 package com.example.instructorlsa.ui.common.components.buttons
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -30,7 +29,8 @@ fun SecondaryButton(text: String,
     OutlinedButton(modifier = Modifier.fillMaxWidth().height(height).padding(horizontal = 20.dp).alpha(alpha),
         shape = CircleShape,
         onClick = onClick,
-        enabled = isEnabled
+        enabled = isEnabled,
+        border = BorderStroke(2.dp, MaterialTheme.colors.primary)
     ){
         Text(text = text, fontSize = fontSize)
     }
