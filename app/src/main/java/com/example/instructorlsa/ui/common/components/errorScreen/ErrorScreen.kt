@@ -27,7 +27,7 @@ fun ErrorScreen(
     screenRoute: NavigationRoute = NavigationRoute.Home
 ) {
     val errorTitle = "Algo salió mal"
-    val errorBody = "Tuvimos un problema y no podemos continuar. Vuelva a intentarlo más tarde"
+    val errorBody = "Tuvimos un problema y no podemos continuar. Vuelvé a intentarlo más tarde"
 
     Column(
         modifier = Modifier.fillMaxSize(),
