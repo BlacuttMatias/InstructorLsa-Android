@@ -34,7 +34,7 @@ class SignVideoService {
         val requestBodyPositionSign = RequestBody.create(MediaType.parse("text/plain"), position)
         val requestBodyCategorySign = RequestBody.create(MediaType.parse("text/plain"), category)
         val requestBodyIsWeb = RequestBody.create(MediaType.parse("text/plain"), "false")
-        return RetrofitBuilder.getRetrofitMockInstance("http://192.168.0.84:5000 ")
+        return RetrofitBuilder.getRetrofitInstance("https://instructor-lsa.azurewebsites.net")
             .create(SignVideoApiService::class.java)
             .checkSignVideo(headers = RetrofitBuilder.getHeadersWithMultipart(),
                 web = requestBodyIsWeb,
