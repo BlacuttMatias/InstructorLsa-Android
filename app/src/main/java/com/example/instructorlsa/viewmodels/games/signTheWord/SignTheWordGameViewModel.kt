@@ -111,9 +111,9 @@ class SignTheWordGameViewModel(
 
     fun correctStateText(): String{
         return if(gameCompletedCorrectly){
-            "Correcto"
+            "¡Correcto!"
         } else{
-            "Incorrecto"
+            "¡Incorrecto!"
         }
     }
 

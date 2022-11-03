@@ -60,9 +60,9 @@ class WriteTheSignScreenViewModel(
 
     fun correctStateText(): String{
         return if(gameAnsweredCorrectly()){
-            "Correcto"
+            "¡Correcto!"
         } else{
-            "Incorrecto"
+            "¡Incorrecto!"
         }
     }
 

@@ -46,10 +46,10 @@ class GuessSignScreenViewModel(
 
     fun correctStateText(): String{
         if(answerSelected?.isCorrect == true){
-            return "Correcto"
+            return "¡Correcto!"
         }
         else{
-            return "Incorrecto"
+            return "¡Incorrecto!"
         }
     }
 
