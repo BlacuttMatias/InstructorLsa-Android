@@ -41,6 +41,7 @@ class WriteTheSignScreenViewModel(
         this.category = category
         this.delegate = delegate
         this.countDownViewModel = CountDownTimerViewModel(delegate = this)
+        delegate.hideInfoButton()
         showLoadingFor {
             countDownViewModel.startCountdown()
         }
