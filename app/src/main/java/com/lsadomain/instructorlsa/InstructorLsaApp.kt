@@ -54,9 +54,10 @@ fun Navigation() {
             CategoriesScreen(navController, screenViewModel = screenViewModel)
         }
         composable(NavigationRoute.Signs.route){
-            SignsScreen(navController = navController, screenViewModel = SignsScreenViewModel(
+            val screenViewModel = SignsScreenViewModel(
                 category = InstructorLsaConfig.getLearningCategory()
-            ))
+            )
+            SignsScreen(navController = navController, screenViewModel = screenViewModel)
         }
         composable(NavigationRoute.SignLearning.route){
             SignLearningScreen(navController = navController, screenViewModel = SignLearningScreenViewModel(

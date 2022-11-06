@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import com.lsadomain.instructorlsa.mappers.SignMapper
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SignsScreenViewModel(category: CategoryViewModel): ViewModel() {
@@ -40,6 +41,7 @@ class SignsScreenViewModel(category: CategoryViewModel): ViewModel() {
                 isError = true
             }
             finally {
+                delay(timeMillis = 1000)
                 loading = false
             }
         }
