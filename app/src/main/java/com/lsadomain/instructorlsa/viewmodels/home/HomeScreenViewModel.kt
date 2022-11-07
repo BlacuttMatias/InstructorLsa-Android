@@ -50,6 +50,6 @@ class HomeScreenViewModel: ScreenWithAlertInfoViewModel() {
     }
 
     override fun getBodyTextAlertInfo(): String{
-        return "Recordá que los Juegos Integrales se desbloquearán una vez que hayas completado al menos una categoría de la Sección Aprendizaje."
+        return "Los Juegos Integrales se desbloquearán una vez que hayas completado al menos una categoría de la Sección Aprendizaje."
     }
 }
