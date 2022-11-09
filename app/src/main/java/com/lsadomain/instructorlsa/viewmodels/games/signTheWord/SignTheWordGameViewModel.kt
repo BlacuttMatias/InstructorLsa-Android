@@ -46,6 +46,7 @@ class SignTheWordGameViewModel(
         this.delegate = delegate
         this.signVideoService = SignVideoService()
         this.resultResponseCheckVideoMapper = ResultCheckVideoMapper()
+        delegate.showInfoButton()
     }
 
     fun permissionsWasRequested(context: Context) {
@@ -75,6 +76,7 @@ class SignTheWordGameViewModel(
     fun checkIfAnswerIsCorrect() {
         viewModelScope.launch {
             loading = true
+            delegate.hideInfoButton()
             try{
                 val response = signVideoService.checkSignVideo(idSign = game.sign.id.toString(),
                     position = game.position.toString(),
@@ -100,6 +102,7 @@ class SignTheWordGameViewModel(
             }
             finally {
                 loading = false
+                delegate.showInfoButton()
             }
         }
     }

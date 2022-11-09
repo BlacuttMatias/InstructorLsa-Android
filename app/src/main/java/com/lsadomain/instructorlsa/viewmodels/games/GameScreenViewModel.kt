@@ -32,6 +32,7 @@ class GameScreenViewModel(
     var shouldShowBackAlertDialog by mutableStateOf(false)
     var isLoading by mutableStateOf(true)
     var isError by mutableStateOf(false)
+    private var shouldShowInfoButton by mutableStateOf(false)
 
     init{
         this.category = category
@@ -69,7 +70,15 @@ class GameScreenViewModel(
     }
 
     fun shouldShowInfoButton(): Boolean{
-        return currentGameType == GameType.SignTheWord
+        return shouldShowInfoButton
+    }
+
+    fun hideInfoButton(){
+        shouldShowInfoButton = false
+    }
+
+    fun showInfoButton(){
+        shouldShowInfoButton = true
     }
 
     fun getCurrentGame(): GameViewModel{
