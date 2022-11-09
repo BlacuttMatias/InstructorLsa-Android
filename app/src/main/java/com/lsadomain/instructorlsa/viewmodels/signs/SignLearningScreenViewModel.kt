@@ -63,15 +63,21 @@ class SignLearningScreenViewModel(category: CategoryViewModel, signs: List<SignV
     fun setPreviousIndex(){
         if(currentIndex > 0){
             currentIndex--
-            InstructorLsaConfig.indexSignToLearn = currentIndex
         }
+        else{
+            currentIndex = signs.size-1
+        }
+        InstructorLsaConfig.indexSignToLearn = currentIndex
     }
 
     fun setNextIndex(){
         if(currentIndex < signs.size-1){
             currentIndex++
-            InstructorLsaConfig.indexSignToLearn = currentIndex
         }
+        else{
+            currentIndex = 0
+        }
+        InstructorLsaConfig.indexSignToLearn = currentIndex
     }
 
     private fun fetchUpdateSignIfIsNotCompleted(onSuccess: () -> Unit = {}){

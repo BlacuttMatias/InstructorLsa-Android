@@ -44,22 +44,12 @@ fun SignLearningScreen(screenViewModel: SignLearningScreenViewModel, navControll
                     VideoPlayer(urlVideo = screenViewModel.getCurrentSign().urlVideo, delegate = screenViewModel)
                     Spacer(modifier = Modifier.height(60.dp))
                     Row(horizontalArrangement = Arrangement.Center) {
-                        if(screenViewModel.currentIndex > 0){
-                            BackNavigateButton {
-                                screenViewModel.didBackButtonClicked()
-                            }
-                        }
-                        else{
-                            Spacer(modifier = Modifier.width(60.dp))
+                        BackNavigateButton {
+                            screenViewModel.didBackButtonClicked()
                         }
                         Spacer(modifier = Modifier.width(50.dp))
-                        if(screenViewModel.currentIndex < screenViewModel.signs.size-1){
-                            NextNavigateButton {
-                                screenViewModel.didNextButtonClicked()
-                            }
-                        }
-                        else{
-                            Spacer(modifier = Modifier.width(60.dp))
+                        NextNavigateButton {
+                            screenViewModel.didNextButtonClicked()
                         }
                     }
                     SloganFooterText()
