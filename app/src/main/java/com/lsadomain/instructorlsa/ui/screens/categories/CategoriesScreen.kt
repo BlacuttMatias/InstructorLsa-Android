@@ -19,6 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.lsadomain.instructorlsa.R
 import com.lsadomain.instructorlsa.constants.Constants
 import com.lsadomain.instructorlsa.ui.common.components.TitleText
+import com.lsadomain.instructorlsa.ui.common.components.alerts.AlertDialogInfo
 import com.lsadomain.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.lsadomain.instructorlsa.ui.screens.categories.components.CategoryCard
 import com.lsadomain.instructorlsa.ui.theme.InstructorLsaTheme
@@ -31,7 +32,11 @@ fun CategoriesScreen(navController: NavController, screenViewModel: CategoriesSc
     val titleTopTabBarText = screenViewModel.titleText
     val categories = screenViewModel.getAllCategories()
     Scaffold(
-        topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
+        topBar = { TopTabBarLsa(titleText = titleTopTabBarText,
+            navController = navController,
+            showInfoButton = screenViewModel.shouldShowInfoButton(),
+            onInfoButtonPressed = { screenViewModel.onClickInfoInfoIconButton() } )
+        }
     ) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
             Spacer(modifier = Modifier.height(20.dp))
@@ -48,6 +53,13 @@ fun CategoriesScreen(navController: NavController, screenViewModel: CategoriesSc
                     }
                 }
             }
+            AlertDialogInfo(
+                isVisible = screenViewModel.shouldShowInfoAlert,
+                title = screenViewModel.getBodyTextAlertInfo(),
+                primaryButtonText = screenViewModel.getTextAlertInfoPrimaryButton(),
+                onDismissRequest = {},
+                onClickContinueButton = { screenViewModel.onClickAlertInfoPrimaryButton() }
+            )
         }
     }
 

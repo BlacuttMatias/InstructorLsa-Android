@@ -19,7 +19,8 @@ fun TopTabBarLsa(
     navController: NavController?,
     showCloseSession: Boolean = true,
     showInfoButton: Boolean = false,
-    onBackButtonPressed: () -> Unit = { navController?.navigateUp() }
+    onBackButtonPressed: () -> Unit = { navController?.navigateUp() },
+    onInfoButtonPressed: () -> Unit = { navController?.navigate(NavigationRoute.InfoGame.route) }
 ){
     var showMenu by remember { mutableStateOf(false) }
     val closeSessionText = stringResource(id = R.string.close_session)
@@ -42,7 +43,7 @@ fun TopTabBarLsa(
         actions = {
             if(showInfoButton){
                 IconButton(onClick = {
-                    navController?.navigate(NavigationRoute.InfoGame.route)
+                    onInfoButtonPressed.invoke()
                 }) {
                     Icon(
                         imageVector = Icons.Outlined.Info,

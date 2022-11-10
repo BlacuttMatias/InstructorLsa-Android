@@ -17,6 +17,7 @@ import com.lsadomain.instructorlsa.R
 import com.lsadomain.instructorlsa.ui.common.components.BodyText
 import com.lsadomain.instructorlsa.ui.common.components.MainButton
 import com.lsadomain.instructorlsa.ui.common.components.TitleText
+import com.lsadomain.instructorlsa.ui.common.components.alerts.AlertDialogInfo
 import com.lsadomain.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
 import com.lsadomain.instructorlsa.viewmodels.InstructorLsaConfig
 import com.lsadomain.instructorlsa.viewmodels.comprehensiveGamesSection.StartComprehensiveGamesScreenViewModel
@@ -28,7 +29,11 @@ fun StartComprehensiveGamesScreen(navController: NavController, screenViewModel:
     val titleTopTabBarText = stringResource(id = R.string.app_name)
 
     Scaffold(
-        topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
+        topBar = { TopTabBarLsa(titleText = titleTopTabBarText,
+            navController = navController,
+            showInfoButton = screenViewModel.shouldShowInfoButton(),
+            onInfoButtonPressed = { screenViewModel.onClickInfoInfoIconButton() } )
+        }
     ) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally){
             Spacer(modifier = Modifier.height(20.dp))
@@ -45,6 +50,13 @@ fun StartComprehensiveGamesScreen(navController: NavController, screenViewModel:
                 BodyText(text = it, fontSize = 16.sp)
                 Spacer(modifier = Modifier.height(2.dp))
             }
+            AlertDialogInfo(
+                isVisible = screenViewModel.shouldShowInfoAlert,
+                title = screenViewModel.getBodyTextAlertInfo(),
+                primaryButtonText = screenViewModel.getTextAlertInfoPrimaryButton(),
+                onDismissRequest = {},
+                onClickContinueButton = { screenViewModel.onClickAlertInfoPrimaryButton() }
+            )
         }
     }
 }

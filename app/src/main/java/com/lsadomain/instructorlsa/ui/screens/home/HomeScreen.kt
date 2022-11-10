@@ -19,6 +19,7 @@ import com.lsadomain.instructorlsa.R
 import com.lsadomain.instructorlsa.ui.common.components.FooterSloganAndIcon
 import com.lsadomain.instructorlsa.ui.common.components.MainButton
 import com.lsadomain.instructorlsa.ui.common.components.TitleText
+import com.lsadomain.instructorlsa.ui.common.components.alerts.AlertDialogInfo
 import com.lsadomain.instructorlsa.ui.common.components.errorScreen.ErrorScreen
 import com.lsadomain.instructorlsa.ui.common.components.loadingScreen.FullScreenLoader
 import com.lsadomain.instructorlsa.ui.common.components.topTabBar.TopTabBarLsa
@@ -35,7 +36,11 @@ fun HomeScreen(navController: NavController, screenViewModel: HomeScreenViewMode
     val titleTopTabBarText = stringResource(id = R.string.app_name)
 
     Scaffold(
-        topBar = { TopTabBarLsa(titleText = titleTopTabBarText, navController = navController) }
+        topBar = { TopTabBarLsa(titleText = titleTopTabBarText,
+            navController = navController,
+            showInfoButton = screenViewModel.shouldShowInfoButton(),
+            onInfoButtonPressed = { screenViewModel.onClickInfoInfoIconButton() })
+        }
     ) {
         if(screenViewModel.isError){
             ErrorScreen(navController = navController)
@@ -61,6 +66,14 @@ fun HomeScreen(navController: NavController, screenViewModel: HomeScreenViewMode
                     navController.navigate(NavigationRoute.StartComprehensiveGames.route)
                 }
                 FooterSloganAndIcon(icon = icon)
+
+                AlertDialogInfo(
+                    isVisible = screenViewModel.shouldShowInfoAlert,
+                    title = screenViewModel.getBodyTextAlertInfo(),
+                    primaryButtonText = screenViewModel.getTextAlertInfoPrimaryButton(),
+                    onDismissRequest = {},
+                    onClickContinueButton = { screenViewModel.onClickAlertInfoPrimaryButton() }
+                )
             }
         }
     }

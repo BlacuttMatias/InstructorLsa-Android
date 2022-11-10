@@ -7,6 +7,7 @@ import com.lsadomain.instructorlsa.viewmodels.InstructorLsaConfig
 interface CategoryNavigationStrategy{
     fun navigateToNextScreen(navController: NavController, category: CategoryViewModel)
     fun getTitleText(): String
+    fun shouldShowInfoButton(): Boolean
 }
 
 class CategoryLearningNavigation: CategoryNavigationStrategy{
@@ -18,6 +19,10 @@ class CategoryLearningNavigation: CategoryNavigationStrategy{
     override fun getTitleText(): String {
         return "Sección Aprendizaje"
     }
+
+    override fun shouldShowInfoButton(): Boolean{
+        return false
+    }
 }
 
 class CategoryPracticeNavigation: CategoryNavigationStrategy{
@@ -28,5 +33,9 @@ class CategoryPracticeNavigation: CategoryNavigationStrategy{
 
     override fun getTitleText(): String {
         return "Sección Práctica"
+    }
+
+    override fun shouldShowInfoButton(): Boolean{
+        return true
     }
 }
