@@ -22,6 +22,7 @@ class GuessSignScreenViewModel(
     var answerSelected: AnswerOptionViewModel? = null
     var delegate: GameScreenViewModel
     var countDownViewModel: CountDownTimerViewModel
+    var countdownFinished = false
 
     init{
         this.game = game
@@ -58,7 +59,12 @@ class GuessSignScreenViewModel(
     }
 
     fun answerWasSelectedAndIsNotCorrect(answerOption: AnswerOptionViewModel): Boolean{
-        return answerWasSelected && answerSelected == answerOption && !answerOption.isCorrect
+        if(countdownFinished){
+            return answerWasSelected && !answerOption.isCorrect
+        }
+        else{
+            return answerWasSelected && answerSelected == answerOption && !answerOption.isCorrect
+        }
     }
 
     fun showStateAnswer(answerOption: AnswerOptionViewModel): Boolean{
@@ -74,6 +80,7 @@ class GuessSignScreenViewModel(
         while (defaultOption.isCorrect){
             defaultOption = game.answerOptions.random()
         }
+        countdownFinished = true
         didTapAnswerOption(answerOption = defaultOption)
     }
 }
