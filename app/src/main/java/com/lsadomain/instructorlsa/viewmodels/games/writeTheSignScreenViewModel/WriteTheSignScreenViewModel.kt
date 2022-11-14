@@ -77,6 +77,10 @@ class WriteTheSignScreenViewModel(
         }
     }
 
+    fun getTitleText(): String {
+        return "Escribí la seña"
+    }
+
     override fun setTypedText(text: String) {
         gameAnswer = text
     }

@@ -27,7 +27,7 @@ import com.lsadomain.instructorlsa.viewmodels.games.writeTheSignScreenViewModel.
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun WriteTheSignGameScreen(screenViewModel: WriteTheSignScreenViewModel, navController: NavController) {
-    val titleText = screenViewModel.game.name
+    val titleText = screenViewModel.getTitleText()
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
